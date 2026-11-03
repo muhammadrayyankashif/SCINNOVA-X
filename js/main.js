@@ -20,11 +20,13 @@ const hoverables = document.querySelectorAll(
 );
 hoverables.forEach((el) => {
   el.addEventListener("mouseenter", () => {
+    if (!cursorOutline) return;
     cursorOutline.style.width = "60px";
     cursorOutline.style.height = "60px";
-    cursorOutline.style.backgroundColor = "rgba(212, 175, 55, 0.1)";
+    cursorOutline.style.backgroundColor = "rgba(84, 123, 96, 0.2)";
   });
   el.addEventListener("mouseleave", () => {
+    if (!cursorOutline) return;
     cursorOutline.style.width = "40px";
     cursorOutline.style.height = "40px";
     cursorOutline.style.backgroundColor = "transparent";
@@ -49,18 +51,17 @@ gsap.ticker.add((time) => {
 gsap.ticker.lagSmoothing(0);
 
 ScrollTrigger.refresh();
+initCountdown(); // Run immediately so digits populate instantly
+
 window.addEventListener("load", () => {
   initLoader();
-  tryAutoPlay();
   initHero();
   initModulesScroll();
   initScroll();
   initFAQ();
-  initCountdown();
   initMagneticButtons();
   initGallery();
   initMobileMenu();
-  initSponsorsScroll();
 });
 /* === LOADER === */
 function initLoader() {
@@ -83,31 +84,45 @@ function initLoader() {
     )
     .to(".loader", {
       opacity: 0,
-      duration: 1,
-      delay: 1,
+      duration: 0.8,
+      delay: 0.8,
       pointerEvents: "none",
       ease: "power2.inOut",
+      onComplete: () => {
+        const l = document.querySelector(".loader");
+        if (l) l.style.display = "none";
+      },
     });
 }
 /* === HERO ANIMATION === */
 function initHero() {
-  const tl = gsap.timeline({ delay: 0.5 });
-  tl.from(".fire-timer", {
-    scale: 0.8,
+  const tl = gsap.timeline({ delay: 0.2 });
+  tl.from(".hero-bg-image", {
+    scale: 1.08,
     opacity: 0,
-    filter: "blur(10px)",
-    duration: 2,
-    ease: "power4.out",
-  }).from(
-    ".hero-title-small",
-    {
-      opacity: 0,
-      letterSpacing: "1em",
-      duration: 1.5,
-      ease: "power2.out",
-    },
-    "-=1.5"
-  );
+    duration: 1.8,
+    ease: "power2.out",
+  })
+    .from(
+      ".doomsday-title",
+      {
+        y: 20,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out",
+      },
+      "-=1.1"
+    )
+    .from(
+      ".doomsday-timer",
+      {
+        y: 20,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out",
+      },
+      "-=0.7"
+    );
 }
 /* === GENERAL SCROLL ANIMATIONS === */
 function initScroll() {
@@ -155,28 +170,18 @@ function initScroll() {
 }
 function initStackingCards() {
   const cards = gsap.utils.toArray(".testimonial-card-stack");
-  cards.forEach((card, index) => {
+  cards.forEach((card) => {
     gsap.from(card, {
       opacity: 0,
       y: 50,
-      duration: 1,
+      duration: 0.8,
       ease: "power3.out",
+      clearProps: "transform",
       scrollTrigger: {
         trigger: card,
         start: "top 80%",
+        fastScrollEnd: true,
       },
-    });
-    ScrollTrigger.create({
-      trigger: card,
-      start: "top top",
-      onEnter: () => {
-        if (audio.enabled && index < 2 && window.innerWidth > 768) {
-          const flipSound = audio.flip.cloneNode();
-          flipSound.volume = 0.5;
-          flipSound.play().catch(() => {});
-        }
-      },
-      once: false,
     });
   });
 }
@@ -242,216 +247,68 @@ function initFAQ() {
 }
 /* === COUNTDOWN TIMER === */
 function initCountdown() {
-  const targetDate = new Date("2026-01-09T08:00:00+05:00").getTime();
-  let fireworksTriggered = false;
+  const elMonths = document.getElementById("months");
+  const elDays = document.getElementById("days");
+  const elHours = document.getElementById("hours");
+  const elMinutes = document.getElementById("minutes");
+  const elSeconds = document.getElementById("seconds");
+  if (!elMonths && !elDays && !elHours && !elMinutes && !elSeconds) return;
+
+  function getTargetDate() {
+    const now = new Date();
+    let year = now.getFullYear();
+    let target = new Date(`${year}-01-08T08:00:00+05:00`);
+    if (now >= target) {
+      target = new Date(`${year + 1}-01-08T08:00:00+05:00`);
+    }
+    return target;
+  }
+
+  const targetDate = getTargetDate();
+
   function updateTimer() {
-    const now = new Date().getTime();
-    const distance = targetDate - now;
-    if (distance < 0) {
-      document.getElementById("days").innerText = "00";
-      document.getElementById("hours").innerText = "00";
-      document.getElementById("minutes").innerText = "00";
-      document.getElementById("seconds").innerText = "00";
-      if (!fireworksTriggered) {
-        startFireworks();
-        fireworksTriggered = true;
-      }
+    const now = new Date();
+    const diffTotalMs = targetDate.getTime() - now.getTime();
+    if (diffTotalMs <= 0) {
+      if (elMonths) elMonths.innerText = "00";
+      if (elDays) elDays.innerText = "00";
+      if (elHours) elHours.innerText = "00";
+      if (elMinutes) elMinutes.innerText = "00";
+      if (elSeconds) elSeconds.innerText = "00";
       return;
     }
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor(
-      (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-    );
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    document.getElementById("days").innerText = days < 10 ? "0" + days : days;
-    document.getElementById("hours").innerText =
-      hours < 10 ? "0" + hours : hours;
-    document.getElementById("minutes").innerText =
-      minutes < 10 ? "0" + minutes : minutes;
-    const prevSeconds = document.getElementById("seconds").innerText;
-    const newSeconds = seconds < 10 ? "0" + seconds : seconds;
-    if (prevSeconds !== newSeconds) {
-      document.getElementById("seconds").innerText = newSeconds;
-      if (
-        audio.enabled &&
-        !fireworksTriggered &&
-        isHeroVisible() &&
-        !document.hidden
-      ) {
-        audio.tick.currentTime = 0;
-        audio.tick.volume = 0.5;
-        audio.tick.play().catch(() => {});
+
+    let m = 0;
+    let temp = new Date(now.getTime());
+    while (true) {
+      let nextMonth = new Date(temp.getTime());
+      nextMonth.setMonth(nextMonth.getMonth() + 1);
+      if (nextMonth <= targetDate) {
+        m++;
+        temp = nextMonth;
+      } else {
+        break;
       }
     }
+
+    let diffMs = targetDate.getTime() - temp.getTime();
+    let days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+    diffMs -= days * (1000 * 60 * 60 * 24);
+    let hours = Math.floor(diffMs / (1000 * 60 * 60));
+    diffMs -= hours * (1000 * 60 * 60);
+    let minutes = Math.floor(diffMs / (1000 * 60));
+    diffMs -= minutes * (1000 * 60);
+    let seconds = Math.floor(diffMs / 1000);
+
+    if (elMonths) elMonths.innerText = String(m).padStart(2, "0");
+    if (elDays) elDays.innerText = String(days).padStart(2, "0");
+    if (elHours) elHours.innerText = String(hours).padStart(2, "0");
+    if (elMinutes) elMinutes.innerText = String(minutes).padStart(2, "0");
+    if (elSeconds) elSeconds.innerText = String(seconds).padStart(2, "0");
   }
-  setInterval(updateTimer, 1000);
+
   updateTimer();
-}
-function startFireworks() {
-  const canvas = document.getElementById("fireworks-canvas");
-  const ctx = canvas.getContext("2d");
-  let width = window.innerWidth;
-  let height = window.innerHeight;
-  canvas.width = width;
-  canvas.height = height;
-  window.addEventListener("resize", () => {
-    width = window.innerWidth;
-    height = window.innerHeight;
-    canvas.width = width;
-    canvas.height = height;
-  });
-  const fireworks = [];
-  const particles = [];
-  let activeSoundCount = 0;
-  function random(min, max) {
-    return Math.random() * (max - min) + min;
-  }
-  class Firework {
-    constructor(sx, sy, tx, ty) {
-      this.x = sx;
-      this.y = sy;
-      this.sx = sx;
-      this.sy = sy;
-      this.tx = tx;
-      this.ty = ty;
-      this.distanceToTarget = Math.sqrt(
-        Math.pow(tx - sx, 2) + Math.pow(ty - sy, 2)
-      );
-      this.distanceTraveled = 0;
-      this.coordinates = [];
-      this.coordinateCount = 3;
-      while (this.coordinateCount--) {
-        this.coordinates.push([this.x, this.y]);
-      }
-      this.angle = Math.atan2(ty - sy, tx - sx);
-      this.speed = 2;
-      this.acceleration = 1.05;
-      this.brightness = random(50, 70);
-      this.targetRadius = 1;
-    }
-    update(index) {
-      this.coordinates.pop();
-      this.coordinates.unshift([this.x, this.y]);
-      if (this.targetRadius < 8) {
-        this.targetRadius += 0.3;
-      } else {
-        this.targetRadius = 1;
-      }
-      this.speed *= this.acceleration;
-      const vx = Math.cos(this.angle) * this.speed;
-      const vy = Math.sin(this.angle) * this.speed;
-      this.distanceTraveled = Math.sqrt(
-        Math.pow(this.sx - this.x, 2) + Math.pow(this.sy - this.y, 2)
-      );
-      if (this.distanceTraveled >= this.distanceToTarget) {
-        createParticles(this.tx, this.ty);
-        fireworks.splice(index, 1);
-        if (audio.enabled && isHeroVisible() && activeSoundCount < 2) {
-          const fwSound = audio.fireworks.cloneNode();
-          fwSound.volume = 0.4 + Math.random() * 0.2;
-          fwSound.playbackRate = 0.8 + Math.random() * 0.4;
-          activeSoundCount++;
-          fwSound.onended = () => {
-            activeSoundCount--;
-          };
-          fwSound.play().catch(() => {
-            activeSoundCount--;
-          });
-        }
-      } else {
-        this.x += vx;
-        this.y += vy;
-      }
-    }
-    draw() {
-      ctx.beginPath();
-      ctx.moveTo(
-        this.coordinates[this.coordinates.length - 1][0],
-        this.coordinates[this.coordinates.length - 1][1]
-      );
-      ctx.lineTo(this.x, this.y);
-      ctx.strokeStyle =
-        "hsl(" + random(40, 60) + ", 100%, " + this.brightness + "%)";
-      ctx.stroke();
-    }
-  }
-  class Particle {
-    constructor(x, y) {
-      this.x = x;
-      this.y = y;
-      this.coordinates = [];
-      this.coordinateCount = 5;
-      while (this.coordinateCount--) {
-        this.coordinates.push([this.x, this.y]);
-      }
-      this.angle = random(0, Math.PI * 2);
-      this.speed = random(2, 15);
-      this.friction = 0.95;
-      this.gravity = 1;
-      this.hue = random(40, 60);
-      this.brightness = random(50, 80);
-      this.alpha = 1;
-      this.decay = random(0.015, 0.03);
-    }
-    update(index) {
-      this.coordinates.pop();
-      this.coordinates.unshift([this.x, this.y]);
-      this.speed *= this.friction;
-      this.x += Math.cos(this.angle) * this.speed;
-      this.y += Math.sin(this.angle) * this.speed + this.gravity;
-      this.alpha -= this.decay;
-      if (this.alpha <= this.decay) {
-        particles.splice(index, 1);
-      }
-    }
-    draw() {
-      ctx.beginPath();
-      ctx.moveTo(
-        this.coordinates[this.coordinates.length - 1][0],
-        this.coordinates[this.coordinates.length - 1][1]
-      );
-      ctx.lineTo(this.x, this.y);
-      ctx.strokeStyle =
-        "hsla(" +
-        this.hue +
-        ", 100%, " +
-        this.brightness +
-        "%, " +
-        this.alpha +
-        ")";
-      ctx.stroke();
-    }
-  }
-  function createParticles(x, y) {
-    let particleCount = 60;
-    while (particleCount--) {
-      particles.push(new Particle(x, y));
-    }
-  }
-  function loop() {
-    requestAnimationFrame(loop);
-    ctx.globalCompositeOperation = "destination-out";
-    ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
-    ctx.fillRect(0, 0, width, height);
-    ctx.globalCompositeOperation = "lighter";
-    let i = fireworks.length;
-    while (i--) {
-      fireworks[i].draw();
-      fireworks[i].update(i);
-    }
-    let j = particles.length;
-    while (j--) {
-      particles[j].draw();
-      particles[j].update(j);
-    }
-    if (Math.random() < 0.05) {
-      fireworks.push(
-        new Firework(width / 2, height, random(0, width), random(0, height / 2))
-      );
-    }
-  }
-  loop();
+  setInterval(updateTimer, 1000);
 }
 /* === GALLERY SECTION === */
 function initGallery() {
@@ -561,120 +418,6 @@ function initMobileMenu() {
     });
   });
 }
-const audio = {
-  tick: new Audio("public/Audio/clock-tick.mp3"),
-  flip: new Audio("public/Audio/paper-flip.mp3"),
-  fireworks: new Audio("public/Audio/fireworks.mp3"),
-  enabled: false,
-};
-function tryAutoPlay() {
-  audio.tick.volume = 0.5;
-  const promise = audio.tick.play();
-  if (promise !== undefined) {
-    promise
-      .then(() => {
-        audio.enabled = true;
-        audio.tick.pause();
-        audio.tick.currentTime = 0;
-      })
-      .catch((error) => {});
-  }
-}
-const unlockEvents = [
-  "click",
-  "keydown",
-  "touchstart",
-  "mousedown",
-  "pointerdown",
-  "mousemove",
-  "wheel",
-  "scroll",
-];
-unlockEvents.forEach((event) => {
-  window.addEventListener(
-    event,
-    () => {
-      if (!audio.enabled) {
-        audio.enabled = true;
-        [audio.tick, audio.flip, audio.fireworks].forEach((snd) => {
-          snd.muted = false;
-          snd.volume = 0.5;
-          snd.preload = "auto";
-          const playPromise = snd.play();
-          if (playPromise !== undefined) {
-            playPromise
-              .then(() => {
-                snd.pause();
-                snd.currentTime = 0;
-              })
-              .catch((error) => {});
-          }
-        });
-      }
-    },
-    { once: true, passive: true }
-  );
-});
-function isHeroVisible() {
-  const hero = document.getElementById("hero");
-  if (!hero) return false;
-  const rect = hero.getBoundingClientRect();
-  return rect.top < window.innerHeight && rect.bottom > 0;
-}
 
-/* === SPONSORS SCROLL === */
-function initSponsorsScroll() {
-  const wrapper = document.querySelector(".sponsors-scroll-wrapper");
-  const pinContainer = document.querySelector(".sponsors-pin-container");
 
-  if (!wrapper || !pinContainer) return;
 
-  if (window.innerWidth <= 768) return;
-
-  const tl = gsap.timeline({
-    scrollTrigger: {
-      trigger: wrapper,
-      start: "top top",
-      end: "bottom bottom",
-      pin: pinContainer,
-      scrub: 1,
-    },
-  });
-
-  gsap.set(".card-platinum", { scale: 1.4, opacity: 1, y: 0, x: 0 });
-  gsap.set(".card-bronze", { scale: 0.5, opacity: 0, x: -100, y: 100 });
-  gsap.set(".card-gift", { scale: 0.5, opacity: 0, x: 100, y: 100 });
-
-  tl.to(".card-platinum", {
-    scale: 0.8,
-    y: "-15vh",
-    duration: 1.5,
-    ease: "power2.inOut",
-  });
-
-  tl.to(
-    ".card-bronze",
-    {
-      scale: 1,
-      opacity: 1,
-      x: "-20vw",
-      y: "10vh",
-      duration: 1.2,
-      ease: "power2.out",
-    },
-    "-=0.5"
-  );
-
-  tl.to(
-    ".card-gift",
-    {
-      scale: 1,
-      opacity: 1,
-      x: "20vw",
-      y: "20vh",
-      duration: 1.2,
-      ease: "power2.out",
-    },
-    "-=0.2"
-  );
-}
