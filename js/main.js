@@ -1,37 +1,3 @@
-const cursorDot = document.querySelector(".cursor-dot");
-const cursorOutline = document.querySelector(".cursor-outline");
-window.addEventListener("mousemove", function (e) {
-  const posX = e.clientX;
-  const posY = e.clientY;
-  if (cursorDot && cursorOutline) {
-    cursorDot.style.left = `${posX}px`;
-    cursorDot.style.top = `${posY}px`;
-    cursorOutline.animate(
-      {
-        left: `${posX}px`,
-        top: `${posY}px`,
-      },
-      { duration: 500, fill: "forwards" }
-    );
-  }
-});
-const hoverables = document.querySelectorAll(
-  "a:not(.magick-nav a):not(.cta-btn):not(.partner-link), button, .magnetic-btn, .module-card"
-);
-hoverables.forEach((el) => {
-  el.addEventListener("mouseenter", () => {
-    if (!cursorOutline) return;
-    cursorOutline.style.width = "60px";
-    cursorOutline.style.height = "60px";
-    cursorOutline.style.backgroundColor = "rgba(84, 123, 96, 0.2)";
-  });
-  el.addEventListener("mouseleave", () => {
-    if (!cursorOutline) return;
-    cursorOutline.style.width = "40px";
-    cursorOutline.style.height = "40px";
-    cursorOutline.style.backgroundColor = "transparent";
-  });
-});
 window.lenis = new Lenis({
   duration: 1.2,
   easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -56,7 +22,7 @@ initCountdown(); // Run immediately so digits populate instantly
 window.addEventListener("load", () => {
   initLoader();
   initHero();
-  initModulesScroll();
+  initModulesPresentation();
   initScroll();
   initFAQ();
   initMagneticButtons();
@@ -96,6 +62,8 @@ function initLoader() {
 }
 /* === HERO ANIMATION === */
 function initHero() {
+  const heroImg = document.querySelector(".hero-bg-image");
+  if (!heroImg) return;
   const tl = gsap.timeline({ delay: 0.2 });
   tl.from(".hero-bg-image", {
     scale: 1.08,
@@ -126,33 +94,36 @@ function initHero() {
 }
 /* === GENERAL SCROLL ANIMATIONS === */
 function initScroll() {
-  if (window.innerWidth > 1024) {
-    gsap.fromTo(
-      ".parallax-img",
-      {
-        yPercent: -10,
-      },
-      {
-        yPercent: 10,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".editorial-image",
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 0.5,
+  const editorialImg = document.querySelector(".editorial-image");
+  if (editorialImg) {
+    if (window.innerWidth > 1024) {
+      gsap.fromTo(
+        ".parallax-img",
+        {
+          yPercent: -10,
         },
-      }
-    );
+        {
+          yPercent: 10,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".editorial-image",
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 0.5,
+          },
+        }
+      );
+    }
+    gsap.to(".image-frame", {
+      clipPath: "inset(0 0 0 0)",
+      duration: 1.5,
+      ease: "power4.out",
+      scrollTrigger: {
+        trigger: ".editorial-image",
+        start: "top 70%",
+      },
+    });
   }
-  gsap.to(".image-frame", {
-    clipPath: "inset(0 0 0 0)",
-    duration: 1.5,
-    ease: "power4.out",
-    scrollTrigger: {
-      trigger: ".editorial-image",
-      start: "top 70%",
-    },
-  });
   const revealElements = document.querySelectorAll(".reveal-text");
   revealElements.forEach((el) => {
     gsap.from(el, {
@@ -314,6 +285,7 @@ function initCountdown() {
 function initGallery() {
   if (window.innerWidth < 768) return;
   const columns = document.querySelectorAll(".gallery-col");
+  if (columns.length === 0) return;
   gsap.to(columns[0], {
     yPercent: -20,
     ease: "none",
@@ -352,34 +324,129 @@ function initGallery() {
   });
 }
 
-/* === MODULES HORIZONTAL SCROLL === */
-function initModulesScroll() {
-  const section = document.querySelector(".horizontal-scroll-section");
-  const wrapper = document.querySelector(".horizontal-scroll-wrapper");
-  const content = document.querySelector(".hs-content");
-  if (!section || !wrapper || !content) return;
+/* === MODULES PRESENTATION CAROUSEL === */
+function initModulesPresentation() {
+  const track = document.getElementById("modules-track");
+  const prevBtn = document.getElementById("module-prev-btn");
+  const nextBtn = document.getElementById("module-next-btn");
+  const dotsContainer = document.getElementById("modules-dots");
+  const currentEl = document.getElementById("current-slide");
+  const totalEl = document.getElementById("total-slides");
 
-  if (window.innerWidth > 1024) {
-    wrapper.style.overflowX = "hidden";
+  if (!track || !prevBtn || !nextBtn) return;
 
-    const getScrollAmount = () => {
-      let contentWidth = content.scrollWidth;
-      return -(contentWidth - window.innerWidth);
-    };
+  const cards = Array.from(track.querySelectorAll(".presentation-card"));
+  if (cards.length === 0) return;
 
-    const tween = gsap.to(content, {
-      x: getScrollAmount,
-      ease: "none",
-      scrollTrigger: {
-        trigger: section,
-        start: "top top",
-        end: () => `+=${Math.abs(getScrollAmount())}`,
-        pin: true,
-        scrub: 1,
-        invalidateOnRefresh: true,
-      },
+  let currentSlide = 0;
+
+  function getCardsPerView() {
+    return window.innerWidth >= 820 ? 2 : 1;
+  }
+
+  function getTotalSlides() {
+    const cpv = getCardsPerView();
+    return cpv === 2 ? Math.ceil(cards.length / 2) : cards.length;
+  }
+
+  function updateDots() {
+    if (!dotsContainer) return;
+    const total = getTotalSlides();
+    dotsContainer.innerHTML = "";
+    for (let i = 0; i < total; i++) {
+      const dot = document.createElement("button");
+      dot.className = `slider-dot ${i === currentSlide ? "active" : ""}`;
+      dot.setAttribute("aria-label", `Slide ${i + 1}`);
+      dot.addEventListener("click", () => goToSlide(i));
+      dotsContainer.appendChild(dot);
+    }
+  }
+
+  function updateUI() {
+    const total = getTotalSlides();
+    if (currentSlide >= total) currentSlide = total - 1;
+    if (currentSlide < 0) currentSlide = 0;
+
+    const cpv = getCardsPerView();
+    const viewport = track.parentElement;
+    const viewportWidth = viewport ? viewport.getBoundingClientRect().width : 1200;
+    const gap = window.innerWidth >= 820 ? 24 : 16;
+
+    let offset = 0;
+    if (cpv === 2) {
+      const cardWidth = (viewportWidth - gap) / 2;
+      const step = (cardWidth + gap) * 2;
+      offset = currentSlide * step;
+      const maxScroll = track.scrollWidth - viewportWidth;
+      if (maxScroll > 0 && offset > maxScroll) offset = maxScroll;
+    } else {
+      const cardWidth = viewportWidth;
+      offset = currentSlide * (cardWidth + gap);
+    }
+
+    track.style.transform = `translateX(-${offset}px)`;
+
+    if (currentEl) currentEl.textContent = String(currentSlide + 1).padStart(2, "0");
+    if (totalEl) totalEl.textContent = String(total).padStart(2, "0");
+
+    prevBtn.disabled = currentSlide === 0;
+    nextBtn.disabled = currentSlide === total - 1;
+
+    const dots = dotsContainer ? dotsContainer.querySelectorAll(".slider-dot") : [];
+    dots.forEach((dot, idx) => {
+      dot.classList.toggle("active", idx === currentSlide);
     });
   }
+
+  function goToSlide(index) {
+    currentSlide = index;
+    updateUI();
+  }
+
+  function nextSlide() {
+    const total = getTotalSlides();
+    if (currentSlide < total - 1) {
+      currentSlide++;
+      updateUI();
+    }
+  }
+
+  function prevSlide() {
+    if (currentSlide > 0) {
+      currentSlide--;
+      updateUI();
+    }
+  }
+
+  prevBtn.addEventListener("click", prevSlide);
+  nextBtn.addEventListener("click", nextSlide);
+
+  // Touch Swipe Support
+  let startX = 0;
+  let endX = 0;
+  track.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX;
+  }, { passive: true });
+  track.addEventListener("touchend", (e) => {
+    endX = e.changedTouches[0].clientX;
+    const diff = startX - endX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) nextSlide();
+      else prevSlide();
+    }
+  }, { passive: true });
+
+  let resizeTimer;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      updateDots();
+      updateUI();
+    }, 100);
+  });
+
+  updateDots();
+  updateUI();
 }
 
 /* === MOBILE MENU === */
