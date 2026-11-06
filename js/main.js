@@ -1,24 +1,53 @@
 const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
 let motionContext;
 let lenisTicker;
-let loaderTimeline;
-let loaderFallback;
+let motionLibraries;
 
 // Essential interactions work even when the animation CDNs are unavailable.
 initCountdown();
 initFAQ();
 initModulesPresentation();
 initMobileMenu();
+initAnchorLinks();
 initMagneticButtons();
-motionPreference.addEventListener("change", configureMotion);
-function initPageMotion() {
-  initLoader();
-  configureMotion();
-}
-if (document.readyState === "complete") {
-  initPageMotion();
+motionPreference.addEventListener("change", initPageMotion);
+
+// Reading and navigation never wait for optional animation libraries.
+if (window.requestIdleCallback) {
+  window.requestIdleCallback(initPageMotion, { timeout: 2000 });
 } else {
-  window.addEventListener("load", initPageMotion, { once: true });
+  window.setTimeout(initPageMotion, 200);
+}
+
+function loadMotionScript(src) {
+  return new Promise((resolve, reject) => {
+    const script = document.createElement("script");
+    script.src = src;
+    script.async = true;
+    script.onload = resolve;
+    script.onerror = reject;
+    document.head.append(script);
+  });
+}
+
+async function initPageMotion() {
+  if (motionPreference.matches || navigator.connection?.saveData) {
+    configureMotion();
+    return;
+  }
+
+  motionLibraries ??= (async () => {
+    if (!window.gsap) {
+      await loadMotionScript("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js");
+    }
+    await Promise.all([
+      window.ScrollTrigger ? null : loadMotionScript("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"),
+      window.Lenis ? null : loadMotionScript("https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js").catch(() => {}),
+    ]);
+    return true;
+  })().catch(() => false);
+
+  if (await motionLibraries) configureMotion();
 }
 
 function configureMotion() {
@@ -28,8 +57,7 @@ function configureMotion() {
   window.lenis = null;
   lenisTicker = null;
 
-  if (motionPreference.matches) {
-    dismissLoader();
+  if (motionPreference.matches || navigator.connection?.saveData) {
     if (window.gsap) {
       gsap.killTweensOf(".magnetic-btn");
       gsap.set(".magnetic-btn", { clearProps: "transform" });
@@ -56,6 +84,7 @@ function configureMotion() {
     lenisTicker = (time) => window.lenis?.raf(time * 1000);
     gsap.ticker.add(lenisTicker);
     gsap.ticker.lagSmoothing(0);
+    if (document.querySelector(".mobile-menu-overlay")?.open) window.lenis.stop();
   }
 
   motionContext = gsap.context(() => {
@@ -65,77 +94,16 @@ function configureMotion() {
   });
   ScrollTrigger.refresh();
 }
-/* === LOADER === */
-function dismissLoader() {
-  window.clearTimeout(loaderFallback);
-  loaderTimeline?.kill();
-  const loader = document.querySelector(".loader");
-  if (loader) loader.style.display = "none";
-}
-function initLoader() {
-  const loader = document.querySelector(".loader");
-  if (!loader) return;
-  if (motionPreference.matches || !window.gsap) {
-    dismissLoader();
-    return;
-  }
-
-  // This is only a failsafe; the timeline controls the normal dismissal.
-  loaderFallback = window.setTimeout(dismissLoader, 1500);
-  loaderTimeline = gsap.timeline();
-  loaderTimeline
-    .from(".loader-text", {
-      opacity: 0,
-      y: 20,
-      duration: 0.3,
-      ease: "power2.out",
-    })
-    .from(".loader-subtext", {
-      opacity: 0,
-      y: 20,
-      duration: 0.3,
-      ease: "power2.out",
-    }, "-=0.15")
-    .to(loader, {
-      opacity: 0,
-      duration: 0.3,
-      delay: 0.25,
-      pointerEvents: "none",
-      ease: "power2.inOut",
-      onComplete: dismissLoader,
-    });
-}
 /* === HERO ANIMATION === */
 function initHero() {
   const heroImg = document.querySelector(".hero-bg-image");
   if (!heroImg) return;
-  const tl = gsap.timeline({ delay: 0.2 });
-  tl.from(".hero-bg-image", {
-    scale: 1.08,
-    opacity: 0,
-    duration: 1.8,
+  // Keep the hero image and text visible from the first paint.
+  gsap.fromTo(heroImg, { scale: 1.03 }, {
+    scale: 1,
+    duration: 1.2,
     ease: "power2.out",
-  })
-    .from(
-      ".doomsday-title",
-      {
-        y: 20,
-        opacity: 0,
-        duration: 1,
-        ease: "power3.out",
-      },
-      "-=1.1"
-    )
-    .from(
-      ".doomsday-timer",
-      {
-        y: 20,
-        opacity: 0,
-        duration: 1,
-        ease: "power3.out",
-      },
-      "-=0.7"
-    );
+  });
 }
 /* === GENERAL SCROLL ANIMATIONS === */
 function initScroll() {
@@ -159,18 +127,21 @@ function initScroll() {
         }
       );
     }
-    gsap.fromTo(".image-frame", { clipPath: "inset(100% 0 0 0)" }, {
-      clipPath: "inset(0 0 0 0)",
-      duration: 1.5,
-      ease: "power4.out",
-      scrollTrigger: {
-        trigger: ".editorial-image",
-        start: "top 70%",
-      },
-    });
+    if (editorialImg.getBoundingClientRect().top >= window.innerHeight) {
+      gsap.fromTo(".image-frame", { clipPath: "inset(100% 0 0 0)" }, {
+        clipPath: "inset(0 0 0 0)",
+        duration: 1.5,
+        ease: "power4.out",
+        scrollTrigger: {
+          trigger: ".editorial-image",
+          start: "top 70%",
+        },
+      });
+    }
   }
   const revealElements = document.querySelectorAll(".reveal-text, .programme-reveal");
   revealElements.forEach((el) => {
+    if (el.getBoundingClientRect().top < window.innerHeight) return;
     const isProgramme = el.classList.contains("programme-reveal");
     gsap.from(el, {
       y: isProgramme ? 16 : 50,
@@ -188,6 +159,7 @@ function initScroll() {
 function initStackingCards() {
   const cards = gsap.utils.toArray(".testimonial-card-stack");
   cards.forEach((card) => {
+    if (card.getBoundingClientRect().top < window.innerHeight) return;
     gsap.from(card, {
       opacity: 0,
       y: 50,
@@ -267,11 +239,11 @@ function initCountdown() {
     const now = new Date();
     const diffTotalMs = targetDate.getTime() - now.getTime();
     if (diffTotalMs <= 0) {
-      if (elMonths) elMonths.innerText = "00";
-      if (elDays) elDays.innerText = "00";
-      if (elHours) elHours.innerText = "00";
-      if (elMinutes) elMinutes.innerText = "00";
-      if (elSeconds) elSeconds.innerText = "00";
+      if (elMonths) elMonths.textContent = "00";
+      if (elDays) elDays.textContent = "00";
+      if (elHours) elHours.textContent = "00";
+      if (elMinutes) elMinutes.textContent = "00";
+      if (elSeconds) elSeconds.textContent = "00";
       window.clearInterval(intervalId);
       return;
     }
@@ -298,11 +270,11 @@ function initCountdown() {
     diffMs -= minutes * (1000 * 60);
     let seconds = Math.floor(diffMs / 1000);
 
-    if (elMonths) elMonths.innerText = String(m).padStart(2, "0");
-    if (elDays) elDays.innerText = String(days).padStart(2, "0");
-    if (elHours) elHours.innerText = String(hours).padStart(2, "0");
-    if (elMinutes) elMinutes.innerText = String(minutes).padStart(2, "0");
-    if (elSeconds) elSeconds.innerText = String(seconds).padStart(2, "0");
+    if (elMonths) elMonths.textContent = String(m).padStart(2, "0");
+    if (elDays) elDays.textContent = String(days).padStart(2, "0");
+    if (elHours) elHours.textContent = String(hours).padStart(2, "0");
+    if (elMinutes) elMinutes.textContent = String(minutes).padStart(2, "0");
+    if (elSeconds) elSeconds.textContent = String(seconds).padStart(2, "0");
   }
 
   if (targetDate > new Date()) intervalId = window.setInterval(updateTimer, 1000);
@@ -481,23 +453,44 @@ function initMobileMenu() {
   const toggle = document.querySelector(".mobile-menu-toggle");
   const closeBtn = document.querySelector(".mobile-menu-close");
   const overlay = document.querySelector(".mobile-menu-overlay");
-  const links = document.querySelectorAll(".mobile-nav-link");
-  function toggleMenu() {
-    if (!overlay) return;
-    overlay.classList.toggle("active");
-    if (toggle) toggle.classList.toggle("hidden");
-    document.body.style.overflow = overlay.classList.contains("active")
-      ? "hidden"
-      : "";
-  }
-  if (toggle) toggle.addEventListener("click", toggleMenu);
-  if (closeBtn) closeBtn.addEventListener("click", toggleMenu);
-  links.forEach((link) => {
-    link.addEventListener("click", () => {
-      toggleMenu();
-    });
+  const navbar = document.querySelector(".magick-nav");
+  if (!toggle || !closeBtn || !overlay || !navbar || !overlay.showModal) return;
+
+  const mobileViewport = window.matchMedia("(max-width: 768px)");
+  let previousOverflow = "";
+
+  // Native dialogs provide focus containment, Escape dismissal, and an inert background.
+  toggle.addEventListener("click", () => {
+    if (overlay.open || !mobileViewport.matches) return;
+    previousOverflow = document.body.style.overflow;
+    overlay.showModal();
+    toggle.setAttribute("aria-expanded", "true");
+    document.body.style.overflow = "hidden";
+    window.lenis?.stop();
   });
+  closeBtn.addEventListener("click", () => overlay.close());
+  overlay.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => overlay.close());
+  });
+  overlay.addEventListener("close", () => {
+    toggle.setAttribute("aria-expanded", "false");
+    document.body.style.overflow = previousOverflow;
+    window.lenis?.start();
+    const focusTarget = mobileViewport.matches ? toggle : navbar.querySelector(".nav-link.active");
+    focusTarget?.focus({ preventScroll: true });
+  });
+  mobileViewport.addEventListener("change", () => {
+    if (!mobileViewport.matches && overlay.open) overlay.close();
+  });
+
+  // Without JavaScript or dialog support, the regular navigation stays visible.
+  navbar.classList.add("menu-ready");
+  toggle.hidden = false;
+}
+
+function initAnchorLinks() {
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    if (anchor.classList.contains("skip-link")) return;
     anchor.addEventListener("click", function (e) {
       e.preventDefault();
       const targetId = this.getAttribute("href");
