@@ -1,63 +1,108 @@
-window.lenis = new Lenis({
-  duration: 1.2,
-  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-  direction: "vertical",
-  gestureDirection: "vertical",
-  smooth: true,
-  mouseMultiplier: 1,
-  smoothTouch: false,
-  touchMultiplier: 2,
-  infinite: false,
-  syncTouch: true,
-});
-window.lenis.on("scroll", ScrollTrigger.update);
-gsap.ticker.add((time) => {
-  window.lenis.raf(time * 1000);
-});
-gsap.ticker.lagSmoothing(0);
+const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
+let motionContext;
+let lenisTicker;
+let loaderTimeline;
+let loaderFallback;
 
-ScrollTrigger.refresh();
-initCountdown(); // Run immediately so digits populate instantly
-
-window.addEventListener("load", () => {
+// Essential interactions work even when the animation CDNs are unavailable.
+initCountdown();
+initFAQ();
+initModulesPresentation();
+initMobileMenu();
+initMagneticButtons();
+motionPreference.addEventListener("change", configureMotion);
+function initPageMotion() {
   initLoader();
-  initHero();
-  initModulesPresentation();
-  initScroll();
-  initFAQ();
-  initMagneticButtons();
-  initGallery();
-  initMobileMenu();
-});
+  configureMotion();
+}
+if (document.readyState === "complete") {
+  initPageMotion();
+} else {
+  window.addEventListener("load", initPageMotion, { once: true });
+}
+
+function configureMotion() {
+  motionContext?.revert();
+  if (lenisTicker) window.gsap.ticker.remove(lenisTicker);
+  window.lenis?.destroy();
+  window.lenis = null;
+  lenisTicker = null;
+
+  if (motionPreference.matches) {
+    dismissLoader();
+    if (window.gsap) {
+      gsap.killTweensOf(".magnetic-btn");
+      gsap.set(".magnetic-btn", { clearProps: "transform" });
+    }
+    return;
+  }
+  if (!window.gsap || !window.ScrollTrigger) return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  if (window.Lenis) {
+    window.lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      direction: "vertical",
+      gestureDirection: "vertical",
+      smooth: true,
+      mouseMultiplier: 1,
+      smoothTouch: false,
+      touchMultiplier: 2,
+      infinite: false,
+      syncTouch: true,
+    });
+    window.lenis.on("scroll", ScrollTrigger.update);
+    lenisTicker = (time) => window.lenis?.raf(time * 1000);
+    gsap.ticker.add(lenisTicker);
+    gsap.ticker.lagSmoothing(0);
+  }
+
+  motionContext = gsap.context(() => {
+    initHero();
+    initScroll();
+    initGallery();
+  });
+  ScrollTrigger.refresh();
+}
 /* === LOADER === */
+function dismissLoader() {
+  window.clearTimeout(loaderFallback);
+  loaderTimeline?.kill();
+  const loader = document.querySelector(".loader");
+  if (loader) loader.style.display = "none";
+}
 function initLoader() {
-  const tl = gsap.timeline();
-  tl.from(".loader-text", {
-    opacity: 0,
-    y: 20,
-    duration: 1,
-    ease: "power2.out",
-  })
-    .from(
-      ".loader-subtext",
-      {
-        opacity: 0,
-        y: 20,
-        duration: 1,
-        ease: "power2.out",
-      },
-      "-=0.5"
-    )
-    .to(".loader", {
+  const loader = document.querySelector(".loader");
+  if (!loader) return;
+  if (motionPreference.matches || !window.gsap) {
+    dismissLoader();
+    return;
+  }
+
+  // This is only a failsafe; the timeline controls the normal dismissal.
+  loaderFallback = window.setTimeout(dismissLoader, 1500);
+  loaderTimeline = gsap.timeline();
+  loaderTimeline
+    .from(".loader-text", {
       opacity: 0,
-      duration: 0.8,
-      delay: 0.8,
+      y: 20,
+      duration: 0.3,
+      ease: "power2.out",
+    })
+    .from(".loader-subtext", {
+      opacity: 0,
+      y: 20,
+      duration: 0.3,
+      ease: "power2.out",
+    }, "-=0.15")
+    .to(loader, {
+      opacity: 0,
+      duration: 0.3,
+      delay: 0.25,
       pointerEvents: "none",
       ease: "power2.inOut",
-      onComplete: () => {
-        const l = document.querySelector(".loader");
-        if (l) l.style.display = "none";
-      },
+      onComplete: dismissLoader,
     });
 }
 /* === HERO ANIMATION === */
@@ -114,7 +159,7 @@ function initScroll() {
         }
       );
     }
-    gsap.to(".image-frame", {
+    gsap.fromTo(".image-frame", { clipPath: "inset(100% 0 0 0)" }, {
       clipPath: "inset(0 0 0 0)",
       duration: 1.5,
       ease: "power4.out",
@@ -124,12 +169,13 @@ function initScroll() {
       },
     });
   }
-  const revealElements = document.querySelectorAll(".reveal-text");
+  const revealElements = document.querySelectorAll(".reveal-text, .programme-reveal");
   revealElements.forEach((el) => {
+    const isProgramme = el.classList.contains("programme-reveal");
     gsap.from(el, {
-      y: 50,
+      y: isProgramme ? 16 : 50,
       opacity: 0,
-      duration: 1,
+      duration: isProgramme ? 0.45 : 1,
       ease: "power3.out",
       scrollTrigger: {
         trigger: el,
@@ -163,6 +209,7 @@ function initMagneticButtons() {
       return;
     }
     magnet.addEventListener("mousemove", (e) => {
+      if (motionPreference.matches || !window.gsap) return;
       const rect = magnet.getBoundingClientRect();
       const x = e.clientX - rect.left - rect.width / 2;
       const y = e.clientY - rect.top - rect.height / 2;
@@ -174,6 +221,7 @@ function initMagneticButtons() {
       });
     });
     magnet.addEventListener("mouseleave", () => {
+      if (motionPreference.matches || !window.gsap) return;
       gsap.to(magnet, {
         x: 0,
         y: 0,
@@ -186,33 +234,18 @@ function initMagneticButtons() {
 /* === FAQ / ORACLE === */
 function initFAQ() {
   const items = document.querySelectorAll(".faq-item");
+  function setExpanded(item, expanded) {
+    item.classList.toggle("active", expanded);
+    item.querySelector(".faq-question").setAttribute("aria-expanded", String(expanded));
+    item.querySelector(".faq-answer").hidden = !expanded;
+  }
   items.forEach((item) => {
     const question = item.querySelector(".faq-question");
+    setExpanded(item, false);
     question.addEventListener("click", () => {
       const isActive = item.classList.contains("active");
-
-      if (window.lenis) {
-        window.lenis.stop();
-      }
-
-      items.forEach((i) => {
-        i.classList.remove("active");
-        i.querySelector(".faq-answer").style.maxHeight = null;
-      });
-      if (!isActive) {
-        item.classList.add("active");
-        const answer = item.querySelector(".faq-answer");
-        answer.style.maxHeight = answer.scrollHeight + "px";
-      }
-
-      setTimeout(() => {
-        if (typeof ScrollTrigger !== "undefined") {
-          ScrollTrigger.refresh();
-        }
-        if (window.lenis) {
-          window.lenis.start();
-        }
-      }, 500);
+      items.forEach((entry) => setExpanded(entry, entry === item && !isActive));
+      window.ScrollTrigger?.refresh();
     });
   });
 }
@@ -225,17 +258,10 @@ function initCountdown() {
   const elSeconds = document.getElementById("seconds");
   if (!elMonths && !elDays && !elHours && !elMinutes && !elSeconds) return;
 
-  function getTargetDate() {
-    const now = new Date();
-    let year = now.getFullYear();
-    let target = new Date(`${year}-01-08T08:00:00+05:00`);
-    if (now >= target) {
-      target = new Date(`${year + 1}-01-08T08:00:00+05:00`);
-    }
-    return target;
-  }
-
-  const targetDate = getTargetDate();
+  const timer = document.querySelector(".doomsday-timer");
+  const targetDate = new Date(timer.dataset.targetDate);
+  if (Number.isNaN(targetDate.getTime())) return;
+  let intervalId;
 
   function updateTimer() {
     const now = new Date();
@@ -246,6 +272,7 @@ function initCountdown() {
       if (elHours) elHours.innerText = "00";
       if (elMinutes) elMinutes.innerText = "00";
       if (elSeconds) elSeconds.innerText = "00";
+      window.clearInterval(intervalId);
       return;
     }
 
@@ -278,12 +305,12 @@ function initCountdown() {
     if (elSeconds) elSeconds.innerText = String(seconds).padStart(2, "0");
   }
 
+  if (targetDate > new Date()) intervalId = window.setInterval(updateTimer, 1000);
   updateTimer();
-  setInterval(updateTimer, 1000);
 }
 /* === GALLERY SECTION === */
 function initGallery() {
-  if (window.innerWidth < 768) return;
+  if (window.innerWidth <= 768) return;
   const columns = document.querySelectorAll(".gallery-col");
   if (columns.length === 0) return;
   gsap.to(columns[0], {
@@ -480,7 +507,7 @@ function initMobileMenu() {
       } else {
         document
           .querySelector(targetId)
-          ?.scrollIntoView({ behavior: "smooth" });
+          ?.scrollIntoView({ behavior: motionPreference.matches ? "auto" : "smooth" });
       }
     });
   });

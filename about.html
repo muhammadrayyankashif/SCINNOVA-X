@@ -11,15 +11,14 @@
     <title>About | ScinNova X</title>
     <link rel="icon" type="image/x-icon" href="public/Icon.ico" />
     <link rel="stylesheet" href="css/style.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/TextPlugin.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
   </head>
   <body>
     <div class="noise-overlay"></div>
 
-    <div class="loader">
+    <div class="loader" aria-hidden="true">
       <div class="loader-content">
         <div class="loader-text">SCINNOVA X</div>
         <div class="loader-subtext">A DECADE OF INNOVATION</div>
@@ -171,11 +170,14 @@
             </h2>
             <div class="faq-wrapper">
               <div class="faq-item">
-                <div class="faq-question">
-                  <h3>Can we register as private candidates?</h3>
-                  <span class="toggle">+</span>
-                </div>
-                <div class="faq-answer">
+                <h3>
+                  <button class="faq-question" type="button" id="faq-question-1"
+                    aria-expanded="true" aria-controls="faq-answer-1">
+                    <span class="faq-question-text">Can we register as private candidates?</span>
+                    <span class="toggle" aria-hidden="true">+</span>
+                  </button>
+                </h3>
+                <div class="faq-answer" id="faq-answer-1" role="region" aria-labelledby="faq-question-1">
                   <p>
                     Yes, private delegations and independent student teams from any institution or city across Pakistan are fully eligible to register.
                   </p>
@@ -183,23 +185,14 @@
               </div>
 
               <div class="faq-item">
-                <div class="faq-question">
-                  <h3>What is the difference between the 4-Module and 6-Module packages?</h3>
-                  <span class="toggle">+</span>
-                </div>
-                <div class="faq-answer">
-                  <p>
-                    The packages determine the number of events your team is eligible to contest. The 4-Module Package allows participation in up to four specific competition categories, while the 6-Module Package offers broader access, allowing teams to compete across six diverse categories for maximum points.
-                  </p>
-                </div>
-              </div>
-
-              <div class="faq-item">
-                <div class="faq-question">
-                  <h3>Do early bird registrants get specific benefits?</h3>
-                  <span class="toggle">+</span>
-                </div>
-                <div class="faq-answer">
+                <h3>
+                  <button class="faq-question" type="button" id="faq-question-3"
+                    aria-expanded="true" aria-controls="faq-answer-3">
+                    <span class="faq-question-text">Do early bird registrants get specific benefits?</span>
+                    <span class="toggle" aria-hidden="true">+</span>
+                  </button>
+                </h3>
+                <div class="faq-answer" id="faq-answer-3" role="region" aria-labelledby="faq-question-3">
                   <p>
                     Teams applying in the Early Bird Round receive priority slot confirmation and preference in module selections before capacity limits are reached.
                   </p>
@@ -207,11 +200,14 @@
               </div>
 
               <div class="faq-item">
-                <div class="faq-question">
-                  <h3>Is it possible to pay the fees in cash?</h3>
-                  <span class="toggle">+</span>
-                </div>
-                <div class="faq-answer">
+                <h3>
+                  <button class="faq-question" type="button" id="faq-question-4"
+                    aria-expanded="true" aria-controls="faq-answer-4">
+                    <span class="faq-question-text">Is it possible to pay the fees in cash?</span>
+                    <span class="toggle" aria-hidden="true">+</span>
+                  </button>
+                </h3>
+                <div class="faq-answer" id="faq-answer-4" role="region" aria-labelledby="faq-question-4">
                   <p>
                     Teams must submit payments via online bank transfer or direct deposit to the official Cedar College designated account (Faysal Bank) and attach their proof of payment in the registration form.
                   </p>
@@ -219,11 +215,14 @@
               </div>
 
               <div class="faq-item">
-                <div class="faq-question">
-                  <h3>What is the refund policy?</h3>
-                  <span class="toggle">+</span>
-                </div>
-                <div class="faq-answer">
+                <h3>
+                  <button class="faq-question" type="button" id="faq-question-5"
+                    aria-expanded="true" aria-controls="faq-answer-5">
+                    <span class="faq-question-text">What is the refund policy?</span>
+                    <span class="toggle" aria-hidden="true">+</span>
+                  </button>
+                </h3>
+                <div class="faq-answer" id="faq-answer-5" role="region" aria-labelledby="faq-question-5">
                   <p>
                     Registration fees are non-refundable and non-transferable once payment processing and team credentials have been verified.
                   </p>
@@ -321,6 +320,6 @@
       </div>
     </div>
 
-    <script src="js/main.js"></script>
+    <script defer src="js/main.js"></script>
   </body>
 </html>
