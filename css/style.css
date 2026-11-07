@@ -1288,10 +1288,6 @@ h4 {
   border-top: 1px solid var(--panel-border);
 }
 .home-modules-heading {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 1.5rem 3rem;
   margin-bottom: clamp(2rem, 4vw, 3.5rem);
 }
 .home-modules-heading h2 {
@@ -1304,22 +1300,6 @@ h4 {
   letter-spacing: 0.01em;
 }
 .home-modules-heading h2 > span {
-  color: var(--text-accent);
-}
-.home-modules-details {
-  flex-shrink: 0;
-  display: inline-flex;
-  align-items: center;
-  min-height: var(--control-min-size);
-  color: var(--metallic-silver);
-  font-size: 0.8rem;
-  line-height: 1.5;
-  text-decoration: underline;
-  text-decoration-color: var(--doom-green);
-  text-underline-offset: 0.4em;
-  transition: color var(--motion-fast) ease;
-}
-.home-modules-details:hover {
   color: var(--text-accent);
 }
 .home-modules-programme {
@@ -1350,48 +1330,37 @@ h4 {
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 4rem;
+  height: 4.5rem;
   margin-bottom: 1.25rem;
 }
 .home-module-emblem img {
   display: block;
   width: auto;
   height: auto;
-  max-width: min(12rem, 90%);
-  max-height: 4rem;
+  max-width: min(13rem, 90%);
+  max-height: 4.5rem;
   object-fit: contain;
+  transition: transform var(--motion-fast) ease, opacity var(--motion-fast) ease;
 }
 .home-module-link--symbol .home-module-emblem img {
-  max-width: 3.5rem;
-  max-height: 3.5rem;
-}
-.home-module-name {
-  max-width: 100%;
-  color: inherit;
-  font-family: var(--font-heading);
-  font-size: clamp(2.1rem, 3.6vw, 3.4rem);
-  font-weight: 400;
-  line-height: 1.08;
-  letter-spacing: 0.015em;
-  overflow-wrap: break-word;
-  text-wrap: balance;
-  transition: color var(--motion-fast) ease;
+  max-width: 4rem;
+  max-height: 4rem;
 }
 .home-module-discipline {
-  margin-top: 0.65rem;
   color: var(--metallic-silver);
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   line-height: 1.5;
+  transition: color var(--motion-fast) ease;
 }
-.home-module-link:focus-visible .home-module-name {
+.home-module-link:focus-visible .home-module-discipline {
   color: var(--text-accent);
 }
 @media (hover: hover) and (pointer: fine) {
-  .home-module-link:hover .home-module-name {
+  .home-module-link:hover .home-module-discipline {
     color: var(--text-accent);
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 0.15em;
+  }
+  .home-module-link:hover .home-module-emblem img {
+    transform: translateY(-2px);
   }
 }
 @media (max-width: 899px) {
@@ -1409,11 +1378,6 @@ h4 {
   }
 }
 @media (max-width: 599px) {
-  .home-modules-heading {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-  }
   .home-modules-programme {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -1717,11 +1681,7 @@ h4 {
   width: 100%;
   height: auto;
   display: block;
-  filter: sepia(80%) contrast(1.1);
   transition: all var(--motion-reveal) ease;
-}
-.gallery-item:hover img {
-  filter: sepia(0%) contrast(1);
 }
 
 .faq-section {

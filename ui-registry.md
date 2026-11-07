@@ -27,13 +27,13 @@ Files: `index.html`, `css/style.css`.
 | Surface | Open on the existing `--obsidian-black` page background |
 | Separators | One `1px solid var(--charcoal-grey)` horizontal rule above each entry; no enclosing frame |
 | Radius / shadow | None |
-| Spacing | Entry padding `clamp(2rem, 4vw, 3rem) 0.5rem`; logo-to-name gap `1.25rem` |
+| Spacing | Entry padding `clamp(2rem, 4vw, 3rem) 0.5rem`; logo-to-discipline gap `1.25rem` |
 | Section heading | Bebas Neue 400, `clamp(3.25rem, 8vw, 7rem)`, line-height `0.95`; pale text with accent emphasis |
-| Module name | `.home-module-name`: Bebas Neue 400, `clamp(2.1rem, 3.6vw, 3.4rem)`, line-height `1.08`, centered |
-| Discipline | `.home-module-discipline`: Inter `0.75rem`, line-height `1.5`, silver text |
-| Hover / focus | Accent name on keyboard focus; accent name with fine underline on fine-pointer hover; global keyboard focus outline remains visible |
+| Module logo | `.home-module-emblem`: Height `4.5rem`, centered wordmark/emblem |
+| Discipline | `.home-module-discipline`: Inter `0.8rem`, line-height `1.5`, silver text |
+| Hover / focus | Accent discipline and subtle emblem lift on hover/focus; global keyboard focus outline remains visible |
 
-Each entry is one native link to its module detail. Logos are supporting marks with natural proportions, explicit dimensions, and lazy loading. Keep the programme free of filled card surfaces, gradients, numerical badges, taglines, and repeated action captions. Testimonial and Contact sections retain their existing patterns independently.
+Each entry is one native link to its module detail. Logos are standalone module marks with natural proportions, explicit dimensions, and lazy loading. Keep the programme free of filled card surfaces, gradients, numerical badges, taglines, and repeated action captions. Testimonial and Contact sections retain their existing patterns independently.
 
 ## Editorial testimonials
 
