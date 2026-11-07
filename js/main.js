@@ -1,5 +1,6 @@
 const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
 let motionContext;
+let motionMedia;
 let lenisTicker;
 let motionLibraries;
 
@@ -8,9 +9,9 @@ initCountdown();
 initFAQ();
 initModulesPresentation();
 initMobileMenu();
-initAnchorLinks();
 initMagneticButtons();
 motionPreference.addEventListener("change", initPageMotion);
+navigator.connection?.addEventListener("change", initPageMotion);
 
 // Reading and navigation never wait for optional animation libraries.
 if (window.requestIdleCallback) {
@@ -51,7 +52,10 @@ async function initPageMotion() {
 }
 
 function configureMotion() {
+  motionMedia?.revert();
+  motionMedia = null;
   motionContext?.revert();
+  motionContext = null;
   if (lenisTicker) window.gsap.ticker.remove(lenisTicker);
   window.lenis?.destroy();
   window.lenis = null;
@@ -90,8 +94,11 @@ function configureMotion() {
   motionContext = gsap.context(() => {
     initHero();
     initScroll();
-    initGallery();
   });
+  // Each breakpoint owns its effects; GSAP restores styles when it stops matching.
+  motionMedia = gsap.matchMedia();
+  motionMedia.add("(min-width: 769px)", initGallery);
+  motionMedia.add("(min-width: 1025px)", initEditorialParallax);
   ScrollTrigger.refresh();
 }
 /* === HERO ANIMATION === */
@@ -101,7 +108,7 @@ function initHero() {
   // Keep the hero image and text visible from the first paint.
   gsap.fromTo(heroImg, { scale: 1.03 }, {
     scale: 1,
-    duration: 1.2,
+    duration: 0.45,
     ease: "power2.out",
   });
 }
@@ -109,29 +116,12 @@ function initHero() {
 function initScroll() {
   const editorialImg = document.querySelector(".editorial-image");
   if (editorialImg) {
-    if (window.innerWidth > 1024) {
-      gsap.fromTo(
-        ".parallax-img",
-        {
-          yPercent: -10,
-        },
-        {
-          yPercent: 10,
-          ease: "none",
-          scrollTrigger: {
-            trigger: ".editorial-image",
-            start: "top bottom",
-            end: "bottom top",
-            scrub: 0.5,
-          },
-        }
-      );
-    }
     if (editorialImg.getBoundingClientRect().top >= window.innerHeight) {
-      gsap.fromTo(".image-frame", { clipPath: "inset(100% 0 0 0)" }, {
-        clipPath: "inset(0 0 0 0)",
-        duration: 1.5,
-        ease: "power4.out",
+      gsap.fromTo(".image-frame", { y: 16, opacity: 0 }, {
+        y: 0,
+        opacity: 1,
+        duration: 0.45,
+        ease: "power2.out",
         scrollTrigger: {
           trigger: ".editorial-image",
           start: "top 70%",
@@ -142,36 +132,29 @@ function initScroll() {
   const revealElements = document.querySelectorAll(".reveal-text, .programme-reveal");
   revealElements.forEach((el) => {
     if (el.getBoundingClientRect().top < window.innerHeight) return;
-    const isProgramme = el.classList.contains("programme-reveal");
     gsap.from(el, {
-      y: isProgramme ? 16 : 50,
+      y: 16,
       opacity: 0,
-      duration: isProgramme ? 0.45 : 1,
-      ease: "power3.out",
+      duration: 0.45,
+      ease: "power2.out",
       scrollTrigger: {
         trigger: el,
         start: "top 85%",
       },
     });
   });
-  initStackingCards();
 }
-function initStackingCards() {
-  const cards = gsap.utils.toArray(".testimonial-card-stack");
-  cards.forEach((card) => {
-    if (card.getBoundingClientRect().top < window.innerHeight) return;
-    gsap.from(card, {
-      opacity: 0,
-      y: 50,
-      duration: 0.8,
-      ease: "power3.out",
-      clearProps: "transform",
-      scrollTrigger: {
-        trigger: card,
-        start: "top 80%",
-        fastScrollEnd: true,
-      },
-    });
+function initEditorialParallax() {
+  if (!document.querySelector(".editorial-image")) return;
+  gsap.fromTo(".parallax-img", { yPercent: -4 }, {
+    yPercent: 4,
+    ease: "none",
+    scrollTrigger: {
+      trigger: ".editorial-image",
+      start: "top bottom",
+      end: "bottom top",
+      scrub: 0.5,
+    },
   });
 }
 function initMagneticButtons() {
@@ -181,24 +164,24 @@ function initMagneticButtons() {
       return;
     }
     magnet.addEventListener("mousemove", (e) => {
-      if (motionPreference.matches || !window.gsap) return;
+      if (motionPreference.matches || navigator.connection?.saveData || !window.gsap) return;
       const rect = magnet.getBoundingClientRect();
       const x = e.clientX - rect.left - rect.width / 2;
       const y = e.clientY - rect.top - rect.height / 2;
       gsap.to(magnet, {
         x: x * 0.3,
         y: y * 0.3,
-        duration: 0.3,
+        duration: 0.2,
         ease: "power2.out",
       });
     });
     magnet.addEventListener("mouseleave", () => {
-      if (motionPreference.matches || !window.gsap) return;
+      if (motionPreference.matches || navigator.connection?.saveData || !window.gsap) return;
       gsap.to(magnet, {
         x: 0,
         y: 0,
-        duration: 0.5,
-        ease: "elastic.out(1, 0.3)",
+        duration: 0.2,
+        ease: "power2.out",
       });
     });
   });
@@ -282,7 +265,6 @@ function initCountdown() {
 }
 /* === GALLERY SECTION === */
 function initGallery() {
-  if (window.innerWidth <= 768) return;
   const columns = document.querySelectorAll(".gallery-col");
   if (columns.length === 0) return;
   gsap.to(columns[0], {
@@ -487,24 +469,4 @@ function initMobileMenu() {
   navbar.classList.add("menu-ready");
   toggle.hidden = false;
 }
-
-function initAnchorLinks() {
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    if (anchor.classList.contains("skip-link")) return;
-    anchor.addEventListener("click", function (e) {
-      e.preventDefault();
-      const targetId = this.getAttribute("href");
-      if (targetId === "#") return;
-      if (window.lenis) {
-        window.lenis.scrollTo(targetId);
-      } else {
-        document
-          .querySelector(targetId)
-          ?.scrollIntoView({ behavior: motionPreference.matches ? "auto" : "smooth" });
-      }
-    });
-  });
-}
-
-
 
