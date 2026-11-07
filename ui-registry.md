@@ -1,4 +1,4 @@
-# Scinnova X component patterns
+# SCINNOVA X component patterns
 
 Updated 7 November 2026. Check these patterns before changing or extending the new components. Preserve the existing Doomsday palette and the Bebas Neue / Inter typography roles.
 
@@ -91,4 +91,4 @@ Files: `about.html`, `css/style.css`.
 
 Use correctly labeled public contact channels. The general college email is not labeled as a dedicated event-registration inbox. Contact is a focusable native anchor destination so keyboard navigation and URL fragments work without JavaScript interception.
 
-Contact Instagram order: Scinnova (`@scinnova_`), Cedar College (`@cedarcollege`), CORDS (`@cords.cedar`), then The Juno Circle (`@juno.cedar`).
+Contact Instagram order: SCINNOVA (`@scinnova_`), Cedar College (`@cedarcollege`), CORDS (`@cords.cedar`), then The Juno Circle (`@juno.cedar`).

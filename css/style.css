@@ -1,5 +1,5 @@
 :root {
-  /* Official Scinnova X Palette */
+  /* Official SCINNOVA X Palette */
   --obsidian-black: #08090d;
   --doom-green: #315c45;
   --emerald: #547b60;
@@ -1343,8 +1343,14 @@ h4 {
   transition: transform var(--motion-fast) ease, opacity var(--motion-fast) ease;
 }
 .home-module-link--symbol .home-module-emblem img {
-  max-width: 4rem;
-  max-height: 4rem;
+  max-width: 8rem;
+  max-height: 5.75rem;
+  height: 5.5rem;
+  width: auto;
+}
+.home-module-link--planck .home-module-emblem img {
+  max-width: min(19rem, 96%);
+  width: min(17.5rem, 92%);
 }
 .home-module-discipline {
   color: var(--metallic-silver);
@@ -1394,6 +1400,16 @@ h4 {
   }
   .home-module-emblem img {
     max-height: 3rem;
+  }
+  .home-module-link--symbol .home-module-emblem img {
+    max-width: 5.5rem;
+    max-height: 4rem;
+    height: 3.75rem;
+    width: auto;
+  }
+  .home-module-link--planck .home-module-emblem img {
+    max-width: 85%;
+    width: 15rem;
   }
 }
 .event-section {
@@ -2423,7 +2439,7 @@ h4 {
 
 /* === MODULES: COMPETITION PROGRAMME === */
 .modules-page-section {
-  padding: clamp(8rem, 14vh, 11rem) 0 clamp(4rem, 8vw, 7rem);
+  padding: clamp(8rem, 14vh, 11rem) 0 0;
   min-height: 100vh;
 }
 
@@ -2431,6 +2447,7 @@ h4 {
   width: calc(100% - 6rem);
   max-width: 1280px;
   padding: 0;
+  margin-bottom: clamp(4rem, 8vw, 7rem);
 }
 
 .module-programme-header {
@@ -2591,9 +2608,11 @@ h4 {
 @media (max-width: 600px) {
   .module-programme.container {
     width: calc(100% - 3rem);
+    margin-bottom: 3.5rem;
   }
   .modules-page-section {
     padding-top: 7.5rem;
+    padding-bottom: 0;
   }
   .module-eyebrow {
     margin-bottom: 1.3rem;

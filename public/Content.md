@@ -13,7 +13,7 @@
 
 ## Ideas
 
-1. Medieval Clock (Time goes off on scinnova day and fireworks)
+1. Medieval Clock (Time goes off on SCINNOVA day and fireworks)
 2. Timeline Photos (Carriages)
 3. Scroll opens and writing comes (organizers messages)
 4. Use golden snitch (like in daydreams website [https://daydream.hackclub.com/karachi](https://daydream.hackclub.com/karachi))
@@ -22,10 +22,10 @@
 
 WHAT IS SCINNOVA?
 
-Scinnova 2025: Igniting Young Minds through Transdisciplinary Exploration
-Scinnova is Cedar College’s flagship science competition, designed to be more than just an academic challenge. It is an immersive learning experience that brings together 60 teams of budding scientists from across Karachi and Pakistan, with each team comprising 4-7 members aged 14-18. This year’s Scinnova consists of nine modules, each an intellectual arena representing a distinct field of science. Together, they showcase how a deep, interdisciplinary understanding of our world fosters true critical thinking, collaboration, and innovation.
+SCINNOVA 2025: Igniting Young Minds through Transdisciplinary Exploration
+SCINNOVA is Cedar College’s flagship science competition, designed to be more than just an academic challenge. It is an immersive learning experience that brings together 60 teams of budding scientists from across Karachi and Pakistan, with each team comprising 4-7 members aged 14-18. This year’s SCINNOVA consists of nine modules, each an intellectual arena representing a distinct field of science. Together, they showcase how a deep, interdisciplinary understanding of our world fosters true critical thinking, collaboration, and innovation.
 
-With two competitive rounds in each module, students face three hours of intensive engagement per module, plus an hour dedicated to setup, briefing, scoring, and preparation. Scinnova is an arena for future problem-solvers, where hands-on challenges lead students to push beyond textbook knowledge, cultivating teamwork and critical reasoning.
+With two competitive rounds in each module, students face three hours of intensive engagement per module, plus an hour dedicated to setup, briefing, scoring, and preparation. SCINNOVA is an arena for future problem-solvers, where hands-on challenges lead students to push beyond textbook knowledge, cultivating teamwork and critical reasoning.
 
 ## Modules
 
