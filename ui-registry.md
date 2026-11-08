@@ -74,21 +74,19 @@ Files: `js/main.js`, `css/style.css`. Updated 7 November 2026.
 
 Use `--motion-fast` (`200ms`) for hover feedback and `--motion-reveal` (`450ms`) for reveals and image transitions. Text reveals travel at most `16px`. Responsive parallax belongs to GSAP match-media contexts so it reverts at its breakpoint. Essential content remains visible without animation libraries; reduced-motion and data-saving preferences disable optional animation.
 
-## Contact panels
+The gallery has no visible motion control. Honor a previously saved gallery opt-in (`scinnova-gallery-motion=enabled`) when reduced motion is active; other effects continue to respect the browser preference. Data-saving mode and the gallery's phone breakpoint still disable parallax.
 
-Files: `about.html`, `css/style.css`.
+## Contact section
+
+Files: `index.html`, `about.html`, `modules.html`, `css/style.css`.
 
 | Property | Pattern |
 | --- | --- |
-| Surface | `.contact-panel`: `--panel-surface`; email panel adds restrained green corner light |
-| Border / radius | `1px solid var(--panel-border)`; square corners |
-| Padding | `clamp(1.5rem, 3vw, 2.5rem)` |
-| Panel title | Bebas Neue 400, `clamp(2rem, 3vw, 2.75rem)`, line-height `1.1` |
-| Email | Inter 600, `clamp(1.05rem, 2vw, 1.6rem)`, accent text, wrapping permitted |
-| Supporting copy | Inter `0.875rem`, line-height `1.8`, silver text |
-| Social rows | Fine top border; `1rem` block padding; pale name and silver handle; accent hover |
-| Focus | Global `--focus-ring`; native email, profile, and section links |
+| Layout | `.contact-layout`: 2-column split grid (`minmax(0, 1.4fr) minmax(0, 1fr)`), 1-column on mobile |
+| Section boundary | Top and bottom `1px solid var(--charcoal-grey)` borders |
+| Left introduction | Eyebrow, Bebas Neue title `LET’S CONNECT.`, metallic silver narrative copy |
+| Right facts list | `.contact-facts`: subtle `1px solid var(--charcoal-grey)` row dividers, uppercase metadata labels (`<dt>`) |
+| Channel values | Inter 600 / Bebas Neue, accent green links with diagonal indicator arrows |
+| Focus | Global `--focus-ring`; native email, phone, Instagram, and maps directions links |
 
-Use correctly labeled public contact channels. The general college email is not labeled as a dedicated event-registration inbox. Contact is a focusable native anchor destination so keyboard navigation and URL fragments work without JavaScript interception.
-
-Contact Instagram order: SCINNOVA (`@scinnova_`), Cedar College (`@cedarcollege`), CORDS (`@cords.cedar`), then The Juno Circle (`@juno.cedar`).
+Use correctly labeled public contact channels: registration email (`reg.scinnova@cedar.edu.pk`), phone helpline (`+92 300 2526200`), official Instagram (`@scinnova_`), and host campus venue details (Cedar College DHA Campus). Contact is a focusable native anchor destination so keyboard navigation and URL fragments work without JavaScript interception.

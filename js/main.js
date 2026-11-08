@@ -3,15 +3,18 @@ let motionContext;
 let motionMedia;
 let lenisTicker;
 let motionLibraries;
+let smoothScrollLibrary;
+const galleryMotionOverride = readGalleryMotionPreference();
 
-// Essential interactions work even when the animation CDNs are unavailable.
+// Essential interactions work even when optional animation scripts are unavailable.
 initCountdown();
 initFAQ();
 initModulesPresentation();
 initMobileMenu();
 initMagneticButtons();
-motionPreference.addEventListener("change", initPageMotion);
-navigator.connection?.addEventListener("change", initPageMotion);
+motionPreference.addEventListener("change", refreshPageMotion);
+navigator.connection?.addEventListener("change", refreshPageMotion);
+window.addEventListener("online", initPageMotion);
 
 // Reading and navigation never wait for optional animation libraries.
 if (window.requestIdleCallback) {
@@ -21,34 +24,57 @@ if (window.requestIdleCallback) {
 }
 
 function loadMotionScript(src) {
-  return new Promise((resolve, reject) => {
+  const load = () => new Promise((resolve, reject) => {
     const script = document.createElement("script");
+    const finish = (error) => {
+      window.clearTimeout(timeout);
+      script.onload = script.onerror = null;
+      if (error) {
+        script.remove();
+        reject(error);
+      } else {
+        resolve();
+      }
+    };
+    const timeout = window.setTimeout(() => finish(new Error(`Timed out loading ${src}`)), 8000);
     script.src = src;
     script.async = true;
-    script.onload = resolve;
-    script.onerror = reject;
+    script.onload = () => finish();
+    script.onerror = () => finish(new Error(`Could not load ${src}`));
     document.head.append(script);
   });
+  return load().catch(() => load());
 }
 
 async function initPageMotion() {
-  if (motionPreference.matches || navigator.connection?.saveData) {
+  if ((motionPreference.matches && !galleryMotionOverride) || navigator.connection?.saveData) {
     configureMotion();
     return;
   }
 
   motionLibraries ??= (async () => {
     if (!window.gsap) {
-      await loadMotionScript("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js");
+      await loadMotionScript("js/vendor/gsap-3.12.2.min.js");
     }
-    await Promise.all([
-      window.ScrollTrigger ? null : loadMotionScript("https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"),
-      window.Lenis ? null : loadMotionScript("https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js").catch(() => {}),
-    ]);
+    if (!window.ScrollTrigger) {
+      await loadMotionScript("js/vendor/ScrollTrigger-3.12.2.min.js");
+    }
     return true;
-  })().catch(() => false);
+  })().catch((error) => {
+    motionLibraries = null;
+    console.warn("Page animations could not start. They will retry when connectivity returns.", error);
+    return false;
+  });
 
-  if (await motionLibraries) configureMotion();
+  if (await motionLibraries) {
+    if (!motionContext) configureMotion();
+    // Parallax uses native scrolling immediately; smooth scrolling is optional.
+    if (!motionPreference.matches && !window.Lenis) {
+      smoothScrollLibrary ??= loadMotionScript("js/vendor/lenis-1.0.29.min.js")
+        .then(initSmoothScrolling)
+        .catch(() => { smoothScrollLibrary = null; });
+    }
+  }
 }
 
 function configureMotion() {
@@ -66,40 +92,62 @@ function configureMotion() {
       gsap.killTweensOf(".magnetic-btn");
       gsap.set(".magnetic-btn", { clearProps: "transform" });
     }
-    return;
+    if (!galleryMotionOverride || navigator.connection?.saveData) return;
   }
   if (!window.gsap || !window.ScrollTrigger) return;
   gsap.registerPlugin(ScrollTrigger);
 
-  if (window.Lenis) {
-    window.lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      direction: "vertical",
-      gestureDirection: "vertical",
-      smooth: true,
-      mouseMultiplier: 1,
-      smoothTouch: false,
-      touchMultiplier: 2,
-      infinite: false,
-      syncTouch: true,
-    });
-    window.lenis.on("scroll", ScrollTrigger.update);
-    lenisTicker = (time) => window.lenis?.raf(time * 1000);
-    gsap.ticker.add(lenisTicker);
-    gsap.ticker.lagSmoothing(0);
-    if (document.querySelector(".mobile-menu-overlay")?.open) window.lenis.stop();
-  }
+  initSmoothScrolling();
 
   motionContext = gsap.context(() => {
-    initHero();
-    initScroll();
+    if (!motionPreference.matches) {
+      initHero();
+      initScroll();
+    }
   });
   // Each breakpoint owns its effects; GSAP restores styles when it stops matching.
   motionMedia = gsap.matchMedia();
   motionMedia.add("(min-width: 769px)", initGallery);
-  motionMedia.add("(min-width: 1025px)", initEditorialParallax);
+  if (!motionPreference.matches) {
+    motionMedia.add("(min-width: 1025px)", initEditorialParallax);
+  }
   ScrollTrigger.refresh();
+}
+
+function refreshPageMotion() {
+  configureMotion();
+  initPageMotion();
+}
+
+function readGalleryMotionPreference() {
+  if (!document.querySelector(".gallery-col")) return false;
+  try {
+    return window.localStorage.getItem("scinnova-gallery-motion") === "enabled";
+  } catch {
+    return false;
+  }
+}
+
+function initSmoothScrolling() {
+  if (motionPreference.matches || navigator.connection?.saveData || window.lenis ||
+      !window.gsap || !window.ScrollTrigger || !window.Lenis) return;
+  window.lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    direction: "vertical",
+    gestureDirection: "vertical",
+    smooth: true,
+    mouseMultiplier: 1,
+    smoothTouch: false,
+    touchMultiplier: 2,
+    infinite: false,
+    syncTouch: true,
+  });
+  window.lenis.on("scroll", ScrollTrigger.update);
+  lenisTicker = (time) => window.lenis?.raf(time * 1000);
+  gsap.ticker.add(lenisTicker);
+  gsap.ticker.lagSmoothing(0);
+  if (document.querySelector(".mobile-menu-overlay")?.open) window.lenis.stop();
 }
 /* === HERO ANIMATION === */
 function initHero() {
