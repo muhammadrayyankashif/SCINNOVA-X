@@ -63,7 +63,7 @@ The description will be added later
 - Dr. Athar Osama
   "Having attended SCINNOVA last year, I was inspired by the passion and dedication of the participants and organizing team. This event nurtures innovative thinking and problem-solving skills. The commitment to excellence highlights the impressive capabilities of our youth and lays the groundwork for a future where science and creativity thrive. SCINNOVA is a testament to the potential of the next generation of innovators."
 - Dr. Sabieh Anwar
-  "SCINNOVA has been a journey of both challenges and triumphs. We’ve experienced the full spectrum of burnout and success through countless hours of dedicated work. Each year, we surpass our previous achievements, continuously striving to offer every young mind an opportunity to excel in the field of STEM."
+  "SCINNOVA has been a journey of challenges and triumphs, shaped by countless hours of dedication. Each year, we strive to surpass our achievements and give more young minds the opportunity to excel in STEM."
 
 - Ruhab Iqbal
 

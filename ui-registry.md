@@ -37,20 +37,19 @@ Each entry is one native link to its module detail. Logos are standalone module 
 
 ## Editorial testimonials
 
-Files: `index.html`, `css/style.css`. Updated 7 November 2026.
+Files: `index.html`, `css/style.css`. Updated 9 November 2026.
 
 | Property | Pattern |
 | --- | --- |
 | Surface | Open on `--obsidian-black`; no panels, gradients, shadows, or numbered labels |
-| Separators | Supporting quotations start with a `1px solid var(--charcoal-grey)` top rule and `2rem` top padding |
-| Lead quote | Inter `clamp(1.25rem, 2.1vw, 1.8rem)`, line-height `1.65`, pale text |
-| Supporting quotes | Inter `clamp(1rem, 1.3vw, 1.125rem)`, line-height `1.85`, pale text |
-| Portrait | Rectangular, natural proportions for the lead; square crop in supporting attributions; no decorative frame |
+| Separators | Each quotation starts with a `1px solid var(--charcoal-grey)` top rule and `2rem` top padding |
+| Quotes | Inter `clamp(1rem, 1.3vw, 1.125rem)`, line-height `1.85`, pale text |
+| Portrait | Matching square crops in each attribution; `object-fit: cover`; no decorative frame |
 | Speaker name | Inter 600, `0.9rem`, line-height `1.5`, pale text |
 | Speaker role | Inter `0.75rem`, line-height `1.6`, silver text, `0.35rem` top margin |
-| Spacing | Attribution margin `2rem` (`1.5rem` for the lead); quotation gap `clamp(2.5rem, 5vw, 4.5rem)` |
+| Spacing | Attribution margin `2rem`; quotation gap `clamp(2.5rem, 5vw, 4.5rem)` |
 
-Use semantic figure / blockquote / figcaption markup. Preserve full quotations, names, roles, and portraits. Lead with one larger quotation beside its portrait; supporting quotations sit below. Stack into a natural reading order on phones.
+Use semantic figure / blockquote / figcaption markup. Preserve full quotations, names, roles, and portraits. All four testimonials share the same treatment: Sabieh Anwar and Sajjad Haider Zaidi in the first row, Athar Osama and Ruhab Iqbal in the second. Stack into that reading order on phones. Keep attributions aligned at the bottom of each row.
 
 ## Homepage event details
 
