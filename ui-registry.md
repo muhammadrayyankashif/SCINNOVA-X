@@ -50,6 +50,7 @@ Files: `index.html`, `css/refinements.css`, `js/main.js`.
 | Radius / shadow | None |
 | Metadata | Muted green monospace module indices; quiet diagonal arrow on homepage |
 | Logos | Centered, natural aspect ratios; no artwork recoloring |
+| Arcanum symbol | Give the vertical symbol a substantially larger dedicated emblem area than the horizontal wordmarks; use the full available width when needed, retain natural proportions and clear space above the discipline label |
 | Discipline text | Muted Inter `0.75rem` |
 | Spacing | `4.5rem 2rem 2rem` |
 | Hover / focus | Slightly lighter surface; green arrow and discipline; homepage logo rises `4px` |

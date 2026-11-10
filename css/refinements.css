@@ -113,7 +113,8 @@
 .module-card-meta > span:last-child { font-size: 1.15rem; color: var(--metallic-silver); transition: color var(--motion-fast), transform var(--motion-fast); }
 .home-module-emblem { position: relative; display: flex; align-items: center; justify-content: center; width: 100%; height: 70px; margin-bottom: 1.5rem; }
 .home-module-emblem img { display: block; max-width: 88%; max-height: 62px; width: auto; height: auto; object-fit: contain; transition: transform var(--motion-fast); }
-.home-module-link--symbol .home-module-emblem img { max-height: 76px; max-width: 90px; }
+.home-module-link--symbol .home-module-emblem { height: 160px; }
+.home-module-link--symbol .home-module-emblem img { max-height: 160px; max-width: 100%; }
 .home-module-link--planck .home-module-emblem img { width: 100%; max-width: 100%; }
 .home-module-discipline { position: relative; font-size: 0.75rem; color: var(--metallic-silver); transition: color var(--motion-fast); }
 .module-card-diagram { position: absolute; z-index: -1; right: -26px; bottom: -35px; width: 150px; height: 150px; border: 1px solid rgba(187, 239, 121, 0.075); border-radius: 50%; transition: transform var(--motion-reveal), border-color var(--motion-fast); }
@@ -364,7 +365,8 @@
   .home-module-link { min-height: 210px; padding: 4rem 1.2rem 1.6rem; }
   .home-module-emblem { height: 60px; margin-bottom: 1.25rem; }
   .home-module-emblem img { max-height: 50px; }
-  .home-module-link--symbol .home-module-emblem img { max-height: 65px; }
+  .home-module-link--symbol .home-module-emblem { height: 132px; }
+  .home-module-link--symbol .home-module-emblem img { max-height: 132px; }
   .home-modules-programme > li:last-child .home-module-emblem img { max-width: 175px; }
   .module-card-meta { inset: 1rem 1rem auto; font-size: 0.5rem; }
   .home-module-discipline { font-size: 0.65rem; }
@@ -401,7 +403,8 @@
   .home-module-link { min-height: 185px; padding: 3.5rem 1rem 1.4rem; }
   .home-module-emblem { height: 48px; margin-bottom: 1rem; }
   .home-module-emblem img { max-height: 40px; max-width: 95%; }
-  .home-module-link--symbol .home-module-emblem img { max-height: 58px; }
+  .home-module-link--symbol .home-module-emblem { height: 116px; }
+  .home-module-link--symbol .home-module-emblem img { max-height: 116px; }
   .home-module-discipline { font-size: 0.6rem; }
   .module-card-meta { font-size: 0.45rem; }
   :is(.module-overview, .testimonials-section, .contact-section, .organizers-section, .faq-section) .feature-eyebrow { font-size: 0.58rem; }
