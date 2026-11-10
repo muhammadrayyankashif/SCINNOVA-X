@@ -34,7 +34,7 @@ Files: all three HTML pages, `css/refinements.css`.
 | Spacing | Main action `0.9rem 1.4rem`; diagonal arrow on navigation and footer actions |
 | Hover / keyboard focus | Dark surface, lime text and border, subtle lime glow, `translateY(-2px)`; the arrow moves diagonally |
 
-Preserve the original navigation layout and mobile dialog. The hero registration button retains its original mobile-only placement with the approved button styling. Keep all original registration destinations. Specify foreground and background together for hover, focus, and active states so legacy white text cannot reappear. Active press keeps dark background / lime text and returns to baseline.
+Preserve the original navigation layout and mobile dialog. The hero registration button retains its original mobile-only placement with the approved button styling. Use `https://forms.gle/w2H4QhemSyPvcqB7A` for every registration destination (navbar, mobile menu, hero, and footer). Specify foreground and background together for hover, focus, and active states so legacy white text cannot reappear. Active press keeps dark background / lime text and returns to baseline.
 
 ### Restored global compositions
 
@@ -115,7 +115,7 @@ Keep native email, phone, Instagram, and map links. Contact destinations remain 
 
 Files: all three HTML pages, `css/refinements.css`.
 
-Use an oversized balanced condensed CTA, the shared solid green registration action, original host and society logos, and a fine ruled monospace sign-off. Society logos stay muted until hover. Footer links retain their existing destinations. New-tab links use `noopener noreferrer`. The back-to-top link targets each page’s focusable main landmark. Footer sign-off text is exactly `SCINNOVA X` and `8–10 JANUARY 2027`; do not include `THE TENTH EDITION` or `/ KARACHI, PK` in the footer. The About image caption retains its location text.
+Use an oversized balanced condensed CTA, the shared solid green registration action, original host and society logos, and a fine ruled monospace sign-off. Society logos stay fully colored and opaque at rest and on hover. All five society logos link directly to their Instagram profiles (`cedarmindsports`, `crew.cedar`, `cords.cedar`, `juno.cedar`, `cedar.codes`), with accessible link names identifying Instagram; the Cedar College host logo keeps the college website destination. Footer registration uses the same URL as the navbar. New-tab links use `noopener noreferrer`. The back-to-top link targets each page’s focusable main landmark. Footer sign-off text is exactly `SCINNOVA X` and `8–10 JANUARY 2027`; do not include `THE TENTH EDITION` or `/ KARACHI, PK` in the footer. The About image caption retains its location text.
 
 ### Numbered FAQ
 
