@@ -1,13 +1,13 @@
 :root {
-  /* Official SCINNOVA X Palette */
+  /* SCINNOVA X palette and shared lime accent. */
   --obsidian-black: #08090d;
   --doom-green: #315c45;
-  --emerald: #547b60;
+  --emerald: var(--text-accent);
   --metallic-silver: #bfc5cc;
   --crimson-red: #8f202b;
   --charcoal-grey: #25282d;
   --pale-white: #e8e9e6;
-  --text-accent: #95b99f;
+  --text-accent: #bbef79;
   --panel-surface: #0c120f;
   --panel-border: rgba(149, 185, 159, 0.22);
 
@@ -36,7 +36,7 @@
   --reading-width: 60ch;
   --radius-pill: 9999px;
   --control-min-size: 2.75rem;
-  --focus-ring: 2px solid var(--pale-white);
+  --focus-ring: 2px solid var(--text-accent);
   --motion-fast: 0.2s;
   --motion-reveal: 0.45s;
   --motion-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -115,8 +115,8 @@ main {
   transform: none;
 }
 ::selection {
-  background: var(--ancient-gold);
-  color: var(--void-black);
+  background: var(--text-accent);
+  color: var(--obsidian-black);
 }
 ::-webkit-scrollbar {
   width: 8px;

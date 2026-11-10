@@ -12,6 +12,7 @@ initFAQ();
 initModulesPresentation();
 initMobileMenu();
 initMagneticButtons();
+initModuleHighlights();
 motionPreference.addEventListener("change", refreshPageMotion);
 navigator.connection?.addEventListener("change", refreshPageMotion);
 window.addEventListener("online", initPageMotion);
@@ -117,6 +118,74 @@ function configureMotion() {
 function refreshPageMotion() {
   configureMotion();
   initPageMotion();
+}
+
+// Only the visible, hovered or keyboard-focused module illustration can move.
+function initModuleHighlights() {
+  const cards = Array.from(document.querySelectorAll(".home-module-link"));
+  if (!cards.length) return;
+
+  const updateCards = new Map();
+  const canMove = () => !motionPreference.matches && !navigator.connection?.saveData;
+  const observer = typeof IntersectionObserver === "function"
+    ? new IntersectionObserver((entries) => {
+      entries.forEach((entry) => updateCards.get(entry.target)?.(entry.isIntersecting));
+    })
+    : null;
+
+  const refreshIllustrations = () => {
+    document.documentElement.classList.toggle("module-motion-enabled", canMove());
+    updateCards.forEach((update) => update());
+  };
+
+  cards.forEach((card) => {
+    let pointerFrame = 0;
+    let pointerInside = false;
+    let inView = !observer;
+
+    const clearPointer = () => {
+      window.cancelAnimationFrame(pointerFrame);
+      pointerFrame = 0;
+      card.style.removeProperty("--pointer-x");
+      card.style.removeProperty("--pointer-y");
+    };
+    const update = (visible = inView) => {
+      inView = visible;
+      const allowed = canMove() && !document.hidden && inView;
+      card.classList.toggle("module-motion-active", allowed &&
+        (pointerInside || card.matches(":focus-visible")));
+      if (!allowed) clearPointer();
+    };
+    updateCards.set(card, update);
+    observer?.observe(card);
+
+    card.addEventListener("pointerenter", (event) => {
+      pointerInside = event.pointerType === "mouse";
+      update();
+    }, { passive: true });
+    card.addEventListener("pointermove", (event) => {
+      if (event.pointerType !== "mouse" || !canMove() || document.hidden || !inView) return;
+      window.cancelAnimationFrame(pointerFrame);
+      pointerFrame = window.requestAnimationFrame(() => {
+        pointerFrame = 0;
+        const bounds = card.getBoundingClientRect();
+        card.style.setProperty("--pointer-x", `${event.clientX - bounds.left}px`);
+        card.style.setProperty("--pointer-y", `${event.clientY - bounds.top}px`);
+      });
+    }, { passive: true });
+    card.addEventListener("pointerleave", () => {
+      pointerInside = false;
+      clearPointer();
+      update();
+    });
+    card.addEventListener("focus", () => update());
+    card.addEventListener("blur", () => update());
+  });
+
+  motionPreference.addEventListener("change", refreshIllustrations);
+  navigator.connection?.addEventListener("change", refreshIllustrations);
+  document.addEventListener("visibilitychange", refreshIllustrations);
+  refreshIllustrations();
 }
 
 function readGalleryMotionPreference() {

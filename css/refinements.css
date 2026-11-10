@@ -1,0 +1,559 @@
+/* Approved SCINNOVA refinements. The original design remains in style.css. */
+:is(.module-overview, .testimonials-section, .contact-section, .organizers-section, .faq-section, .main-footer) {
+  --obsidian-black: #080b09;
+  --metallic-silver: #a4afa7;
+  --charcoal-grey: #28322b;
+  --pale-white: #edf1e8;
+  --panel-surface: #101711;
+  --panel-border: #2b392e;
+  --font-tech: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  --text-section: clamp(3.5rem, 7.2vw, 7rem);
+  --space-lg: clamp(4.5rem, 8vw, 8rem);
+  --page-gutter: clamp(1.25rem, 4.5vw, 5rem);
+  color: var(--pale-white);
+  font-size: 1rem;
+}
+:is(.module-overview, .testimonials-section, .contact-section) .feature-container,
+.organizers-section .container {
+  width: calc(100% - var(--page-gutter) * 2);
+  max-width: 1380px;
+  padding-inline: 0;
+}
+:is(.module-overview, .testimonials-section, .contact-section, .organizers-section, .faq-section) .feature-eyebrow,
+.main-footer .micro-label {
+  display: block;
+  margin-bottom: 1.4rem;
+  color: var(--metallic-silver);
+  font-family: var(--font-tech);
+  font-size: 0.65rem;
+  font-weight: 400;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  line-height: 1.6;
+}
+:is(.testimonials-section, .contact-section) .feature-title {
+  margin-top: 0;
+  font-size: var(--text-section);
+  letter-spacing: -0.015em;
+  line-height: 0.95;
+}
+.testimonials-section .feature-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 2rem;
+  margin-bottom: 3.5rem;
+}
+:is(.module-overview, .contact-section) .feature-text-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  min-height: var(--control-min-size);
+  padding-block: 0.6rem;
+  border-bottom: 1px solid var(--emerald);
+  font-family: var(--font-tech);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  transition: color var(--motion-fast), border-color var(--motion-fast);
+}
+:is(.module-overview, .contact-section) .feature-text-link:hover {
+  color: var(--text-accent);
+  border-color: var(--text-accent);
+}
+
+.nav-register-btn, .hero-register-btn, .cta-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 2rem;
+  min-height: 50px; padding: 0.9rem 1.4rem;
+  border: 1px solid var(--text-accent); border-radius: 0;
+  background: var(--text-accent); color: var(--obsidian-black);
+  font-family: var(--font-tech); font-size: 0.72rem; font-weight: 600;
+  letter-spacing: 0.04em; text-decoration: none; cursor: pointer;
+  transition: background var(--motion-fast), color var(--motion-fast), border-color var(--motion-fast), box-shadow var(--motion-fast), transform var(--motion-fast);
+}
+.nav-register-btn::after, .cta-btn::after { content: "↗"; font-size: 1.1rem; font-weight: 400; }
+.nav-register-btn { min-height: 42px; padding: 0.6rem 1rem; font-size: 0.65rem; gap: 1.8rem; }
+:is(.nav-register-btn, .hero-register-btn, .cta-btn):is(:hover, :focus-visible) {
+  background: var(--obsidian-black);
+  color: var(--text-accent);
+  border-color: var(--text-accent);
+  box-shadow: 0 0 0 1px rgba(187, 239, 121, 0.15), 0 8px 26px rgba(187, 239, 121, 0.12);
+  transform: translateY(-2px);
+}
+:is(.nav-register-btn, .hero-register-btn, .cta-btn):active {
+  background: var(--obsidian-black);
+  color: var(--text-accent);
+  border-color: var(--text-accent);
+  box-shadow: none;
+  transform: translateY(0);
+}
+.nav-register-btn::after, .cta-btn::after { transition: transform var(--motion-fast) var(--motion-ease); }
+:is(.nav-register-btn, .cta-btn):is(:hover, :focus-visible)::after { transform: translate(2px, -2px); }
+
+/* The programme is a set of specimen tiles. Logos keep their natural proportions. */
+.module-overview, .testimonials-section, .contact-section { position: relative; padding-block: var(--space-lg); }
+.home-modules-heading { display: flex; justify-content: space-between; align-items: end; gap: 2rem; margin-bottom: 3.2rem; }
+.home-modules-heading h2 { font-size: var(--text-section); letter-spacing: -0.015em; }
+.home-modules-heading h2 > span { color: var(--text-accent); }
+.section-heading-aside { color: var(--metallic-silver); font-size: 0.85rem; line-height: 1.7; max-width: 30ch; }
+.section-heading-aside .feature-text-link { margin-top: 0.5rem; color: var(--pale-white); }
+.home-modules-programme { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; padding: 1px; background: var(--panel-border); list-style: none; }
+.home-modules-programme > li { min-width: 0; display: flex; }
+.home-module-link {
+  position: relative; isolation: isolate; width: 100%; min-width: 0; overflow: hidden;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 4.5rem 2rem 2rem; min-height: 238px;
+  background: var(--obsidian-black); color: var(--pale-white); text-decoration: none;
+  transition: background var(--motion-fast);
+}
+.home-module-link::before { content: ""; position: absolute; inset: 0; z-index: -1; opacity: 0; background: radial-gradient(ellipse at var(--pointer-x, 50%) var(--pointer-y, 50%), rgba(187, 239, 121, 0.12), transparent 70%); transition: opacity var(--motion-fast); }
+.module-card-meta { position: absolute; inset: 1.15rem 1.3rem auto; display: flex; justify-content: space-between; align-items: center; color: var(--emerald); font-family: var(--font-tech); font-size: 0.55rem; letter-spacing: 0.12em; }
+.module-card-meta > span:last-child { font-size: 1.15rem; color: var(--metallic-silver); transition: color var(--motion-fast), transform var(--motion-fast); }
+.home-module-emblem { position: relative; display: flex; align-items: center; justify-content: center; width: 100%; height: 70px; margin-bottom: 1.5rem; }
+.home-module-emblem img { display: block; max-width: 88%; max-height: 62px; width: auto; height: auto; object-fit: contain; transition: transform var(--motion-fast); }
+.home-module-link--symbol .home-module-emblem img { max-height: 76px; max-width: 90px; }
+.home-module-link--planck .home-module-emblem img { width: 100%; max-width: 100%; }
+.home-module-discipline { position: relative; font-size: 0.75rem; color: var(--metallic-silver); transition: color var(--motion-fast); }
+.module-card-diagram { position: absolute; z-index: -1; right: -26px; bottom: -35px; width: 150px; height: 150px; border: 1px solid rgba(187, 239, 121, 0.075); border-radius: 50%; transition: transform var(--motion-reveal), border-color var(--motion-fast); }
+.module-card-diagram::before { content: ""; position: absolute; inset: 19%; border: inherit; border-radius: inherit; }
+.module-card-diagram::after { content: ""; position: absolute; left: -20%; top: 50%; width: 140%; height: 1px; background: rgba(187, 239, 121, 0.075); transform: rotate(-45deg); }
+.diagram-2, .diagram-5, .diagram-8 { border-radius: 0; transform: rotate(45deg); }
+.diagram-3, .diagram-6, .diagram-9 { width: 190px; height: 100px; border-radius: 50%; transform: rotate(-35deg); }
+.home-module-link:focus-visible { z-index: 2; outline-offset: -5px; }
+.home-module-link:is(:hover, :focus-visible) { background: var(--panel-surface); }
+.home-module-link:is(:hover, :focus-visible)::before { opacity: 1; }
+.home-module-link:is(:hover, :focus-visible) .home-module-emblem img { transform: translateY(-4px); }
+.home-module-link:is(:hover, :focus-visible) .home-module-discipline,
+.home-module-link:is(:hover, :focus-visible) .module-card-meta > span:last-child { color: var(--text-accent); }
+.home-module-link:is(:hover, :focus-visible) .module-card-meta > span:last-child { transform: translate(2px, -2px); }
+
+/* Quotes remain complete; a restrained editorial layout provides the contrast. */
+.testimonials-section { background: var(--panel-surface); border-block: 1px solid var(--panel-border); }
+.testimonials-editorial { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 5rem; row-gap: 3.5rem; }
+.testimonial { display: flex; flex-direction: column; min-width: 0; position: relative; padding-top: 3.3rem; border-top: 1px solid var(--panel-border); }
+.testimonial::before { content: "“"; position: absolute; top: 0.65rem; left: 0; color: var(--text-accent); font-family: Georgia, serif; font-size: 4rem; line-height: 1; }
+.testimonial-quote { font-size: clamp(0.95rem, 1.25vw, 1.1rem); color: var(--pale-white); line-height: 1.9; flex: 1; }
+.testimonial-person { display: flex; align-items: center; gap: 1rem; margin-top: 2rem; }
+.testimonial-portrait { display: block; width: 52px; height: 58px; object-fit: cover; filter: none; }
+.testimonial-person-info { min-width: 0; }
+.testimonial-name { font-size: 0.8rem; font-weight: 600; }
+.testimonial-role { margin-top: 0.3rem; font-size: 0.65rem; line-height: 1.7; color: var(--metallic-silver); max-width: 45ch; }
+
+
+/* Contact: a large invitation, beside a clean directory of real channels. */
+.contact-section { border-top: 1px solid var(--panel-border); background-image: radial-gradient(ellipse at 5% 100%, rgba(49, 92, 69, 0.13), transparent 60%); }
+.contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(3rem, 7vw, 7rem); }
+.contact-introduction { align-self: start; }
+.contact-description { margin-top: 2rem; max-width: 43ch; color: var(--metallic-silver); font-size: 0.9rem; line-height: 1.9; }
+.contact-facts { display: grid; align-content: start; }
+.contact-facts > div { border-top: 1px solid var(--panel-border); padding-block: 1.5rem; }
+.contact-facts dt { font-family: var(--font-tech); color: var(--metallic-silver); font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.65rem; }
+.contact-facts dd { font-size: 1rem; line-height: 1.6; }
+.contact-email { display: flex; justify-content: space-between; align-items: center; gap: 1rem; width: 100%; font-size: clamp(0.95rem, 1.5vw, 1.3rem); letter-spacing: -0.025em; text-decoration: none; color: var(--pale-white); overflow-wrap: anywhere; transition: color var(--motion-fast); }
+.contact-email svg { flex: 0 0 auto; color: var(--text-accent); }
+.contact-email:hover { color: var(--text-accent); }
+.contact-facts address { margin-top: 0.5rem; font-size: 0.8rem; line-height: 1.8; font-style: normal; color: var(--metallic-silver); }
+.contact-facts .feature-text-link { margin-top: 0.5rem; }
+
+
+.organizers-section { border-block: 1px solid var(--panel-border); background: var(--panel-surface); }
+.council-hierarchy { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; margin-top: 3rem; }
+.council-row { display: contents; }
+.organizer-card { min-width: 0; text-align: left; }
+.organizer-photo { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; object-position: center 30%; margin-bottom: 1.5rem; filter: none; border-bottom: 2px solid var(--doom-green); transition: filter var(--motion-reveal), border-color var(--motion-fast); }
+.organizer-card:hover .organizer-photo { filter: none; border-color: var(--text-accent); }
+.org-name { font-family: var(--font-body); font-size: clamp(1rem, 1.4vw, 1.25rem); font-weight: 600; line-height: 1.5; text-transform: none; }
+.org-role { margin-top: 0.5rem; color: var(--text-accent); font-family: var(--font-tech); font-size: 0.6rem; letter-spacing: 0.12em; }
+.org-quote { margin-top: 1rem; color: var(--metallic-silver); font-size: 0.8rem; line-height: 1.8; }
+
+/* The final invitation uses the same typography and flat signal-green action. */
+.main-footer { position: relative; overflow: hidden; padding-top: var(--space-lg); text-align: center; border-top: 1px solid var(--panel-border); background: radial-gradient(ellipse at 50% 25%, #1d301c 0%, var(--obsidian-black) 65%); }
+.footer-content, .footer-container { display: flex; flex-direction: column; align-items: center; max-width: 1100px; width: calc(100% - var(--page-gutter) * 2); margin-inline: auto; }
+.footer-scinnova-logo { display: block; width: 200px; height: auto; margin-bottom: 2.5rem; }
+.footer-cta { max-width: 1000px; font-size: clamp(3.25rem, 6.5vw, 6.5rem); line-height: 1.05; letter-spacing: -0.015em; margin-bottom: 2.2rem; text-wrap: balance; }
+.cta-btn { padding-inline: 1.7rem; }
+.footer-cedar-link { display: block; margin-top: 4rem; }
+.footer-cedar-logo { display: block; width: 150px; height: auto; }
+.footer-partners-label { margin-top: 2.5rem; }
+.footer-partners { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 2.5rem; width: 100%; margin-top: 1.5rem; padding-bottom: 3.5rem; }
+.partner-link { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; }
+.footer-partners .partner-logo { display: block; object-fit: contain; width: auto; height: 55px; max-width: 100px; opacity: 0.65; filter: grayscale(1); transition: opacity var(--motion-fast), filter var(--motion-fast); }
+.footer-partners .partner-logo.enlarged { max-width: 110px; height: 65px; }
+.partner-link:hover .partner-logo { opacity: 1; filter: none; }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; width: calc(100% - var(--page-gutter) * 2); max-width: 1380px; margin-inline: auto; padding-block: 1.5rem; border-top: 1px solid var(--panel-border); color: var(--metallic-silver); font-family: var(--font-tech); font-size: 0.55rem; letter-spacing: 0.06em; text-align: left; }
+.footer-bottom a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; color: var(--text-accent); }
+
+
+/* Keep the retained components independent of the restored base theme. */
+.nav-register-btn, .hero-register-btn, .cta-btn {
+  --obsidian-black: #080b09;
+  --pale-white: #edf1e8;
+  --font-tech: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  box-shadow: none;
+  text-shadow: none;
+  backdrop-filter: none;
+}
+:is(.nav-register-btn, .hero-register-btn, .cta-btn):is(:hover, :active) {
+  text-shadow: none;
+  backdrop-filter: none;
+}
+.nav-register-btn::before, .cta-btn::before { content: none; }
+.hero-register-btn.mobile-only { display: none; }
+
+.module-overview { background: var(--obsidian-black); }
+.home-modules-programme > li { border-top: 0; }
+.home-modules-programme > li:last-child { grid-column: auto; width: auto; justify-self: stretch; }
+.home-module-link--symbol .home-module-emblem img { width: auto; height: auto; }
+
+/* Each discipline gets its own full-tile scientific illustration. */
+.module-card-diagram {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: 0;
+  color: var(--text-accent);
+  opacity: 0.2;
+  transform: none;
+  transition: opacity var(--motion-reveal);
+}
+.module-card-diagram::before, .module-card-diagram::after { content: none; }
+.module-card-diagram svg { display: block; width: 100%; height: 100%; }
+.module-card-diagram .diagram-node { fill: currentColor; stroke: none; }
+.module-card-diagram .diagram-faint { opacity: 0.45; }
+.home-module-link:is(:hover, :focus-visible) .module-card-diagram { opacity: 0.34; }
+.home-module-emblem { z-index: 1; }
+.home-module-emblem img { filter: drop-shadow(0 2px 8px var(--obsidian-black)); }
+
+.testimonial-portrait { filter: none; }
+.testimonial-name { line-height: 1.65; }
+
+.contact-section { border-bottom: 0; }
+.contact-introduction .feature-eyebrow { margin-bottom: 1.4rem; }
+.contact-facts { align-self: start; }
+.contact-facts .contact-email {
+  flex-wrap: nowrap;
+  font-size: clamp(0.95rem, 1.5vw, 1.3rem);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 1.65;
+}
+.contact-email:hover { text-decoration: none; }
+
+/* Preserve the new caption while leaving the original About composition intact. */
+.floating-caption {
+  --obsidian-black: #080b09;
+  --font-tech: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  position: absolute;
+  bottom: 1.5rem;
+  left: -1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 1rem 1.5rem;
+  border: 0;
+  background: var(--text-accent);
+  color: var(--obsidian-black);
+  font: 0.65rem var(--font-tech);
+  letter-spacing: 0.08em;
+  line-height: 1.8;
+}
+
+.organizers-section .section-title {
+  margin-bottom: 2.5rem;
+  font-size: var(--text-section);
+  letter-spacing: -0.015em;
+  line-height: 0.95;
+}
+.organizers-section .gold-text { text-shadow: none; }
+.organizer-card { align-items: stretch; }
+.organizer-photo {
+  border: 0;
+  border-bottom: 2px solid var(--doom-green);
+  border-radius: 0;
+  box-shadow: none;
+  filter: none;
+}
+.organizer-photo:hover, .organizer-card:hover .organizer-photo {
+  filter: none;
+  transform: none;
+  box-shadow: none;
+  border-color: var(--text-accent);
+}
+.org-name { margin-bottom: 0; }
+.org-role { font-weight: 400; }
+.org-quote { max-width: none; font-style: normal; }
+/* The Director stays first in the document, but occupies the middle desktop cell. */
+.council-row-1 .organizer-card { grid-column: 2; grid-row: 1; }
+.council-row-2 .organizer-card:first-child { grid-column: 1; grid-row: 1; }
+.council-row-2 .organizer-card:last-child { grid-column: 3; grid-row: 1; }
+
+.main-footer { display: block; padding-bottom: 0; }
+.main-footer::before { content: none; }
+.footer-content, .footer-container { padding-inline: 0; }
+.footer-scinnova-logo { height: auto; filter: none; }
+.footer-scinnova-logo:hover { transform: none; filter: none; }
+.footer-cta { text-shadow: none; }
+.footer-cedar-logo { margin: 0; opacity: 1; }
+.footer-cedar-logo:hover { transform: none; filter: none; }
+.main-footer .footer-partners-label { margin-bottom: 0; }
+.footer-partners .partner-link:nth-child(n) .partner-logo { height: 55px; }
+.footer-partners .partner-link:nth-child(n) .partner-logo.enlarged { height: 65px; }
+.footer-partners .partner-link:hover .partner-logo { transform: none; }
+
+/* Reuse the original redesign's numbered FAQ and square plus controls. */
+.faq-section { padding-block: var(--space-lg); }
+.faq-section .section-title { font-size: clamp(3rem, 6vw, 6rem); }
+.faq-wrapper { width: 100%; max-width: 960px; margin: 3rem auto 0; border-top: 1px solid var(--panel-border); counter-reset: question; }
+.faq-item { border-bottom: 1px solid var(--panel-border); padding-block: 1.5rem; counter-increment: question; }
+.faq-question { display: flex; align-items: center; width: 100%; min-height: 44px; gap: 1.5rem; background: none; border: 0; cursor: pointer; text-align: left; }
+.faq-question::before { content: counter(question, decimal-leading-zero); color: var(--emerald); font-family: var(--font-tech); font-size: 0.65rem; }
+.faq-question-text { flex: 1; font-family: var(--font-body); font-size: clamp(0.9rem, 1.4vw, 1.1rem); font-weight: 400; letter-spacing: normal; text-transform: none; line-height: 1.6; transition: color var(--motion-fast); }
+.faq-question:hover .faq-question-text { color: var(--text-accent); }
+.toggle { display: grid; place-items: center; flex: 0 0 auto; width: 32px; height: 32px; border: 1px solid var(--panel-border); color: var(--text-accent); font-size: 1.4rem; line-height: 1; transition: transform var(--motion-fast), background var(--motion-fast); }
+.faq-item.active .toggle { transform: rotate(45deg); background: var(--panel-surface); color: var(--text-accent); }
+.faq-answer p { padding: 1.25rem 3.25rem 0 2.5rem; color: var(--metallic-silver); font-size: 0.9rem; line-height: 1.9; }
+
+
+/* The lime accent follows the existing layouts across every page. */
+.gold-text { text-shadow: none; }
+.nav-link.active, .nav-link:is(:hover, :focus-visible), .mobile-nav-link.active {
+  color: var(--text-accent);
+}
+.nav-link:is(:hover, :focus-visible) {
+  background: rgba(187, 239, 121, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(187, 239, 121, 0.3);
+  text-shadow: none;
+}
+.feature-text-link { border-color: var(--text-accent); }
+.module-entry:hover { border-bottom-color: var(--text-accent); }
+.about-contact-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  min-height: var(--control-min-size);
+  padding-block: 0.6rem;
+  border-bottom: 1px solid var(--text-accent);
+  color: var(--text-accent);
+  font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: color var(--motion-fast), border-color var(--motion-fast);
+}
+.about-contact-link svg { transition: transform var(--motion-fast) var(--motion-ease); }
+.about-contact-link:is(:hover, :focus-visible) { color: var(--pale-white); border-color: var(--pale-white); }
+.about-contact-link:is(:hover, :focus-visible) svg { transform: translateX(4px); }
+
+@media (max-width: 1100px) {
+  .home-module-link { padding-inline: 1.3rem; }
+  .testimonials-editorial { column-gap: 3rem; }
+}
+@media (max-width: 768px) {
+  .hero-register-btn.mobile-only { display: inline-flex; }
+  .home-modules-heading { align-items: start; margin-bottom: 2.5rem; }
+  .section-heading-aside { font-size: 0.72rem; }
+  .section-heading-aside .feature-text-link { font-size: 0.58rem; gap: 0.75rem; }
+  .home-modules-programme { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .home-modules-programme > li:last-child { grid-column: 1 / -1; }
+  .home-module-link { min-height: 210px; padding: 4rem 1.2rem 1.6rem; }
+  .home-module-emblem { height: 60px; margin-bottom: 1.25rem; }
+  .home-module-emblem img { max-height: 50px; }
+  .home-module-link--symbol .home-module-emblem img { max-height: 65px; }
+  .home-modules-programme > li:last-child .home-module-emblem img { max-width: 175px; }
+  .module-card-meta { inset: 1rem 1rem auto; font-size: 0.5rem; }
+  .home-module-discipline { font-size: 0.65rem; }
+  :is(.testimonials-section, .contact-section) .feature-title { font-size: clamp(3.5rem, 10vw, 5rem); }
+  .testimonials-editorial { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.5rem; }
+  .testimonial-quote { font-size: 0.9rem; }
+  .testimonial-person { align-items: start; gap: 0.75rem; }
+  .testimonial-portrait { width: 40px; height: 48px; }
+  .testimonial-name { font-size: 0.7rem; }
+  .testimonial-role { font-size: 0.6rem; }
+  .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
+  .contact-description { max-width: 55ch; }
+  .contact-facts .contact-email { font-size: 1.2rem; }
+  .floating-caption { left: 1rem; bottom: 1rem; }
+  .council-hierarchy { grid-template-columns: 1fr; gap: 2.5rem; max-width: 480px; margin-inline: auto; }
+  .council-hierarchy .council-row .organizer-card { grid-column: 1; grid-row: auto; order: 0; }
+  .organizer-photo { aspect-ratio: 1; }
+  .org-name { font-size: 1.15rem; }
+  .org-role { font-size: 0.6rem; }
+  .org-quote { font-size: 0.85rem; }
+  .footer-cta { font-size: clamp(3rem, 8vw, 4.5rem); }
+  .footer-scinnova-logo { width: 175px; }
+  .footer-partners { gap: 1.5rem; }
+  .footer-bottom { font-size: 0.5rem; }
+}
+@media (max-width: 520px) {
+  .faq-section .section-title { font-size: 2.8rem; }
+  .faq-question { gap: 0.75rem; }
+  .faq-answer p { padding-left: 1.75rem; padding-right: 0; font-size: 0.85rem; }
+  .home-modules-heading { flex-direction: column; gap: 1rem; }
+  .home-modules-heading h2 { font-size: 3.75rem; }
+  .section-heading-aside { max-width: none; width: 100%; display: flex; align-items: end; justify-content: space-between; gap: 1rem; }
+  .section-heading-aside .feature-text-link { margin-top: 0; font-size: 0.5rem; gap: 0.5rem; }
+  .home-module-link { min-height: 185px; padding: 3.5rem 1rem 1.4rem; }
+  .home-module-emblem { height: 48px; margin-bottom: 1rem; }
+  .home-module-emblem img { max-height: 40px; max-width: 95%; }
+  .home-module-link--symbol .home-module-emblem img { max-height: 58px; }
+  .home-module-discipline { font-size: 0.6rem; }
+  .module-card-meta { font-size: 0.45rem; }
+  :is(.module-overview, .testimonials-section, .contact-section, .organizers-section, .faq-section) .feature-eyebrow { font-size: 0.58rem; }
+  .testimonials-editorial { grid-template-columns: 1fr; gap: 2.5rem; }
+  .testimonial-person { align-items: center; }
+  .testimonial-portrait { width: 48px; height: 56px; }
+  .testimonial-name { font-size: 0.8rem; }
+  .contact-facts .contact-email { font-size: clamp(0.85rem, 4.3vw, 1.2rem); }
+  .footer-partners { gap: 1.25rem; }
+  .footer-partners .partner-link:nth-child(n) .partner-logo { height: 42px; max-width: 70px; }
+  .footer-partners .partner-link:nth-child(n) .partner-logo.enlarged { height: 52px; max-width: 80px; }
+  .footer-bottom { flex-direction: column; align-items: start; gap: 0.5rem; padding-block: 1.5rem; }
+}
+
+/* Module illustration motion: decorative, interaction-driven, and paused at rest. */
+.module-card-diagram [data-motion] {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.module-card-diagram .module-signal { opacity: 0; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .module-motion-enabled [data-motion="cipher-outer"] { animation: module-cipher-turn 18s linear infinite paused; }
+  .module-motion-enabled [data-motion="cipher-inner"] { animation: module-cipher-turn 24s linear infinite reverse paused; }
+  .module-motion-enabled [data-motion="reaction"] { animation: module-reaction 3.8s ease-in-out infinite paused; }
+  .module-motion-enabled [data-motion="plot-line"] {
+    stroke-dasharray: 1;
+    animation: module-plot-trace 5.6s linear infinite paused;
+  }
+  .module-motion-enabled [data-motion="plot-point"] { animation: module-plot-point 5.6s linear infinite paused; }
+  .module-motion-enabled [data-motion="atom"] { animation: module-atom-precession 7s ease-in-out infinite paused; }
+  .module-motion-enabled [data-motion="wave"] {
+    stroke-dasharray: 0.07 0.055;
+    animation: module-wave-flow 4s linear infinite paused;
+  }
+  .module-motion-enabled [data-motion="helix"] { animation: module-helix-twist 6s ease-in-out infinite paused; }
+  .module-motion-enabled [data-motion="dna-bond"] { animation: module-dna-sweep 3.8s ease-in-out infinite paused; }
+  .module-motion-enabled [data-motion="planet-near"],
+  .module-motion-enabled [data-motion="planet-far"] {
+    transform-box: view-box;
+    transform-origin: 276px 160px;
+    animation: module-planet-orbit 18s linear infinite paused;
+  }
+  .module-motion-enabled [data-motion="planet-far"] { animation-duration: 30s; animation-direction: reverse; }
+  .module-motion-enabled [data-motion="stars"] { animation: module-starlight 5.5s ease-in-out infinite paused; }
+  .module-motion-enabled [data-motion="chip"] { animation: module-chip-cycle 3.4s ease-in-out infinite paused; }
+  .module-motion-enabled [data-motion="circuit-in"],
+  .module-motion-enabled [data-motion="circuit-out"] {
+    stroke-dasharray: 0.16 0.84;
+    animation: module-circuit-packet 3.4s linear infinite paused;
+  }
+  .module-motion-enabled [data-motion="neuron-core"] { animation: module-neuron-pulse 3.8s ease-out infinite paused; }
+  .module-motion-enabled [data-motion="synapse-a"],
+  .module-motion-enabled [data-motion="synapse-b"],
+  .module-motion-enabled [data-motion="synapse-c"] {
+    stroke-dasharray: 0.24 0.76;
+    animation: module-synapse-transmit 3.8s ease-in-out infinite paused;
+  }
+  .module-motion-enabled [data-motion="terminal-code"] {
+    stroke-dasharray: 1;
+    animation: module-terminal-type 4.6s ease-in-out infinite paused;
+  }
+  .module-motion-enabled [data-motion="terminal-caret"] { animation: module-terminal-caret 2.3s steps(1, end) infinite paused; }
+  .module-motion-enabled .module-card-diagram [data-motion] { animation-delay: var(--module-phase, 0s); }
+  .home-module-link.module-motion-active .module-card-diagram [data-motion] { animation-play-state: running; }
+}
+
+@keyframes module-cipher-turn { to { transform: rotate(360deg); } }
+@keyframes module-reaction {
+  0%, 55%, 100% { transform: scale(1); opacity: 0.7; }
+  28% { transform: scale(1.5); opacity: 1; }
+}
+@keyframes module-plot-trace {
+  0% { stroke-dashoffset: 1; opacity: 0; }
+  5% { stroke-dashoffset: 1; opacity: 1; }
+  85% { stroke-dashoffset: 0; opacity: 1; }
+  92% { stroke-dashoffset: 0; opacity: 0; }
+  100% { stroke-dashoffset: 1; opacity: 0; }
+}
+@keyframes module-atom-precession {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(9deg); }
+}
+@keyframes module-wave-flow {
+  0% { stroke-dashoffset: 0; opacity: 0.55; }
+  50% { opacity: 1; }
+  100% { stroke-dashoffset: -0.5; opacity: 0.55; }
+}
+@keyframes module-helix-twist {
+  0%, 100% { transform: scaleX(1) skewY(0deg); }
+  50% { transform: scaleX(0.95) skewY(1deg); }
+}
+@keyframes module-dna-sweep {
+  0%, 60%, 100% { opacity: 0; }
+  25% { opacity: 1; }
+}
+@keyframes module-planet-orbit { to { transform: rotate(360deg); } }
+@keyframes module-starlight {
+  0%, 100% { opacity: 0.65; }
+  50% { opacity: 1; }
+}
+@keyframes module-chip-cycle {
+  0%, 100% { opacity: 0.55; }
+  35%, 65% { opacity: 1; }
+}
+@keyframes module-circuit-packet {
+  0% { stroke-dashoffset: 0.16; opacity: 0; }
+  10% { opacity: 1; }
+  75% { opacity: 1; }
+  100% { stroke-dashoffset: -1; opacity: 0; }
+}
+@keyframes module-neuron-pulse {
+  0% { transform: scale(0.85); opacity: 0; }
+  15% { transform: scale(1); opacity: 0.9; }
+  65%, 100% { transform: scale(1.8); opacity: 0; }
+}
+@keyframes module-synapse-transmit {
+  0%, 8% { stroke-dashoffset: 0.24; opacity: 0; }
+  20% { opacity: 0.9; }
+  65% { stroke-dashoffset: -1; opacity: 0; }
+  100% { stroke-dashoffset: -1; opacity: 0; }
+}
+@keyframes module-terminal-type {
+  0% { stroke-dashoffset: 1; opacity: 0; }
+  15% { opacity: 1; }
+  48%, 80% { stroke-dashoffset: 0; opacity: 1; }
+  95%, 100% { stroke-dashoffset: 0; opacity: 0; }
+}
+@keyframes module-terminal-caret {
+  0%, 100% { opacity: 0.25; }
+  50% { opacity: 1; }
+}
+
+@keyframes module-plot-point {
+  0% { transform: translate(0px, 0px); opacity: 0; }
+  5% { transform: translate(0.00px, 0.00px); opacity: 1; }
+  10% { transform: translate(11.20px, 29.70px); opacity: 1; }
+  15% { transform: translate(22.30px, 55.31px); opacity: 1; }
+  20% { transform: translate(33.29px, 76.83px); opacity: 1; }
+  25% { transform: translate(44.19px, 94.25px); opacity: 1; }
+  30% { transform: translate(54.98px, 107.58px); opacity: 1; }
+  35% { transform: translate(65.67px, 116.81px); opacity: 1; }
+  40% { transform: translate(76.26px, 121.95px); opacity: 1; }
+  45% { transform: translate(86.75px, 123.00px); opacity: 1; }
+  50% { transform: translate(97.14px, 119.95px); opacity: 1; }
+  55% { transform: translate(107.42px, 112.81px); opacity: 1; }
+  60% { transform: translate(117.61px, 101.58px); opacity: 1; }
+  65% { transform: translate(127.69px, 86.25px); opacity: 1; }
+  70% { transform: translate(137.67px, 66.83px); opacity: 1; }
+  75% { transform: translate(147.55px, 43.31px); opacity: 1; }
+  80% { transform: translate(157.32px, 15.70px); opacity: 1; }
+  85% { transform: translate(167.00px, -16.00px); opacity: 1; }
+  92% { transform: translate(167px, -16px); opacity: 0; }
+  100% { transform: translate(0px, 0px); opacity: 0; }
+}
