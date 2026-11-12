@@ -92,6 +92,49 @@
 .nav-register-btn::after, .cta-btn::after { transition: transform var(--motion-fast) var(--motion-ease); }
 :is(.nav-register-btn, .cta-btn):is(:hover, :focus-visible)::after { transform: translate(2px, -2px); }
 
+/* === COMBINED HEADER/NAVBAR SCROLL STATE === */
+.magick-nav {
+  transition: background-color var(--motion-reveal) var(--motion-ease),
+              border-color var(--motion-reveal) var(--motion-ease),
+              box-shadow var(--motion-reveal) var(--motion-ease),
+              backdrop-filter var(--motion-reveal) var(--motion-ease),
+              -webkit-backdrop-filter var(--motion-reveal) var(--motion-ease),
+              padding var(--motion-reveal) var(--motion-ease);
+}
+
+.magick-nav.is-scrolled {
+  pointer-events: auto;
+  background-color: rgba(8, 11, 9, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--panel-border);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  padding-block: clamp(0.6rem, 1.4vh, 0.85rem);
+}
+
+.magick-nav .nav-links {
+  transition: background-color var(--motion-reveal) var(--motion-ease),
+              border-color var(--motion-reveal) var(--motion-ease),
+              box-shadow var(--motion-reveal) var(--motion-ease),
+              backdrop-filter var(--motion-reveal) var(--motion-ease),
+              -webkit-backdrop-filter var(--motion-reveal) var(--motion-ease);
+}
+
+.magick-nav.is-scrolled .nav-links {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .magick-nav,
+  .magick-nav .nav-links {
+    transition: none !important;
+  }
+}
+
 /* === SUMMARY DATA STRIP === */
 .summary-strip {
   position: relative;
@@ -222,6 +265,68 @@
 
 /* Contact: a large invitation, beside a clean directory of real channels. */
 .contact-section { border-top: 1px solid var(--panel-border); background-image: radial-gradient(ellipse at 5% 100%, rgba(49, 92, 69, 0.13), transparent 60%); }
+
+/* === MARVEL DOOMSDAY CLOCK HERO COUNTDOWN === */
+.doomsday-title {
+  font-family: var(--font-body, "Inter", -apple-system, sans-serif) !important;
+  font-size: clamp(1.35rem, 2.7vw, 2.2rem) !important;
+  font-weight: 800 !important;
+  letter-spacing: clamp(0.12em, 0.22vw, 0.2em) !important;
+  text-transform: uppercase !important;
+  color: #ffffff !important;
+  margin-bottom: clamp(1rem, 2vh, 1.5rem) !important;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.9), 0 0 40px rgba(0, 0, 0, 0.7) !important;
+}
+
+.doomsday-timer {
+  display: flex !important;
+  gap: clamp(0.35rem, 1.3vw, 1.25rem) !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  font-family: var(--font-body, "Inter", system-ui, sans-serif) !important;
+  cursor: pointer;
+}
+
+.doomsday-timer .timer-unit {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  min-width: clamp(2.4rem, 5.8vw, 5.4rem) !important;
+}
+
+.doomsday-timer .timer-unit > span:not(.timer-label) {
+  font-family: var(--font-body, "Inter", system-ui, sans-serif) !important;
+  font-size: clamp(2.3rem, 5.5vw, 4.8rem) !important;
+  line-height: 1 !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  font-variant-numeric: tabular-nums !important;
+  letter-spacing: 0.02em !important;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.95), 0 0 35px rgba(0, 0, 0, 0.75) !important;
+}
+
+.doomsday-timer .timer-unit .timer-label {
+  font-family: var(--font-body, "Inter", system-ui, sans-serif) !important;
+  font-size: clamp(0.55rem, 0.85vw, 0.75rem) !important;
+  font-weight: 600 !important;
+  letter-spacing: clamp(0.14em, 0.24vw, 0.24em) !important;
+  text-transform: uppercase !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+  margin-top: clamp(0.45rem, 0.9vh, 0.75rem) !important;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9) !important;
+}
+
+.doomsday-timer .timer-separator {
+  font-family: var(--font-body, "Inter", system-ui, sans-serif) !important;
+  font-size: clamp(2rem, 5vw, 4.4rem) !important;
+  line-height: 0.95 !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  opacity: 0.95 !important;
+  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.95) !important;
+  user-select: none !important;
+  padding-inline: 0.05em !important;
+}
 .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(3rem, 7vw, 7rem); }
 .contact-introduction { align-self: start; }
 .contact-description { margin-top: 2rem; max-width: 43ch; color: var(--metallic-silver); font-size: 0.9rem; line-height: 1.9; }
@@ -235,7 +340,81 @@
 .contact-facts address { margin-top: 0.5rem; font-size: 0.8rem; line-height: 1.8; font-style: normal; color: var(--metallic-silver); }
 .contact-facts .feature-text-link { margin-top: 0.5rem; }
 
+/* === CONTACT COMPETITION SPECIFICATIONS === */
+.contact-specs-bar {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 2rem;
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  padding-top: clamp(2rem, 3.5vw, 2.75rem);
+  border-top: 1px solid var(--panel-border);
+}
 
+.specs-bar-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.specs-bar-label {
+  font-family: var(--font-tech);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--metallic-silver);
+}
+
+.specs-bar-value {
+  font-family: var(--font-body);
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--pale-white);
+  line-height: 1.4;
+}
+
+.specs-bar-note {
+  display: block;
+  font-family: var(--font-tech);
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  color: var(--text-accent);
+  margin-top: 0.2rem;
+}
+
+.specs-bar-sep {
+  color: var(--metallic-silver);
+  opacity: 0.45;
+  margin-inline: 0.35rem;
+}
+
+.specs-bar-free {
+  color: var(--text-accent);
+  font-weight: 600;
+}
+
+@media (max-width: 1024px) {
+  .contact-specs-bar {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem 2.5rem;
+  }
+}
+
+@media (max-width: 580px) {
+  .contact-specs-bar {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+/* === CORE TEAM / DIRECTORATE PAGE & SECTION === */
+.core-team-page-section {
+  padding-top: clamp(8rem, 14vh, 11rem);
+  padding-bottom: clamp(5rem, 8vw, 7rem);
+  min-height: 80vh;
+}
+.core-team-header {
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
 .organizers-section { border-block: 1px solid var(--panel-border); background: var(--panel-surface); }
 .council-hierarchy { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; margin-top: 3rem; }
 .council-row { display: contents; }
@@ -541,14 +720,22 @@
   .home-module-link { min-height: 185px; padding: 3.5rem 1rem 1.4rem; }
   .home-module-emblem { height: 48px; margin-bottom: 1rem; }
   .home-module-emblem img { max-height: 40px; max-width: 95%; }
-  :is(.home-module-link--symbol, .home-module-link--arcanum) .home-module-emblem { height: 48px; }
+  :is(.home-module-link--symbol, .home-module-link--arcanum) .home-module-emblem {
+    position: relative;
+    height: 48px;
+  }
   :is(.home-module-link--symbol, .home-module-link--arcanum) .home-module-emblem img {
-    height: auto;
-    max-height: 40px;
-    transform: scale(1.3);
+    position: absolute;
+    top: calc(50% - 3px);
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    height: 72px;
+    max-height: 72px;
+    max-width: 82px;
   }
   .home-module-link:is(.home-module-link--symbol, .home-module-link--arcanum):is(:hover, :focus-visible) .home-module-emblem img {
-    transform: translateY(-4px) scale(1.3);
+    transform: translate(-50%, calc(-50% - 4px));
   }
   .home-module-discipline { font-size: 0.72rem; }
   .module-card-meta { font-size: 0.45rem; }
@@ -564,57 +751,69 @@
   .footer-bottom { flex-direction: column; align-items: start; gap: 0.5rem; padding-block: 1.5rem; }
 }
 
-/* Module illustration motion: decorative, interaction-driven, and paused at rest. */
+/* Module illustration motion: active and decorative by default. */
 .module-card-diagram [data-motion] {
   transform-box: fill-box;
   transform-origin: center;
 }
-.module-card-diagram .module-signal { opacity: 0; }
+.module-card-diagram .module-signal { opacity: 0.85; }
+
+/* DNA Helix 3D Rotation System */
+.dna-helix {
+  color: var(--text-accent);
+}
+.dna-helix .dna-strand {
+  fill: none;
+}
+.dna-helix .dna-rung {
+  stroke-linecap: round;
+}
+.dna-helix .dna-node {
+  fill: currentColor;
+  stroke: none;
+}
 
 @media (prefers-reduced-motion: no-preference) {
-  .module-motion-enabled [data-motion="cipher-outer"] { animation: module-cipher-turn 18s linear infinite paused; }
-  .module-motion-enabled [data-motion="cipher-inner"] { animation: module-cipher-turn 24s linear infinite reverse paused; }
-  .module-motion-enabled [data-motion="reaction"] { animation: module-reaction 3.8s ease-in-out infinite paused; }
+  .module-motion-enabled [data-motion="cipher-outer"] { animation: module-cipher-turn 18s linear infinite; }
+  .module-motion-enabled [data-motion="cipher-inner"] { animation: module-cipher-turn 24s linear infinite reverse; }
+  .module-motion-enabled [data-motion="reaction"] { animation: module-reaction 3.8s ease-in-out infinite; }
   .module-motion-enabled [data-motion="plot-line"] {
     stroke-dasharray: 1;
-    animation: module-plot-trace 5.6s linear infinite paused;
+    animation: module-plot-trace 5.6s linear infinite;
   }
-  .module-motion-enabled [data-motion="plot-point"] { animation: module-plot-point 5.6s linear infinite paused; }
-  .module-motion-enabled [data-motion="atom"] { animation: module-atom-precession 7s ease-in-out infinite paused; }
+  .module-motion-enabled [data-motion="plot-point"] { animation: module-plot-point 5.6s linear infinite; }
+  .module-motion-enabled [data-motion="atom"] { animation: module-atom-precession 7s ease-in-out infinite; }
   .module-motion-enabled [data-motion="wave"] {
     stroke-dasharray: 0.07 0.055;
-    animation: module-wave-flow 4s linear infinite paused;
+    animation: module-wave-flow 4s linear infinite;
   }
-  .module-motion-enabled [data-motion="helix"] { animation: module-helix-twist 6s ease-in-out infinite paused; }
-  .module-motion-enabled [data-motion="dna-bond"] { animation: module-dna-sweep 3.8s ease-in-out infinite paused; }
   .module-motion-enabled [data-motion="planet-near"],
   .module-motion-enabled [data-motion="planet-far"] {
     transform-box: view-box;
     transform-origin: 276px 160px;
-    animation: module-planet-orbit 18s linear infinite paused;
+    animation: module-planet-orbit 18s linear infinite;
   }
   .module-motion-enabled [data-motion="planet-far"] { animation-duration: 30s; animation-direction: reverse; }
-  .module-motion-enabled [data-motion="stars"] { animation: module-starlight 5.5s ease-in-out infinite paused; }
-  .module-motion-enabled [data-motion="chip"] { animation: module-chip-cycle 3.4s ease-in-out infinite paused; }
+  .module-motion-enabled [data-motion="stars"] { animation: module-starlight 5.5s ease-in-out infinite; }
+  .module-motion-enabled [data-motion="chip"] { animation: module-chip-cycle 3.4s ease-in-out infinite; }
   .module-motion-enabled [data-motion="circuit-in"],
   .module-motion-enabled [data-motion="circuit-out"] {
     stroke-dasharray: 0.16 0.84;
-    animation: module-circuit-packet 3.4s linear infinite paused;
+    animation: module-circuit-packet 3.4s linear infinite;
   }
-  .module-motion-enabled [data-motion="neuron-core"] { animation: module-neuron-pulse 3.8s ease-out infinite paused; }
+  .module-motion-enabled [data-motion="neuron-core"] { animation: module-neuron-pulse 3.8s ease-out infinite; }
   .module-motion-enabled [data-motion="synapse-a"],
   .module-motion-enabled [data-motion="synapse-b"],
   .module-motion-enabled [data-motion="synapse-c"] {
     stroke-dasharray: 0.24 0.76;
-    animation: module-synapse-transmit 3.8s ease-in-out infinite paused;
+    animation: module-synapse-transmit 3.8s ease-in-out infinite;
   }
   .module-motion-enabled [data-motion="terminal-code"] {
     stroke-dasharray: 1;
-    animation: module-terminal-type 4.6s ease-in-out infinite paused;
+    animation: module-terminal-type 4.6s ease-in-out infinite;
   }
-  .module-motion-enabled [data-motion="terminal-caret"] { animation: module-terminal-caret 2.3s steps(1, end) infinite paused; }
+  .module-motion-enabled [data-motion="terminal-caret"] { animation: module-terminal-caret 2.3s steps(1, end) infinite; }
   .module-motion-enabled .module-card-diagram [data-motion] { animation-delay: var(--module-phase, 0s); }
-  .home-module-link.module-motion-active .module-card-diagram [data-motion] { animation-play-state: running; }
 }
 
 @keyframes module-cipher-turn { to { transform: rotate(360deg); } }
@@ -637,14 +836,6 @@
   0% { stroke-dashoffset: 0; opacity: 0.55; }
   50% { opacity: 1; }
   100% { stroke-dashoffset: -0.5; opacity: 0.55; }
-}
-@keyframes module-helix-twist {
-  0%, 100% { transform: scaleX(1) skewY(0deg); }
-  50% { transform: scaleX(0.95) skewY(1deg); }
-}
-@keyframes module-dna-sweep {
-  0%, 60%, 100% { opacity: 0; }
-  25% { opacity: 1; }
 }
 @keyframes module-planet-orbit { to { transform: rotate(360deg); } }
 @keyframes module-starlight {

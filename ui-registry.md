@@ -36,20 +36,16 @@ Files: all three HTML pages, `css/refinements.css`.
 
 Preserve the original navigation layout and mobile dialog. The hero registration button retains its original mobile-only placement with the approved button styling. Use `https://forms.gle/w2H4QhemSyPvcqB7A` for every registration destination (navbar, mobile menu, hero, and footer). Specify foreground and background together for hover, focus, and active states so legacy white text cannot reappear. Active press keeps dark background / lime text and returns to baseline.
 
-### Restored global compositions
+### Restored global compositions & Marvel Doomsday Clock Countdown
 
-The homepage hero and countdown, masthead, About introduction, archive gallery, and Modules detail page retain their earlier layouts, now with the shared lime accent. The numbered redesigned FAQ uses `css/refinements.css`. The scrolling ribbon, reading progress bar, and their JavaScript have been removed. Keep the original animation preferences and native interactions.
-
-### Competition briefing (Summary Data Strip)
-
-Files: `index.html`, `css/refinements.css`.
+Files: `index.html`, `css/refinements.css`, `js/main.js`.
 
 | Property | Pattern |
 | --- | --- |
-| Surface | Minimal border-divided data strip directly beneath the hero countdown |
-| Structure | Pure data cells without filler headings or marketing descriptions |
-| Labels | Monospace uppercase tech labels (`font-family: var(--font-tech)`, `0.62rem`) |
-| Values | Clean `font-family: var(--font-body)` values with lime signal accents |
+| Hero Title | `DOOMSDAY IS COMING`: bold geometric uppercase sans-serif (`font-family: var(--font-body)`), pure white `#ffffff`, tracking `0.15em` matching Marvel livestream |
+| Countdown Numbers | 5 units (`MONTH`, `DAYS`, `HOURS`, `MINUTES`, `SECONDS`): pure white tabular bold sans-serif digits, white colon separators `:` |
+| Countdown Labels | Centered under each unit: `MONTH`, `DAYS`, `HOURS`, `MINUTES`, `SECONDS` in crisp white uppercase |
+| Authentic Clock Audio | Exact alternating tick/tock sound and atmospheric drone extracted directly from the official Marvel Avengers: Doomsday livestream (`public/audio/doomsday-clock-loop.mp3`), auto-playing only while on the hero section and automatically pausing when scrolled past |
 
 ### Programme specimen tiles
 
@@ -86,20 +82,20 @@ Files: `index.html`, `css/refinements.css`.
 
 Preserve every complete quotation, name, role, and portrait. Use `figure`, `blockquote`, and `figcaption`; retain the existing reading order. Attributions align beneath each row; phone layout stacks the quotations.
 
-### About image caption and directorate
+### About image caption and Core Team page
 
-Files: `about.html`, `css/refinements.css`.
+Files: `about.html`, `core-team.html`, `css/refinements.css`.
 
 | Property | Pattern |
 | --- | --- |
 | Editorial opening | Original About title, copy, layout, and image treatment |
 | Caption | Solid green rectangle, dark monospace metadata |
-| Directorate surface | Shared panel surface; section rules |
+| Directorate surface | Dedicated `core-team.html` page; shared panel surface; section rules |
 | Portraits | Large square crops, permanently colored (`filter: none`), square corners and a 1:1 aspect ratio on every viewport, no shadow, green bottom rule |
 | Hover | Brighten the bottom rule; portraits stay colored without scaling |
 | Attribution | Inter 600, normal casing; green monospace role; muted quotation |
 
-Keep all director names, roles, and quotations. Desktop order: Dr Husham Arshad, Director Roque Martin D.Mello, Nabeel Nasir Sheikh. At 768px and below, stack the Director first, followed by the two Co-Directors; the Director remains first in DOM order. Keep the green `EST. 2017` / `KARACHI, PK` image caption visible on mobile as well. The Get in touch link uses the restored monospace treatment, lime text and underline, and an arrow that moves slightly on hover or focus. Its native `#contact` destination remains intact.
+Keep all director names, roles, and quotations. Hosted on `core-team.html`. Desktop order: Dr Husham Arshad, Director Roque Martin D.Mello, Nabeel Nasir Sheikh. At 768px and below, stack the Director first, followed by the two Co-Directors; the Director remains first in DOM order. Keep the green `EST. 2017` / `KARACHI, PK` image caption visible on mobile as well. The Get in touch link uses the restored monospace treatment, lime text and underline, and an arrow that moves slightly on hover or focus. Its native `#contact` destination remains intact.
 
 ### Archive gallery
 
@@ -107,9 +103,9 @@ Files: `index.html`, `js/main.js`, `css/style.css`.
 
 Restored to the original photographic columns, frames, responsive rules, and GSAP match-media behavior. No redesign-specific crops, desaturation, or archive eyebrow remain.
 
-### Contact directory
+### Contact directory & Competition Specifications Bar
 
-Files: all three HTML pages, `css/refinements.css`.
+Files: all HTML pages (`index.html`, `about.html`, `core-team.html`, `modules.html`), `css/refinements.css`.
 
 | Property | Pattern |
 | --- | --- |
@@ -119,9 +115,31 @@ Files: all three HTML pages, `css/refinements.css`.
 | Facts | Open rows with panel-rule dividers |
 | Labels | Small uppercase muted monospace |
 | Links | Pale Inter, green diagonal arrow; green on hover |
+| Specifications Bar | Clean, minimalist 4-column data bar (`.contact-specs-bar`) with subtle top border divider, uppercase tech labels, legible values, and highlighted Free tier |
 | Radius / shadow | None |
 
-Keep native email, phone, Instagram, and map links. Contact destinations remain focusable via URL fragments. Preserve `reg.scinnova@cedar.edu.pk`, `+92 300 2526200`, `@scinnova_`, and the Cedar College DHA venue details.
+Keep native email, phone, Instagram, and map links. Contact destinations remain focusable via URL fragments. Preserve `reg.scinnova@cedar.edu.pk`, `+92 300 2526200`, `@scinnova_`, and the Cedar College DHA venue details. The key competition specifications bar (Team Limit 4–7 Members, Module Allowance 4–6 Modules, Early Bird Deadline 29 Nov, Early Bird Fee Structure Delegate: 4,000 PKR / Team: Free) is integrated at the base of the Let's Connect section across all pages.
+
+### Home Module Highlights & Biology 3D Rotating DNA
+
+Files: `index.html`, `css/refinements.css`, `js/main.js`.
+
+| Property | Pattern |
+| --- | --- |
+| Auto-Motion | Module card diagrams animate automatically whenever in viewport (`IntersectionObserver`), without requiring mouse hover or focus |
+| Biology (Module 05) | True 3D rotating double helix in real time via `requestAnimationFrame` (`initDnaRotation`), updating smooth cubic bezier backbone strands, horizontal base-pair rungs, and depth-scaled nucleotide nodes around the vertical Y axis |
+| Reduced Motion | Respects `prefers-reduced-motion: reduce` by freezing animations |
+
+### Header / Navbar Scroll Combining
+
+Files: all HTML pages, `css/refinements.css`, `js/main.js`.
+
+| Property | Pattern |
+| --- | --- |
+| Default (top) | Transparent navbar with central floating pill for nav links |
+| Scrolled (`.is-scrolled`) | Combines smoothly into a unified dark blurred header bar (`rgba(8, 11, 9, 0.92)`, blur 16px, bottom border `1px solid var(--panel-border)`) |
+| Nav links on scroll | Sheds pill background/border to blend seamlessly into the combined bar |
+| Motion | Smooth transitions; disabled under `prefers-reduced-motion: reduce` |
 
 ### Closing invitation and footer
 

@@ -14,6 +14,8 @@ initMobileMenu();
 initMagneticButtons();
 initModuleHighlights();
 initBackToTop();
+initNavbarScroll();
+initDnaRotation();
 motionPreference.addEventListener("change", refreshPageMotion);
 navigator.connection?.addEventListener("change", refreshPageMotion);
 window.addEventListener("online", initPageMotion);
@@ -153,8 +155,7 @@ function initModuleHighlights() {
     const update = (visible = inView) => {
       inView = visible;
       const allowed = canMove() && !document.hidden && inView;
-      card.classList.toggle("module-motion-active", allowed &&
-        (pointerInside || card.matches(":focus-visible")));
+      card.classList.toggle("module-motion-active", allowed);
       if (!allowed) clearPointer();
     };
     updateCards.set(card, update);
@@ -213,7 +214,14 @@ function initSmoothScrolling() {
     infinite: false,
     syncTouch: true,
   });
-  window.lenis.on("scroll", ScrollTrigger.update);
+  window.lenis.on("scroll", (e) => {
+    ScrollTrigger.update();
+    const navbar = document.querySelector(".magick-nav");
+    if (navbar) {
+      const scrollY = e?.scroll ?? (window.scrollY || document.documentElement.scrollTop || 0);
+      navbar.classList.toggle("is-scrolled", scrollY > 20);
+    }
+  });
   lenisTicker = (time) => window.lenis?.raf(time * 1000);
   gsap.ticker.add(lenisTicker);
   gsap.ticker.lagSmoothing(0);
@@ -332,9 +340,93 @@ function initCountdown() {
   if (!elMonths && !elDays && !elHours && !elMinutes && !elSeconds) return;
 
   const timer = document.querySelector(".doomsday-timer");
-  const targetDate = new Date(timer.dataset.targetDate);
+  const targetDate = new Date(timer?.dataset.targetDate);
   if (Number.isNaN(targetDate.getTime())) return;
   let intervalId;
+
+  // Marvel Avengers Doomsday Clock audio system - Plays ONLY on Hero section
+  const heroEl = document.getElementById("hero") || document.querySelector(".hero-gate");
+  const loopAudio = new Audio("public/audio/doomsday-clock-loop.mp3");
+  loopAudio.loop = true;
+  loopAudio.preload = "auto";
+  loopAudio.volume = 0.85;
+
+  let isPlaying = false;
+  let heroInView = true;
+
+  const startClockAudio = () => {
+    if (!heroInView || document.hidden) return;
+    if (isPlaying) return;
+
+    const now = new Date();
+    const secOffset = (now.getSeconds() % 4) + (now.getMilliseconds() / 1000);
+    try {
+      loopAudio.currentTime = secOffset % 4;
+    } catch (e) {}
+
+    const playPromise = loopAudio.play();
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => {
+          isPlaying = true;
+        })
+        .catch(() => {
+          // Autoplay policy waiting for user gesture
+        });
+    }
+  };
+
+  const stopClockAudio = () => {
+    if (loopAudio) {
+      loopAudio.pause();
+      isPlaying = false;
+    }
+  };
+
+  const handleGesture = () => {
+    if (heroInView) {
+      startClockAudio();
+    }
+  };
+
+  const gestureEvents = ["click", "pointerdown", "keydown", "touchstart", "scroll"];
+  gestureEvents.forEach((ev) => window.addEventListener(ev, handleGesture, { capture: true, passive: true }));
+
+  // Hero visibility observer: only play when hero is visible in the viewport
+  if (heroEl && typeof IntersectionObserver === "function") {
+    const heroObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        heroInView = entry.isIntersecting;
+        if (heroInView) {
+          startClockAudio();
+        } else {
+          stopClockAudio();
+        }
+      });
+    }, { threshold: 0.05 });
+    heroObserver.observe(heroEl);
+  } else {
+    const checkScroll = () => {
+      const heroHeight = heroEl ? heroEl.offsetHeight : 600;
+      const scrollY = window.scrollY || document.documentElement.scrollTop || 0;
+      const inView = scrollY < heroHeight;
+      if (inView !== heroInView) {
+        heroInView = inView;
+        if (heroInView) startClockAudio();
+        else stopClockAudio();
+      }
+    };
+    window.addEventListener("scroll", checkScroll, { passive: true });
+    startClockAudio();
+  }
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      stopClockAudio();
+    } else if (heroInView) {
+      startClockAudio();
+    }
+  });
 
   function updateTimer() {
     const now = new Date();
@@ -346,6 +438,10 @@ function initCountdown() {
       if (elMinutes) elMinutes.textContent = "00";
       if (elSeconds) elSeconds.textContent = "00";
       window.clearInterval(intervalId);
+      if (loopAudio) {
+        loopAudio.pause();
+        isPlaying = false;
+      }
       return;
     }
 
@@ -619,4 +715,176 @@ function initBackToTop() {
     });
   });
 }
+
+/* === NAVBAR SCROLL STATE === */
+function initNavbarScroll() {
+  const navbar = document.querySelector(".magick-nav");
+  if (!navbar) return;
+
+  let ticking = false;
+
+  const updateNavbar = () => {
+    const scrollY = window.scrollY || document.documentElement.scrollTop || 0;
+    navbar.classList.toggle("is-scrolled", scrollY > 20);
+    ticking = false;
+  };
+
+  window.addEventListener("scroll", () => {
+    if (!ticking) {
+      window.requestAnimationFrame(updateNavbar);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  updateNavbar();
+}
+
+/* === BIOLOGY MODULE 3D ROTATING DNA HELIX === */
+function initDnaRotation() {
+  const helix = document.querySelector(".dna-helix");
+  if (!helix) return;
+
+  const pathA = helix.querySelector(".dna-strand-a");
+  const pathB = helix.querySelector(".dna-strand-b");
+  const rungEls = Array.from(helix.querySelectorAll(".dna-rung"));
+  const nodeEls = Array.from(helix.querySelectorAll(".dna-node"));
+  if (!pathA || !pathB || !rungEls.length) return;
+
+  const card = helix.closest(".home-module-link");
+  const cx = 265;
+  const radius = 36;
+  const numRungs = 13;
+  const startY = 28;
+  const endY = 212;
+  const stepY = (endY - startY) / (numRungs - 1);
+  const twist = 0.40;
+
+  let theta = 0;
+  let animId = null;
+  let lastTime = 0;
+  let isVisible = false;
+  const speed = 0.00185; // ~3.4s per complete 360-degree rotation (0.84x relaxed pace)
+
+  const ptsA = new Array(numRungs);
+  const ptsB = new Array(numRungs);
+
+  const render = (time) => {
+    if (motionPreference.matches || document.hidden || !isVisible) {
+      animId = null;
+      return;
+    }
+
+    if (!lastTime) lastTime = time;
+    const dt = Math.min(time - lastTime, 50);
+    lastTime = time;
+    theta = (theta + dt * speed) % (Math.PI * 2);
+
+    for (let i = 0; i < numRungs; i++) {
+      const y = startY + i * stepY;
+      const phi = theta + i * twist;
+      const cosPhi = Math.cos(phi);
+      const sinPhi = Math.sin(phi);
+
+      const xa = cx + radius * cosPhi;
+      const xb = cx - radius * cosPhi;
+      const za = sinPhi; // depth: >0 is front, <0 is back
+
+      ptsA[i] = [xa, y, -(radius * twist / 3.0) * sinPhi];
+      ptsB[i] = [xb, y, (radius * twist / 3.0) * sinPhi];
+
+      // Update base pair rung
+      const rung = rungEls[i];
+      if (rung) {
+        rung.setAttribute("x1", xa.toFixed(1));
+        rung.setAttribute("x2", xb.toFixed(1));
+        rung.setAttribute("y1", y.toFixed(1));
+        rung.setAttribute("y2", y.toFixed(1));
+        rung.setAttribute("opacity", (0.2 + 0.5 * Math.abs(cosPhi)).toFixed(2));
+      }
+
+      // Update nucleotide node A
+      const nodeA = nodeEls[i * 2];
+      if (nodeA) {
+        nodeA.setAttribute("cx", xa.toFixed(1));
+        nodeA.setAttribute("cy", y.toFixed(1));
+        nodeA.setAttribute("r", (2.2 + 1.2 * (za + 1) / 2).toFixed(1));
+        nodeA.setAttribute("opacity", (0.35 + 0.65 * (za + 1) / 2).toFixed(2));
+      }
+
+      // Update nucleotide node B
+      const nodeB = nodeEls[i * 2 + 1];
+      if (nodeB) {
+        nodeB.setAttribute("cx", xb.toFixed(1));
+        nodeB.setAttribute("cy", y.toFixed(1));
+        nodeB.setAttribute("r", (2.2 + 1.2 * (-za + 1) / 2).toFixed(1));
+        nodeB.setAttribute("opacity", (0.35 + 0.65 * (-za + 1) / 2).toFixed(2));
+      }
+    }
+
+    // Generate smooth bezier curves for both ribbons
+    let dA = `M ${ptsA[0][0].toFixed(1)} ${ptsA[0][1].toFixed(1)}`;
+    let dB = `M ${ptsB[0][0].toFixed(1)} ${ptsB[0][1].toFixed(1)}`;
+
+    for (let i = 0; i < numRungs - 1; i++) {
+      const p1A = ptsA[i];
+      const p2A = ptsA[i + 1];
+      const cp1xA = p1A[0] + p1A[2];
+      const cp1yA = p1A[1] + (stepY / 3.0);
+      const cp2xA = p2A[0] - p2A[2];
+      const cp2yA = p2A[1] - (stepY / 3.0);
+      dA += ` C ${cp1xA.toFixed(1)} ${cp1yA.toFixed(1)}, ${cp2xA.toFixed(1)} ${cp2yA.toFixed(1)}, ${p2A[0].toFixed(1)} ${p2A[1].toFixed(1)}`;
+
+      const p1B = ptsB[i];
+      const p2B = ptsB[i + 1];
+      const cp1xB = p1B[0] + p1B[2];
+      const cp1yB = p1B[1] + (stepY / 3.0);
+      const cp2xB = p2B[0] - p2B[2];
+      const cp2yB = p2B[1] - (stepY / 3.0);
+      dB += ` C ${cp1xB.toFixed(1)} ${cp1yB.toFixed(1)}, ${cp2xB.toFixed(1)} ${cp2yB.toFixed(1)}, ${p2B[0].toFixed(1)} ${p2B[1].toFixed(1)}`;
+    }
+
+    pathA.setAttribute("d", dA);
+    pathB.setAttribute("d", dB);
+
+    animId = window.requestAnimationFrame(render);
+  };
+
+  const start = () => {
+    if (!animId && !motionPreference.matches && !document.hidden && isVisible) {
+      lastTime = 0;
+      animId = window.requestAnimationFrame(render);
+    }
+  };
+
+  const stop = () => {
+    if (animId) {
+      window.cancelAnimationFrame(animId);
+      animId = null;
+    }
+  };
+
+  if (typeof IntersectionObserver === "function" && card) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible) start();
+        else stop();
+      });
+    }, { threshold: 0.05 });
+    observer.observe(card);
+  } else {
+    isVisible = true;
+    start();
+  }
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) stop();
+    else if (isVisible) start();
+  });
+  motionPreference.addEventListener("change", () => {
+    if (motionPreference.matches) stop();
+    else if (isVisible) start();
+  });
+}
+
 

@@ -37,6 +37,7 @@
       <div class="nav-links desktop-only">
         <a href="index.html" class="nav-link active" aria-current="page">HOME</a>
         <a href="about.html" class="nav-link">ABOUT</a>
+        <a href="core-team.html" class="nav-link">CORE TEAM</a>
         <a href="modules.html" class="nav-link">MODULES</a>
       </div>
       <div class="nav-controls">
@@ -61,6 +62,7 @@
       <nav class="mobile-nav-links" aria-label="Mobile">
         <a href="index.html" class="mobile-nav-link active" aria-current="page">HOME</a>
         <a href="about.html" class="mobile-nav-link">ABOUT</a>
+        <a href="core-team.html" class="mobile-nav-link">CORE TEAM</a>
         <a href="modules.html" class="mobile-nav-link">MODULES</a>
         <a
           href="https://forms.gle/w2H4QhemSyPvcqB7A"
@@ -89,24 +91,24 @@
               <div class="doomsday-timer" role="timer" aria-label="Countdown to SCINNOVA X" aria-live="off" data-target-date="2027-01-08T08:00:00+05:00">
                 <div class="timer-unit">
                   <span id="months">00</span>
-                  <span class="timer-label">MONTHS</span>
+                  <span class="timer-label">MONTH</span>
                 </div>
-                <div class="timer-separator">:</div>
+                <div class="timer-separator" aria-hidden="true">:</div>
                 <div class="timer-unit">
                   <span id="days">00</span>
                   <span class="timer-label">DAYS</span>
                 </div>
-                <div class="timer-separator">:</div>
+                <div class="timer-separator" aria-hidden="true">:</div>
                 <div class="timer-unit">
                   <span id="hours">00</span>
                   <span class="timer-label">HOURS</span>
                 </div>
-                <div class="timer-separator">:</div>
+                <div class="timer-separator" aria-hidden="true">:</div>
                 <div class="timer-unit">
                   <span id="minutes">00</span>
                   <span class="timer-label">MINUTES</span>
                 </div>
-                <div class="timer-separator">:</div>
+                <div class="timer-separator" aria-hidden="true">:</div>
                 <div class="timer-unit">
                   <span id="seconds">00</span>
                   <span class="timer-label">SECONDS</span>
@@ -123,28 +125,6 @@
             </div>
           </div>
         </header>
-
-        <!-- COMPETITION DATA STRIP -->
-        <section class="summary-strip" aria-label="Key competition details">
-          <div class="summary-strip-inner">
-            <div class="summary-strip-cell">
-              <span class="strip-label">Team Limit</span>
-              <span class="strip-value">4–7 Members</span>
-            </div>
-            <div class="summary-strip-cell">
-              <span class="strip-label">Module Allowance</span>
-              <span class="strip-value">4–6 Modules <span class="strip-note">(Arcanum Compulsory)</span></span>
-            </div>
-            <div class="summary-strip-cell">
-              <span class="strip-label">Early Bird Deadline</span>
-              <span class="strip-value">29 Nov</span>
-            </div>
-            <div class="summary-strip-cell">
-              <span class="strip-label">Early Bird Fee Structure</span>
-              <span class="strip-value">Delegate: 4,000 PKR <span class="strip-divider">/</span> Team: <span class="strip-highlight">Free</span></span>
-            </div>
-          </div>
-        </section>
 
         <!-- HOMEPAGE MODULE PROGRAMME -->
         <section class="module-overview" id="modules" aria-labelledby="home-modules-title">
@@ -233,23 +213,52 @@
                 <a class="home-module-link" href="modules.html#module-5-title" aria-label="Asclepius – Biology">
                   <span class="module-card-meta" aria-hidden="true"><span>MODULE / 05</span><span>↗</span></span><span class="module-card-diagram diagram-5" aria-hidden="true">
                     <svg viewBox="0 0 360 240" preserveAspectRatio="xMidYMid slice" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true" focusable="false" class="module-illustration">
-                      <g data-motion="helix">
-                        <path d="M227 33c106 52-17 76 28 116s49 62-28 98M298 33c-106 52 17 76-28 116s-49 62 28 98" />
-                        <path d="M242 43h42m-31 17h20m-22 18h25m-32 18h39m-45 18h49m-36 18h26m-17 18h9m-19 18h28m-35 18h44m-47 18h49m-42 18h34m-25 18h16" />
-                        <g class="diagram-node">
-                          <circle cx="227" cy="33" r="3" />
-                          <circle cx="298" cy="33" r="3" />
-                          <circle cx="239" cy="113" r="3" />
-                          <circle cx="287" cy="113" r="3" />
-                          <circle cx="237" cy="202" r="3" />
-                          <circle cx="288" cy="202" r="3" />
+                      <g class="dna-helix" data-motion="dna-helix">
+                        <path class="dna-strand dna-strand-a" d="M 301.0 28.0 C 301.0 33.1, 300.0 38.2, 298.2 43.3 C 296.3 48.4, 293.5 53.6, 290.1 58.7 C 286.6 63.8, 282.5 68.9, 278.0 74.0 C 273.6 79.1, 268.7 84.2, 263.9 89.3 C 259.2 94.4, 254.4 99.6, 250.0 104.7 C 245.7 109.8, 241.7 114.9, 238.5 120.0 C 235.2 125.1, 232.7 130.2, 231.1 135.3 C 229.5 140.4, 228.8 145.6, 229.1 150.7 C 229.3 155.8, 230.6 160.9, 232.7 166.0 C 234.8 171.1, 237.8 176.2, 241.5 181.3 C 245.1 186.4, 249.4 191.6, 253.9 196.7 C 258.5 201.8, 263.4 206.9, 268.1 212.0" stroke="currentColor" stroke-width="1.8" opacity="0.85" />
+                        <path class="dna-strand dna-strand-b" d="M 229.0 28.0 C 229.0 33.1, 230.0 38.2, 231.8 43.3 C 233.7 48.4, 236.5 53.6, 239.9 58.7 C 243.4 63.8, 247.5 68.9, 252.0 74.0 C 256.4 79.1, 261.3 84.2, 266.1 89.3 C 270.8 94.4, 275.6 99.6, 280.0 104.7 C 284.3 109.8, 288.3 114.9, 291.5 120.0 C 294.8 125.1, 297.3 130.2, 298.9 135.3 C 300.5 140.4, 301.2 145.6, 300.9 150.7 C 300.7 155.8, 299.4 160.9, 297.3 166.0 C 295.2 171.1, 292.2 176.2, 288.5 181.3 C 284.9 186.4, 280.6 191.6, 276.1 196.7 C 271.5 201.8, 266.6 206.9, 261.9 212.0" stroke="currentColor" stroke-width="1.4" stroke-dasharray="4 3" opacity="0.55" />
+                        <g class="dna-rungs">
+                          <line class="dna-rung" x1="301.0" y1="28.0" x2="229.0" y2="28.0" stroke="currentColor" stroke-width="1.2" opacity="0.70" />
+                          <line class="dna-rung" x1="298.2" y1="43.3" x2="231.8" y2="43.3" stroke="currentColor" stroke-width="1.2" opacity="0.66" />
+                          <line class="dna-rung" x1="290.1" y1="58.7" x2="239.9" y2="58.7" stroke="currentColor" stroke-width="1.2" opacity="0.56" />
+                          <line class="dna-rung" x1="278.0" y1="74.0" x2="252.0" y2="74.0" stroke="currentColor" stroke-width="1.2" opacity="0.41" />
+                          <line class="dna-rung" x1="263.9" y1="89.3" x2="266.1" y2="89.3" stroke="currentColor" stroke-width="1.2" opacity="0.26" />
+                          <line class="dna-rung" x1="250.0" y1="104.7" x2="280.0" y2="104.7" stroke="currentColor" stroke-width="1.2" opacity="0.44" />
+                          <line class="dna-rung" x1="238.5" y1="120.0" x2="291.5" y2="120.0" stroke="currentColor" stroke-width="1.2" opacity="0.58" />
+                          <line class="dna-rung" x1="231.1" y1="135.3" x2="298.9" y2="135.3" stroke="currentColor" stroke-width="1.2" opacity="0.67" />
+                          <line class="dna-rung" x1="229.1" y1="150.7" x2="300.9" y2="150.7" stroke="currentColor" stroke-width="1.2" opacity="0.70" />
+                          <line class="dna-rung" x1="232.7" y1="166.0" x2="297.3" y2="166.0" stroke="currentColor" stroke-width="1.2" opacity="0.65" />
+                          <line class="dna-rung" x1="241.5" y1="181.3" x2="288.5" y2="181.3" stroke="currentColor" stroke-width="1.2" opacity="0.54" />
+                          <line class="dna-rung" x1="253.9" y1="196.7" x2="276.1" y2="196.7" stroke="currentColor" stroke-width="1.2" opacity="0.39" />
+                          <line class="dna-rung" x1="268.1" y1="212.0" x2="261.9" y2="212.0" stroke="currentColor" stroke-width="1.2" opacity="0.29" />
                         </g>
-                        <path d="M242 43H284" class="module-signal" data-motion="dna-bond" stroke-width="1.8" style="--module-phase: 0.00s" />
-                        <path d="M251 78H276" class="module-signal" data-motion="dna-bond" stroke-width="1.8" style="--module-phase: 0.28s" />
-                        <path d="M238 114H287" class="module-signal" data-motion="dna-bond" stroke-width="1.8" style="--module-phase: 0.56s" />
-                        <path d="M260 150H269" class="module-signal" data-motion="dna-bond" stroke-width="1.8" style="--module-phase: 0.84s" />
-                        <path d="M243 186H287" class="module-signal" data-motion="dna-bond" stroke-width="1.8" style="--module-phase: 1.12s" />
-                        <path d="M247 222H281" class="module-signal" data-motion="dna-bond" stroke-width="1.8" style="--module-phase: 1.40s" />
+                        <g class="dna-nodes diagram-node">
+                          <circle class="dna-node" cx="301.0" cy="28.0" r="2.8" opacity="0.68" />
+                          <circle class="dna-node" cx="229.0" cy="28.0" r="2.8" opacity="0.68" />
+                          <circle class="dna-node" cx="298.2" cy="43.3" r="3.0" opacity="0.80" />
+                          <circle class="dna-node" cx="231.8" cy="43.3" r="2.6" opacity="0.55" />
+                          <circle class="dna-node" cx="290.1" cy="58.7" r="3.2" opacity="0.91" />
+                          <circle class="dna-node" cx="239.9" cy="58.7" r="2.4" opacity="0.44" />
+                          <circle class="dna-node" cx="278.0" cy="74.0" r="3.4" opacity="0.98" />
+                          <circle class="dna-node" cx="252.0" cy="74.0" r="2.2" opacity="0.37" />
+                          <circle class="dna-node" cx="263.9" cy="89.3" r="3.4" opacity="1.00" />
+                          <circle class="dna-node" cx="266.1" cy="89.3" r="2.2" opacity="0.35" />
+                          <circle class="dna-node" cx="250.0" cy="104.7" r="3.3" opacity="0.97" />
+                          <circle class="dna-node" cx="280.0" cy="104.7" r="2.3" opacity="0.38" />
+                          <circle class="dna-node" cx="238.5" cy="120.0" r="3.2" opacity="0.89" />
+                          <circle class="dna-node" cx="291.5" cy="120.0" r="2.4" opacity="0.46" />
+                          <circle class="dna-node" cx="231.1" cy="135.3" r="3.0" opacity="0.78" />
+                          <circle class="dna-node" cx="298.9" cy="135.3" r="2.6" opacity="0.57" />
+                          <circle class="dna-node" cx="229.1" cy="150.7" r="2.8" opacity="0.66" />
+                          <circle class="dna-node" cx="300.9" cy="150.7" r="2.8" opacity="0.69" />
+                          <circle class="dna-node" cx="232.7" cy="166.0" r="2.5" opacity="0.53" />
+                          <circle class="dna-node" cx="297.3" cy="166.0" r="3.1" opacity="0.82" />
+                          <circle class="dna-node" cx="241.5" cy="181.3" r="2.3" opacity="0.43" />
+                          <circle class="dna-node" cx="288.5" cy="181.3" r="3.3" opacity="0.92" />
+                          <circle class="dna-node" cx="253.9" cy="196.7" r="2.2" opacity="0.37" />
+                          <circle class="dna-node" cx="276.1" cy="196.7" r="3.4" opacity="0.98" />
+                          <circle class="dna-node" cx="268.1" cy="212.0" r="2.2" opacity="0.35" />
+                          <circle class="dna-node" cx="261.9" cy="212.0" r="3.4" opacity="1.00" />
+                        </g>
                       </g>
                       <path class="diagram-faint" d="M180 61h25m-13-12v25m128 122h25m-13-12v25" />
                     </svg>
@@ -476,40 +485,62 @@
 
         <!-- CONTACT SECTION -->
         <section class="contact-section" id="contact" aria-labelledby="contact-title" tabindex="-1">
-          <div class="feature-container contact-layout">
-            <div class="contact-introduction reveal-text">
-              <p class="feature-eyebrow">KEEP IN TOUCH <span aria-hidden="true">/</span> SCINNOVA X</p>
-              <h2 class="feature-title" id="contact-title">LET’S<br /><span>CONNECT.</span></h2>
-              <p class="contact-description">Have questions or need assistance? Reach the SCINNOVA team by email or phone, follow us on Instagram, or find our event venue at Cedar College.</p>
+          <div class="feature-container">
+            <div class="contact-layout">
+              <div class="contact-introduction reveal-text">
+                <p class="feature-eyebrow">KEEP IN TOUCH <span aria-hidden="true">/</span> SCINNOVA X</p>
+                <h2 class="feature-title" id="contact-title">LET’S<br /><span>CONNECT.</span></h2>
+                <p class="contact-description">Have questions or need assistance? Reach the SCINNOVA team by email or phone, follow us on Instagram, or find our event venue at Cedar College.</p>
+              </div>
+              <dl class="contact-facts reveal-text">
+                <div>
+                  <dt>Registration &amp; Enquiries</dt>
+                  <dd>
+                    <a class="contact-email" href="mailto:reg.scinnova@cedar.edu.pk">reg.scinnova@cedar.edu.pk <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12" /></svg></a>
+                  </dd>
+                </div>
+                <div>
+                  <dt> Comlink(phone) / Available 9am-4pm</dt>
+                  <dd>
+                    <a class="contact-email contact-phone" href="tel:+923002526200">+92 300 2526200 <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12" /></svg></a>
+                  </dd>
+                </div>
+                <div>
+                  <dt>Official Instagram</dt>
+                  <dd>
+                    <a class="contact-email" href="https://www.instagram.com/scinnova_/" target="_blank" rel="noopener noreferrer">@scinnova_ <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12" /></svg></a>
+                  </dd>
+                </div>
+                <div>
+                  <dt>Venue</dt>
+                  <dd>
+                    Cedar College, DHA Campus
+                    <address>211, Khayaban-e-Shaheen,<br />DHA Phase VIII, Karachi</address>
+                    <a class="feature-text-link" href="https://www.google.com/maps/search/?api=1&amp;query=Cedar+College+211+Khayaban-e-Shaheen+DHA+Phase+VIII+Karachi" target="_blank" rel="noopener noreferrer">Get directions <span aria-hidden="true">↗</span></a>
+                  </dd>
+                </div>
+              </dl>
             </div>
-            <dl class="contact-facts reveal-text">
-              <div>
-                <dt>Registration &amp; Enquiries</dt>
-                <dd>
-                  <a class="contact-email" href="mailto:reg.scinnova@cedar.edu.pk">reg.scinnova@cedar.edu.pk <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12" /></svg></a>
-                </dd>
+
+            <!-- COMPETITION SPECIFICATIONS -->
+            <div class="contact-specs-bar reveal-text" aria-label="Key competition details">
+              <div class="specs-bar-item">
+                <span class="specs-bar-label">Team Limit</span>
+                <span class="specs-bar-value">4–7 Members</span>
               </div>
-              <div>
-                <dt> Comlink(phone) / Available 9am-4pm</dt>
-                <dd>
-                  <a class="contact-email contact-phone" href="tel:+923002526200">+92 300 2526200 <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12" /></svg></a>
-                </dd>
+              <div class="specs-bar-item">
+                <span class="specs-bar-label">Module Allowance</span>
+                <span class="specs-bar-value">4–6 Modules<span class="specs-bar-note">(Arcanum Compulsory)</span></span>
               </div>
-              <div>
-                <dt>Official Instagram</dt>
-                <dd>
-                  <a class="contact-email" href="https://www.instagram.com/scinnova_/" target="_blank" rel="noopener noreferrer">@scinnova_ <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12" /></svg></a>
-                </dd>
+              <div class="specs-bar-item">
+                <span class="specs-bar-label">Early Bird Deadline</span>
+                <span class="specs-bar-value">29 Nov</span>
               </div>
-              <div>
-                <dt>Venue</dt>
-                <dd>
-                  Cedar College, DHA Campus
-                  <address>211, Khayaban-e-Shaheen,<br />DHA Phase VIII, Karachi</address>
-                  <a class="feature-text-link" href="https://www.google.com/maps/search/?api=1&amp;query=Cedar+College+211+Khayaban-e-Shaheen+DHA+Phase+VIII+Karachi" target="_blank" rel="noopener noreferrer">Get directions <span aria-hidden="true">↗</span></a>
-                </dd>
+              <div class="specs-bar-item">
+                <span class="specs-bar-label">Early Bird Fee Structure</span>
+                <span class="specs-bar-value">Delegate: 4,000 PKR<span class="specs-bar-sep">/</span>Team: <span class="specs-bar-free">Free</span></span>
               </div>
-            </dl>
+            </div>
           </div>
         </section>
 
