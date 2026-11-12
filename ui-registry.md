@@ -30,7 +30,7 @@ Files: all three HTML pages, `css/refinements.css`.
 | --- | --- |
 | Primary actions | `.nav-register-btn`, `.hero-register-btn`, `.cta-btn`: solid `#bbef79`, dark text, `1px` accent border |
 | Radius / shadow | None; clear legacy sheen, glow, and backdrop effects |
-| Text | System monospace, `0.65rem`–`0.72rem`, weight 600, `0.04em` tracking |
+| Text | System monospace, `0.78rem`–`0.84rem`, weight 600, `0.04em` tracking |
 | Spacing | Main action `0.9rem 1.4rem`; diagonal arrow on navigation and footer actions |
 | Hover / keyboard focus | Dark surface, lime text and border, subtle lime glow, `translateY(-2px)`; the arrow moves diagonally |
 
@@ -39,6 +39,17 @@ Preserve the original navigation layout and mobile dialog. The hero registration
 ### Restored global compositions
 
 The homepage hero and countdown, masthead, About introduction, archive gallery, and Modules detail page retain their earlier layouts, now with the shared lime accent. The numbered redesigned FAQ uses `css/refinements.css`. The scrolling ribbon, reading progress bar, and their JavaScript have been removed. Keep the original animation preferences and native interactions.
+
+### Competition briefing (Summary Data Strip)
+
+Files: `index.html`, `css/refinements.css`.
+
+| Property | Pattern |
+| --- | --- |
+| Surface | Minimal border-divided data strip directly beneath the hero countdown |
+| Structure | Pure data cells without filler headings or marketing descriptions |
+| Labels | Monospace uppercase tech labels (`font-family: var(--font-tech)`, `0.62rem`) |
+| Values | Clean `font-family: var(--font-body)` values with lime signal accents |
 
 ### Programme specimen tiles
 
@@ -49,9 +60,9 @@ Files: `index.html`, `css/refinements.css`, `js/main.js`.
 | Homepage surface | `.home-module-link`: obsidian; `1px` panel-rule grid |
 | Radius / shadow | None |
 | Metadata | Muted green monospace module indices; quiet diagonal arrow on homepage |
-| Logos | Centered, natural aspect ratios; no artwork recoloring |
-| Arcanum symbol | Give the vertical symbol a substantially larger dedicated emblem area than the horizontal wordmarks; use the full available width when needed, retain natural proportions and clear space above the discipline label |
-| Discipline text | Muted Inter `0.75rem` |
+| Logos | Centered, natural aspect ratios; uniform 70px emblem area on specimen tiles with `min-height: 238px` |
+| Arcanum symbol | Visual scale (`scale(1.42)`) keeping identical 70px emblem height and baseline alignment for text across all cards |
+| Discipline text | Muted Inter `1.08rem` (responsive `0.72rem`–`0.78rem`) |
 | Spacing | `4.5rem 2rem 2rem` |
 | Hover / focus | Slightly lighter surface; green arrow and discipline; homepage logo rises `4px` |
 | Decorative accent | Nine unique inline SVG scientific drawings, `currentColor`, opacity `0.2` (`0.34` on interaction); subtle pointer-positioned green illumination |

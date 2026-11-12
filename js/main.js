@@ -13,6 +13,7 @@ initModulesPresentation();
 initMobileMenu();
 initMagneticButtons();
 initModuleHighlights();
+initBackToTop();
 motionPreference.addEventListener("change", refreshPageMotion);
 navigator.connection?.addEventListener("change", refreshPageMotion);
 window.addEventListener("online", initPageMotion);
@@ -585,5 +586,37 @@ function initMobileMenu() {
   // Without JavaScript or dialog support, the regular navigation stays visible.
   navbar.classList.add("menu-ready");
   toggle.hidden = false;
+}
+
+/* === BACK TO TOP INTERACTION === */
+function initBackToTop() {
+  const links = document.querySelectorAll('.footer-bottom a[href^="#"]');
+  if (!links.length) return;
+
+  links.forEach((link) => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      link.classList.add("scrolling-up");
+      window.setTimeout(() => link.classList.remove("scrolling-up"), 1200);
+
+      if (window.lenis && !motionPreference.matches) {
+        window.lenis.scrollTo(0, {
+          duration: 1.4,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        });
+      } else {
+        window.scrollTo({
+          top: 0,
+          behavior: motionPreference.matches ? "auto" : "smooth",
+        });
+      }
+
+      const targetId = link.getAttribute("href");
+      if (targetId && targetId !== "#") {
+        const targetEl = document.querySelector(targetId);
+        targetEl?.focus({ preventScroll: true });
+      }
+    });
+  });
 }
 
