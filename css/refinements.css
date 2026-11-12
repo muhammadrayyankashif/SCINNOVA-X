@@ -266,24 +266,24 @@
 /* Contact: a large invitation, beside a clean directory of real channels. */
 .contact-section { border-top: 1px solid var(--panel-border); background-image: radial-gradient(ellipse at 5% 100%, rgba(49, 92, 69, 0.13), transparent 60%); }
 
-/* === MARVEL DOOMSDAY CLOCK HERO COUNTDOWN === */
+/* === HERO COUNTDOWN CLOCK === */
 .doomsday-title {
-  font-family: var(--font-body, "Inter", -apple-system, sans-serif) !important;
-  font-size: clamp(1.35rem, 2.7vw, 2.2rem) !important;
-  font-weight: 800 !important;
-  letter-spacing: clamp(0.12em, 0.22vw, 0.2em) !important;
+  font-family: var(--font-hero), "Bebas Neue", sans-serif !important;
+  font-size: clamp(1.8rem, 3.8vw, 3rem) !important;
+  letter-spacing: clamp(0.24em, 0.45vw, 0.4em) !important;
   text-transform: uppercase !important;
-  color: #ffffff !important;
-  margin-bottom: clamp(1rem, 2vh, 1.5rem) !important;
-  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.9), 0 0 40px rgba(0, 0, 0, 0.7) !important;
+  color: var(--pale-white) !important;
+  margin-bottom: clamp(1rem, 2vh, 1.8rem) !important;
+  text-shadow: 0 0 30px rgba(84, 123, 96, 0.55),
+               0 2px 10px rgba(0, 0, 0, 0.95) !important;
 }
 
 .doomsday-timer {
   display: flex !important;
-  gap: clamp(0.35rem, 1.3vw, 1.25rem) !important;
+  gap: clamp(0.35rem, 1.4vw, 1.6rem) !important;
   align-items: flex-start !important;
   justify-content: center !important;
-  font-family: var(--font-body, "Inter", system-ui, sans-serif) !important;
+  font-family: var(--font-numeric), "Orbitron", monospace !important;
   cursor: pointer;
 }
 
@@ -291,39 +291,40 @@
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
-  min-width: clamp(2.4rem, 5.8vw, 5.4rem) !important;
+  min-width: clamp(2.4rem, 6.2vw, 5.8rem) !important;
 }
 
 .doomsday-timer .timer-unit > span:not(.timer-label) {
-  font-family: var(--font-body, "Inter", system-ui, sans-serif) !important;
-  font-size: clamp(2.3rem, 5.5vw, 4.8rem) !important;
+  font-family: var(--font-numeric), "Orbitron", ui-monospace, monospace !important;
+  font-size: clamp(2rem, 5vw, 4.4rem) !important;
   line-height: 1 !important;
   font-weight: 700 !important;
-  color: #ffffff !important;
+  color: var(--pale-white) !important;
   font-variant-numeric: tabular-nums !important;
   letter-spacing: 0.02em !important;
-  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.95), 0 0 35px rgba(0, 0, 0, 0.75) !important;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.95),
+               0 0 25px rgba(84, 123, 96, 0.35) !important;
 }
 
 .doomsday-timer .timer-unit .timer-label {
-  font-family: var(--font-body, "Inter", system-ui, sans-serif) !important;
-  font-size: clamp(0.55rem, 0.85vw, 0.75rem) !important;
+  font-family: var(--font-sub), "Inter", sans-serif !important;
+  font-size: clamp(0.6rem, 0.9vw, 0.85rem) !important;
   font-weight: 600 !important;
-  letter-spacing: clamp(0.14em, 0.24vw, 0.24em) !important;
+  letter-spacing: clamp(0.18em, 0.28vw, 0.28em) !important;
   text-transform: uppercase !important;
-  color: rgba(255, 255, 255, 0.9) !important;
-  margin-top: clamp(0.45rem, 0.9vh, 0.75rem) !important;
+  color: var(--metallic-silver) !important;
+  margin-top: clamp(0.45rem, 1vh, 0.8rem) !important;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9) !important;
 }
 
 .doomsday-timer .timer-separator {
-  font-family: var(--font-body, "Inter", system-ui, sans-serif) !important;
-  font-size: clamp(2rem, 5vw, 4.4rem) !important;
+  font-family: var(--font-numeric), "Orbitron", ui-monospace, monospace !important;
+  font-size: clamp(1.8rem, 4.5vw, 4rem) !important;
   line-height: 0.95 !important;
-  font-weight: 700 !important;
-  color: #ffffff !important;
-  opacity: 0.95 !important;
-  text-shadow: 0 4px 18px rgba(0, 0, 0, 0.95) !important;
+  font-weight: 600 !important;
+  color: var(--emerald) !important;
+  opacity: 0.9 !important;
+  text-shadow: 0 0 15px rgba(84, 123, 96, 0.6) !important;
   user-select: none !important;
   padding-inline: 0.05em !important;
 }
@@ -370,6 +371,17 @@
   font-weight: 500;
   color: var(--pale-white);
   line-height: 1.4;
+}
+
+.specs-bar-value--stacked {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.specs-bar-line {
+  display: block;
+  white-space: nowrap;
 }
 
 .specs-bar-note {

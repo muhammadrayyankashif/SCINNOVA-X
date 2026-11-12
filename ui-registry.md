@@ -63,7 +63,7 @@ Files: `index.html`, `css/refinements.css`, `js/main.js`.
 | Hover / focus | Slightly lighter surface; green arrow and discipline; homepage logo rises `4px` |
 | Decorative accent | Nine unique inline SVG scientific drawings, `currentColor`, opacity `0.2` (`0.34` on interaction); subtle pointer-positioned green illumination |
 
-Homepage entries stay native links to their corresponding detail headings. Maintain nine modules. The heading aside contains only the Explore all modules link; the “Nine disciplines. Infinite possibilities.” tagline is removed. Tiles move from three columns to two; the final module spans the row at two columns. Each background illustration belongs to its discipline: cryptographic maze, molecular bonds, mathematical graph, atomic waves, DNA, planetary orbits, circuitry, neurons, and code. Drawings are decorative and hidden from assistive technology. Pointer illumination is mouse-only and respects reduced motion / data saving. Each illustration also has its own subtle motion on mouse hover or visible keyboard focus; pause it on pointer leave, blur, leaving the viewport, or hiding the tab. Keep all nine logos and labels steady apart from the existing small hover lift. The Modules detail page keeps its original open programme rows.
+Homepage entries stay native links to their corresponding detail headings. Maintain nine modules. The heading aside contains only the Explore all modules link; the “Nine disciplines. Infinite possibilities.” tagline is removed. Tiles move from three columns to two; the final module spans the row at two columns. Each background illustration belongs to its discipline: cryptographic maze, molecular bonds, mathematical graph, atomic waves, DNA, planetary orbits, circuitry, neural wireframe brain, and code. Drawings are decorative and hidden from assistive technology. Pointer illumination is mouse-only and respects reduced motion / data saving. Each illustration also has its own subtle motion on mouse hover or visible keyboard focus; pause it on pointer leave, blur, leaving the viewport, or hiding the tab. Keep all nine logos and labels steady apart from the existing small hover lift. The Modules detail page keeps its original open programme rows.
 
 ### Editorial testimonials
 
@@ -118,7 +118,7 @@ Files: all HTML pages (`index.html`, `about.html`, `core-team.html`, `modules.ht
 | Specifications Bar | Clean, minimalist 4-column data bar (`.contact-specs-bar`) with subtle top border divider, uppercase tech labels, legible values, and highlighted Free tier |
 | Radius / shadow | None |
 
-Keep native email, phone, Instagram, and map links. Contact destinations remain focusable via URL fragments. Preserve `reg.scinnova@cedar.edu.pk`, `+92 300 2526200`, `@scinnova_`, and the Cedar College DHA venue details. The key competition specifications bar (Team Limit 4–7 Members, Module Allowance 4–6 Modules, Early Bird Deadline 29 Nov, Early Bird Fee Structure Delegate: 4,000 PKR / Team: Free) is integrated at the base of the Let's Connect section across all pages.
+Keep native email, phone, Instagram, and map links. Contact destinations remain focusable via URL fragments. Preserve `reg.scinnova@cedar.edu.pk`, `+92 300 2526200`, `@scinnova_`, and the Cedar College DHA venue details. The key competition specifications bar (Team Limit 4–7 Members, Module Allowance 4–6 Modules, Early Bird Deadline 29 Nov 2026, Early Bird Fee Structure Delegate: 4,000 PKR / Team: Free) is integrated at the base of the Let's Connect section across all pages.
 
 ### Home Module Highlights & Biology 3D Rotating DNA
 
@@ -180,7 +180,7 @@ Last updated: 10 November 2026.
 | Asclepius / Biology | The DNA ladder shifts slightly while bonds illuminate in sequence (6s / 3.8s) |
 | Redshift / Astronomy | Planets orbit the existing central point at different speeds; stars softly brighten (18s / 30s / 5.5s) |
 | Automaton / Robotics | Small signal packets travel toward and away from the chip, with a quiet core pulse (3.4s) |
-| Freud’s Forsit / Psychology | A central neuron pulse spreads along three staggered branches (3.8s) |
+| Freud’s Forsit / Psychology | Anatomical neural wireframe brain with cortical sulci, cerebellar folia, and three travelling synaptic signal streams (3.8s) |
 | QWERTY / Computer Science | Short code lines draw in sequence alongside a restrained terminal caret (4.6s / 2.3s) |
 
 **Pattern notes:**
