@@ -763,7 +763,7 @@ function initDnaRotation() {
   let animId = null;
   let lastTime = 0;
   let isVisible = false;
-  const speed = (Math.PI * 2) / 6000; // Exactly 1 full rotation per 6 seconds
+  const speed = (Math.PI * 2) / 10000; // Exactly 1 full rotation per 10 seconds
 
   const ptsA = new Array(numRungs);
   const ptsB = new Array(numRungs);

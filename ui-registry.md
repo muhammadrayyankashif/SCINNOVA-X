@@ -115,10 +115,10 @@ Files: all HTML pages (`index.html`, `about.html`, `core-team.html`, `modules.ht
 | Facts | Open rows with panel-rule dividers |
 | Labels | Small uppercase muted monospace |
 | Links | Pale Inter, green diagonal arrow; green on hover |
-| Specifications Bar | Clean, minimalist 4-column data bar (`.contact-specs-bar`) with subtle top border divider, uppercase tech labels, legible values, and highlighted Free tier |
+| Specifications Strip | Clean, minimalist 4-column data strip (`.summary-strip`) positioned beneath the homepage hero, displaying Team Limit (4–7 Members), Module Allowance (4–6 Modules, Arcanum Compulsory), Early Bird Deadline (29 Nov 2026), and stacked Early Bird Fee Structure (Delegate: 4,000 PKR / Team: Free) |
 | Radius / shadow | None |
 
-Keep native email, phone, Instagram, and map links. Contact destinations remain focusable via URL fragments. Preserve `reg.scinnova@cedar.edu.pk`, `+92 300 2526200`, `@scinnova_`, and the Cedar College DHA venue details. The key competition specifications bar (Team Limit 4–7 Members, Module Allowance 4–6 Modules, Early Bird Deadline 29 Nov 2026, Early Bird Fee Structure Delegate: 4,000 PKR / Team: Free) is integrated at the base of the Let's Connect section across all pages.
+Keep native email, phone, Instagram, and map links. Contact destinations remain focusable via URL fragments. Preserve `reg.scinnova@cedar.edu.pk`, `+92 300 2526200`, `@scinnova_`, and the Cedar College DHA venue details.
 
 ### Home Module Highlights & Biology 3D Rotating DNA
 
