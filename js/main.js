@@ -763,7 +763,7 @@ function initDnaRotation() {
   let animId = null;
   let lastTime = 0;
   let isVisible = false;
-  const speed = 0.00185; // ~3.4s per complete 360-degree rotation (0.84x relaxed pace)
+  const speed = (Math.PI * 2) / 6000; // Exactly 1 full rotation per 6 seconds
 
   const ptsA = new Array(numRungs);
   const ptsB = new Array(numRungs);
