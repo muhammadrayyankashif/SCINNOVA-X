@@ -1,5 +1,5 @@
 /* Approved SCINNOVA refinements. The original design remains in style.css. */
-:is(.module-overview, .testimonials-section, .contact-section, .organizers-section, .faq-section, .main-footer) {
+:is(.summary-strip, .module-overview, .testimonials-section, .contact-section, .organizers-section, .faq-section, .main-footer) {
   --obsidian-black: #080b09;
   --metallic-silver: #a4afa7;
   --charcoal-grey: #28322b;
@@ -135,82 +135,75 @@
   }
 }
 
-/* === INTEGRATED COMPETITION SPECS === */
-.competition-specs {
+/* === SUMMARY DATA STRIP === */
+.summary-strip {
+  position: relative;
+  border-block: 1px solid var(--panel-border);
+  background: var(--obsidian-black);
+}
+.summary-strip-inner {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1px;
-  padding: 1px;
-  background: var(--panel-border);
-  margin-bottom: 1.75rem;
+  width: calc(100% - var(--page-gutter, clamp(1.25rem, 4.5vw, 5rem)) * 2);
+  max-width: 1380px;
+  margin-inline: auto;
+  padding-left: clamp(1rem, 2.5vw, 2rem);
 }
-.competition-spec {
+.summary-strip-cell {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  gap: 0.45rem;
-  min-width: 0;
-  padding: clamp(1.15rem, 2vw, 1.6rem) clamp(1.1rem, 2vw, 1.65rem);
-  background: var(--panel-surface);
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 1.6rem 1.75rem;
+  border-right: 1px solid var(--panel-border);
 }
-.spec-label {
+.summary-strip-cell:first-child {
+  padding-left: clamp(0.75rem, 1.5vw, 1.25rem);
+}
+.summary-strip-cell:last-child {
+  border-right: none;
+  padding-right: 0;
+}
+.strip-label {
   font-family: var(--font-tech);
-  font-size: 0.6rem;
+  font-size: 0.62rem;
   letter-spacing: 0.12em;
   color: var(--metallic-silver);
   text-transform: uppercase;
-  line-height: 1.4;
 }
-.spec-value {
-  font-family: var(--font-hero);
-  font-size: clamp(1.75rem, 2.4vw, 2.35rem);
-  font-weight: 400;
-  letter-spacing: 0.02em;
-  line-height: 0.98;
+.strip-value {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-weight: 600;
   color: var(--pale-white);
-}
-.spec-note {
-  font-family: var(--font-tech);
-  font-size: 0.62rem;
-  font-weight: 500;
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-  line-height: 1.45;
-  color: var(--metallic-silver);
-}
-.spec-note--accent,
-.spec-highlight {
-  color: var(--text-accent);
-}
-.spec-fee-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-}
-.spec-fee-row {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 0.75rem;
-}
-.spec-fee-type {
-  font-family: var(--font-tech);
-  font-size: 0.68rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--metallic-silver);
-}
-.spec-fee-amount {
-  font-family: var(--font-hero);
-  font-size: clamp(1.35rem, 1.8vw, 1.7rem);
-  font-weight: 400;
-  letter-spacing: 0.03em;
-  line-height: 1;
-  color: var(--pale-white);
+  letter-spacing: 0.01em;
   white-space: nowrap;
 }
-.spec-fee-amount.spec-highlight {
+.strip-value--stacked {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  line-height: 1.35;
+}
+.strip-line {
+  display: block;
+  white-space: nowrap;
+}
+.strip-note {
+  font-family: var(--font-tech);
+  font-size: 0.7rem;
+  font-weight: 500;
   color: var(--text-accent);
+  letter-spacing: 0.04em;
+  margin-left: 0.35rem;
+}
+.strip-divider {
+  color: var(--panel-border);
+  margin-inline: 0.35rem;
+}
+.strip-highlight {
+  color: var(--text-accent);
+  font-weight: 700;
 }
 
 /* The programme is a set of specimen tiles. Logos keep their natural proportions. */
@@ -346,108 +339,21 @@
   user-select: none !important;
   padding-inline: 0.05em !important;
 }
-.contact-layout { display: block; }
-.contact-introduction {
-  display: flex;
-  justify-content: space-between;
-  align-items: end;
-  gap: 2rem 4rem;
-  margin-bottom: clamp(2.5rem, 4.5vw, 3.75rem);
-}
-.contact-heading-group { min-width: 0; }
-.contact-description {
-  margin-top: 0;
-  max-width: 42ch;
-  color: var(--metallic-silver);
-  font-size: 0.9rem;
-  line-height: 1.85;
-}
-
-.contact-facts {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: clamp(2.5rem, 5vw, 5rem);
-  align-content: start;
-}
-.contact-facts > div {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  min-width: 0;
-  border-top: 1px solid var(--panel-border);
-  padding-block: clamp(1.4rem, 2.4vw, 1.85rem);
-}
-.contact-facts > div:nth-last-child(-n + 2) {
-  border-bottom: 1px solid var(--panel-border);
-}
-.contact-facts dt {
-  font-family: var(--font-tech);
-  color: var(--metallic-silver);
-  font-size: 0.6rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  margin-bottom: 0.7rem;
-}
-.contact-facts dd { width: 100%; font-size: 1rem; line-height: 1.6; }
-.contact-facts .contact-email {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: nowrap;
-  gap: 1rem;
-  width: 100%;
-  min-height: auto;
-  margin-top: 0;
-  font-size: clamp(1.05rem, 1.5vw, 1.3rem);
-  font-weight: 500;
-  letter-spacing: -0.015em;
-  line-height: 1.45;
-  text-decoration: none;
-  color: var(--pale-white);
-  overflow-wrap: anywhere;
-  transition: color var(--motion-fast);
-}
-.contact-facts .contact-email svg {
-  flex: 0 0 auto;
-  color: var(--text-accent);
-  transition: transform var(--motion-fast) var(--motion-ease);
-}
-.contact-facts .contact-email:is(:hover, :focus-visible) {
-  color: var(--text-accent);
-  text-decoration: none;
-}
-.contact-facts .contact-email:is(:hover, :focus-visible) svg {
-  transform: translate(2px, -2px);
-}
-.contact-venue-name {
-  font-size: clamp(1.05rem, 1.5vw, 1.3rem);
-  font-weight: 500;
-  letter-spacing: -0.015em;
-  line-height: 1.45;
-  color: var(--pale-white);
-}
-.contact-facts address {
-  margin-top: 0.45rem;
-  font-size: 0.85rem;
-  line-height: 1.7;
-  font-style: normal;
-  color: var(--metallic-silver);
-}
-.contact-facts .feature-text-link {
-  margin-top: 0.75rem;
-  color: var(--pale-white);
-}
-.contact-facts .feature-text-link:is(:hover, :focus-visible) {
-  color: var(--text-accent);
-}
-.contact-facts .feature-text-link > span {
-  display: inline-block;
-  color: var(--text-accent);
-  transition: transform var(--motion-fast) var(--motion-ease);
-}
-.contact-facts .feature-text-link:is(:hover, :focus-visible) > span {
-  transform: translate(2px, -2px);
-}
+.contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(3rem, 7vw, 7rem); }
+.contact-introduction { align-self: start; }
+.contact-description { margin-top: 2rem; max-width: 43ch; color: var(--metallic-silver); font-size: 0.9rem; line-height: 1.9; }
+.contact-facts { display: grid; align-content: start; }
+.contact-facts > div { border-top: 1px solid var(--panel-border); padding-block: 1.5rem; }
+.contact-facts dt { font-family: var(--font-tech); color: var(--metallic-silver); font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.65rem; }
+.contact-facts dd { font-size: 1rem; line-height: 1.6; }
+.contact-email { display: flex; justify-content: space-between; align-items: center; gap: 1rem; width: 100%; font-size: clamp(0.95rem, 1.5vw, 1.3rem); letter-spacing: -0.025em; text-decoration: none; color: var(--pale-white); overflow-wrap: anywhere; transition: color var(--motion-fast); }
+.contact-email svg { flex: 0 0 auto; color: var(--text-accent); transition: transform var(--motion-fast) var(--motion-ease); }
+.contact-email:is(:hover, :focus-visible) { color: var(--text-accent); }
+.contact-email:is(:hover, :focus-visible) svg { transform: translate(2px, -2px); }
+.contact-facts address { margin-top: 0.5rem; font-size: 0.8rem; line-height: 1.8; font-style: normal; color: var(--metallic-silver); }
+.contact-facts .feature-text-link { margin-top: 0.5rem; }
+.contact-facts .feature-text-link > span { display: inline-block; color: var(--text-accent); transition: transform var(--motion-fast) var(--motion-ease); }
+.contact-facts .feature-text-link:is(:hover, :focus-visible) > span { transform: translate(2px, -2px); }
 
 /* === CORE TEAM / DIRECTORATE PAGE & SECTION === */
 .core-team-page-section {
@@ -567,6 +473,15 @@
 
 .contact-section { border-bottom: 0; }
 .contact-introduction .feature-eyebrow { margin-bottom: 1.4rem; }
+.contact-facts { align-self: start; }
+.contact-facts .contact-email {
+  flex-wrap: nowrap;
+  font-size: clamp(0.95rem, 1.5vw, 1.3rem);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 1.65;
+}
+.contact-email:hover { text-decoration: none; }
 
 /* Preserve the new caption while leaving the original About composition intact. */
 .floating-caption {
@@ -678,10 +593,14 @@
 
 @media (max-width: 1100px) {
   .home-module-link { padding-inline: 1.3rem; }
-  .testimonials-editorial, .contact-facts { column-gap: 3rem; }
+  .testimonials-editorial { column-gap: 3rem; }
 }
 @media (max-width: 1024px) {
-  .competition-specs { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .summary-strip-inner { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .summary-strip-cell { padding: 1.3rem 1.2rem; }
+  .summary-strip-cell:nth-child(2) { border-right: none; }
+  .summary-strip-cell:nth-child(3) { border-top: 1px solid var(--panel-border); padding-left: clamp(0.75rem, 1.5vw, 1.25rem); }
+  .summary-strip-cell:nth-child(4) { border-top: 1px solid var(--panel-border); border-right: none; }
 }
 @media (max-width: 768px) {
   .hero-register-btn.mobile-only { display: inline-flex; }
@@ -720,11 +639,9 @@
   .testimonial-portrait { width: 40px; height: 48px; }
   .testimonial-name { font-size: 0.7rem; }
   .testimonial-role { font-size: 0.6rem; }
-  .contact-introduction { flex-direction: column; align-items: start; gap: 1.25rem; margin-bottom: 2.25rem; }
+  .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
   .contact-description { max-width: 55ch; }
-  .contact-facts { grid-template-columns: 1fr; }
-  .contact-facts > div:nth-last-child(2) { border-bottom: 0; }
-  .contact-facts .contact-email, .contact-venue-name { font-size: 1.15rem; }
+  .contact-facts .contact-email { font-size: 1.2rem; }
   .floating-caption { left: 1rem; bottom: 1rem; }
   .council-hierarchy { grid-template-columns: 1fr; gap: 2.5rem; max-width: 480px; margin-inline: auto; }
   .council-hierarchy .council-row .organizer-card { grid-column: 1; grid-row: auto; order: 0; }
@@ -741,13 +658,10 @@
   .faq-section .section-title { font-size: 2.8rem; }
   .faq-question { gap: 0.75rem; }
   .faq-answer p { padding-left: 1.75rem; padding-right: 0; font-size: 0.85rem; }
-  .competition-specs { margin-bottom: 1.25rem; }
-  .competition-spec { padding: 1rem 0.9rem; gap: 0.35rem; }
-  .spec-label { font-size: 0.54rem; letter-spacing: 0.09em; }
-  .spec-value { font-size: clamp(1.35rem, 5.4vw, 1.75rem); }
-  .spec-note { font-size: 0.54rem; letter-spacing: 0.05em; }
-  .spec-fee-type { font-size: 0.56rem; letter-spacing: 0.06em; }
-  .spec-fee-amount { font-size: clamp(1.1rem, 4.4vw, 1.4rem); }
+  .summary-strip-inner { grid-template-columns: 1fr; }
+  .summary-strip-cell { padding: 1rem 1rem; border-right: none; border-top: 1px solid var(--panel-border); }
+  .summary-strip-cell:first-child { border-top: none; }
+  .strip-value { white-space: normal; font-size: 0.95rem; }
   .home-modules-heading { flex-direction: column; gap: 1rem; }
   .home-modules-heading h2 { font-size: 3.75rem; }
   .section-heading-aside { max-width: none; width: 100%; display: flex; align-items: end; justify-content: space-between; gap: 1rem; }
@@ -779,7 +693,7 @@
   .testimonial-person { align-items: center; }
   .testimonial-portrait { width: 48px; height: 56px; }
   .testimonial-name { font-size: 0.8rem; }
-  .contact-facts .contact-email, .contact-venue-name { font-size: clamp(0.95rem, 4.2vw, 1.15rem); }
+  .contact-facts .contact-email { font-size: clamp(0.85rem, 4.3vw, 1.2rem); }
   .footer-partners { gap: 1.25rem; }
   .footer-partners .partner-link:nth-child(n) .partner-logo { height: 42px; max-width: 70px; }
   .footer-partners .partner-link:nth-child(n) .partner-logo.enlarged { height: 52px; max-width: 80px; }

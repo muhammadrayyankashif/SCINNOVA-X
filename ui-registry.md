@@ -103,7 +103,7 @@ Files: `index.html`, `js/main.js`, `css/style.css`.
 
 Restored to the original photographic columns, frames, responsive rules, and GSAP match-media behavior. No redesign-specific crops, desaturation, or archive eyebrow remain.
 
-### Contact directory & Competition Specifications Bar
+### Contact directory & Competition Specifications Strip
 
 Files: all HTML pages (`index.html`, `about.html`, `core-team.html`, `modules.html`), `css/refinements.css`.
 
@@ -111,11 +111,11 @@ Files: all HTML pages (`index.html`, `about.html`, `core-team.html`, `modules.ht
 | --- | --- |
 | Section | Obsidian, fine top rule, restrained green atmosphere |
 | Heading | Shared large condensed pale / green title |
-| Copy | Muted Inter `0.9rem`, `1.85` leading, aligned beside the heading |
-| Facts | Balanced 2-column open rows with panel-rule dividers (stacks cleanly on mobile) |
+| Copy | Muted Inter `0.9rem`, `1.9` leading |
+| Facts | Open rows with panel-rule dividers |
 | Labels | Small uppercase muted monospace |
 | Links | Pale Inter, green diagonal arrow; green on hover |
-| Competition Specs | Architectural 4-column hairline dossier grid (`.competition-specs`, collapsing 2×2 at 1024px and below) integrated inside `#modules` above the module tiles, displaying Delegation Limit (4–7 Members), Module Allowance (4–6 Modules, Arcanum Compulsory), Early Bird Deadline (29 Nov 2026), and Early Bird Fee Structure (Delegate: 4,000 PKR / Delegation: Free) |
+| Specifications Strip | Clean, minimalist 4-column data strip (`.summary-strip`) positioned beneath the homepage hero, displaying Team Limit (4–7 Members), Module Allowance (4–6 Modules, Arcanum Compulsory), Early Bird Deadline (29 Nov 2026), and stacked Early Bird Fee Structure (Delegate: 4,000 PKR / Team: Free) |
 | Radius / shadow | None |
 
 Keep native email, phone, Instagram, and map links. Contact destinations remain focusable via URL fragments. Preserve `reg.scinnova@cedar.edu.pk`, `+92 300 2526200`, `@scinnova_`, and the Cedar College DHA venue details.
