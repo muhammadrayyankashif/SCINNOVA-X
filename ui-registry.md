@@ -72,15 +72,13 @@ Files: `index.html`, `css/refinements.css`.
 | Property | Pattern |
 | --- | --- |
 | Section | Panel surface and thin top / bottom rules |
-| Quote surface | Open; no filled cards or enclosing frames |
-| Border | Thin panel rule above each quote |
-| Accent | Oversized green opening quotation mark |
-| Quote type | Pale Inter, `0.95rem`–`1.1rem`, `1.9` leading |
-| Portrait | Rectangular crop, permanently colored (`filter: none`); no decorative frame |
-| Attribution | Pale Inter 600 name; small muted role |
-| Spacing | `3.3rem` top padding; `2rem` attribution margin |
+| Card surface | 2x2 grid of 50/50 split obsidian panels (`.testimonial`), `1px` `--panel-border`, `2px` green top accent illuminating to lime on hover |
+| Portrait half | `.testimonial-media` occupying 50% width on desktop (`clamp(290px, 24vw, 355px)` min-height) and top 5:4 full-width crop on mobile; permanently full-color (`filter: none`), `object-position: 50% 12%`, subtle bottom vignette and green bottom edge accent |
+| Quote half | `.testimonial-body` with oversized lime opening quotation mark (`::before`), quiet monospace plate index (`01`–`04` via CSS counter `::after`), pale Inter `0.88rem`–`0.98rem` quote copy |
+| Attribution | Hairline divider above pale Inter 600 name (`0.9rem`) and muted institutional role (`0.7rem`) |
+| Responsive | Single-column `clamp(220px, 45%, 320px) / 1fr` horizontal split under `1100px`; vertical portrait-top / quote-bottom stack under `600px` |
 
-Preserve every complete quotation, name, role, and portrait. Use `figure`, `blockquote`, and `figcaption`; retain the existing reading order. Attributions align beneath each row; phone layout stacks the quotations.
+Preserve every complete quotation, name, role, and portrait. Use `figure`, `blockquote`, and `figcaption`; retain the existing reading order. Keep portrait framing unobstructed so full faces and Dr. Sajjad Haider Zaidi's desk flag remain clear.
 
 ### About image caption and Core Team page
 
