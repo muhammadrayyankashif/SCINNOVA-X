@@ -72,11 +72,11 @@ Files: `index.html`, `css/refinements.css`.
 | Property | Pattern |
 | --- | --- |
 | Section | Panel surface and thin top / bottom rules |
-| Card surface | 2x2 grid of 50/50 split obsidian panels (`.testimonial`), `1px` `--panel-border`, `2px` green top accent illuminating to lime on hover |
-| Portrait half | `.testimonial-media` occupying 50% width on desktop (`clamp(290px, 24vw, 355px)` min-height) and top 5:4 full-width crop on mobile; permanently full-color (`filter: none`), `object-position: 50% 12%`, subtle bottom vignette and green bottom edge accent |
+| Card surface | 2x2 grid of split obsidian panels (`.testimonial`), `1px` `--panel-border`, `2px` green top accent illuminating to lime on hover |
+| Portrait half | `.testimonial-media` (`clamp(195px, 38%, 250px)` width and `clamp(235px, 19vw, 280px)` min-height on desktop; `4:3` `max-height: 240px` full-width crop on mobile); permanently full-color (`filter: none`), `object-position: 50% 12%`, subtle bottom vignette and green bottom edge accent |
 | Quote half | `.testimonial-body` with oversized lime opening quotation mark (`::before`), quiet monospace plate index (`01`–`04` via CSS counter `::after`), pale Inter `0.88rem`–`0.98rem` quote copy |
 | Attribution | Hairline divider above pale Inter 600 name (`0.9rem`) and muted institutional role (`0.7rem`) |
-| Responsive | Single-column `clamp(220px, 45%, 320px) / 1fr` horizontal split under `1100px`; vertical portrait-top / quote-bottom stack under `600px` |
+| Responsive | Single-column `clamp(180px, 35%, 245px) / 1fr` horizontal split under `1100px`; vertical portrait-top / quote-bottom stack under `600px` |
 
 Preserve every complete quotation, name, role, and portrait. Use `figure`, `blockquote`, and `figcaption`; retain the existing reading order. Keep portrait framing unobstructed so full faces and Dr. Sajjad Haider Zaidi's desk flag remain clear.
 

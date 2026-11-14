@@ -234,7 +234,7 @@
 .home-module-link:is(:hover, :focus-visible) .module-card-meta > span:last-child { color: var(--text-accent); }
 .home-module-link:is(:hover, :focus-visible) .module-card-meta > span:last-child { transform: translate(2px, -2px); }
 
-/* Testimonials split 50/50 between full-height speaker portraits and editorial quotes. */
+/* Testimonials split between full-height speaker portraits and editorial quotes. */
 .testimonials-section { background: var(--panel-surface); border-block: 1px solid var(--panel-border); }
 .testimonials-editorial {
   display: grid;
@@ -245,7 +245,7 @@
 .testimonial {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-columns: clamp(195px, 38%, 250px) minmax(0, 1fr);
   min-width: 0;
   margin: 0;
   padding: 0;
@@ -263,7 +263,7 @@
 .testimonial-media {
   position: relative;
   overflow: hidden;
-  min-height: clamp(290px, 24vw, 355px);
+  min-height: clamp(235px, 19vw, 280px);
   background: #0c110d;
   border-right: 1px solid var(--panel-border);
 }
@@ -696,8 +696,8 @@
 @media (max-width: 1100px) {
   .home-module-link { padding-inline: 1.3rem; }
   .testimonials-editorial { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
-  .testimonial { grid-template-columns: clamp(220px, 45%, 320px) minmax(0, 1fr); }
-  .testimonial-media { min-height: 270px; }
+  .testimonial { grid-template-columns: clamp(180px, 35%, 245px) minmax(0, 1fr); }
+  .testimonial-media { min-height: 220px; }
 }
 @media (max-width: 768px) {
   .hero-register-btn.mobile-only { display: inline-flex; }
@@ -760,7 +760,8 @@
   .testimonial { grid-template-columns: minmax(0, 1fr); }
   .testimonial-media {
     min-height: 0;
-    aspect-ratio: 5 / 4;
+    aspect-ratio: 4 / 3;
+    max-height: 240px;
     border-right: 0;
     border-bottom: 1px solid var(--panel-border);
   }
