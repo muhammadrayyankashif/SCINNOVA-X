@@ -380,13 +380,38 @@
 .footer-scinnova-logo { display: block; width: 200px; height: auto; margin-bottom: 2.5rem; }
 .footer-cta { max-width: 1000px; font-size: clamp(3.25rem, 6.5vw, 6.5rem); line-height: 1.05; letter-spacing: -0.015em; margin-bottom: 2.2rem; text-wrap: balance; }
 .cta-btn { padding-inline: 1.7rem; }
-.footer-cedar-link { display: block; margin-top: 4rem; }
+.footer-cedar-link { display: flex; align-items: center; justify-content: center; width: 100%; margin: 4rem auto 0; }
 .footer-cedar-logo { display: block; width: 150px; height: auto; }
 .footer-partners-label { margin-top: 2.5rem; }
-.footer-partners { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 2.5rem; width: 100%; margin-top: 1.5rem; padding-bottom: 3.5rem; }
+.footer-partners {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  align-items: center;
+  justify-items: center;
+  gap: clamp(0.75rem, 1.5vw, 1.25rem);
+  width: 100%;
+  max-width: 760px;
+  margin: 1.5rem auto 0;
+  padding-bottom: 3.5rem;
+}
 .partner-link { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; }
-.footer-partners .partner-logo { display: block; object-fit: contain; width: auto; height: 55px; max-width: 100px; opacity: 1; filter: none; transition: opacity var(--motion-fast), filter var(--motion-fast); }
-.footer-partners .partner-logo.enlarged { max-width: 110px; height: 65px; }
+.footer-partners .partner-link { width: 100%; height: 72px; }
+.footer-partners .partner-logo {
+  display: block;
+  object-fit: contain;
+  width: auto;
+  max-width: none;
+  height: 56px;
+  opacity: 1;
+  filter: none;
+  transition: opacity var(--motion-fast), filter var(--motion-fast);
+}
+/* Compensate for uneven transparent margins in source artwork so all five society marks share equal visual weight. */
+.footer-partners .partner-link:nth-child(1) .partner-logo { height: 84px; position: relative; top: 4px; }
+.footer-partners .partner-link:nth-child(2) .partner-logo { height: 112px; position: relative; left: -3px; }
+.footer-partners .partner-link:nth-child(3) .partner-logo { height: 56px; }
+.footer-partners .partner-link:nth-child(4) .partner-logo { height: 114px; position: relative; left: -1px; }
+.footer-partners .partner-link:nth-child(5) .partner-logo { height: 58px; }
 .partner-link:hover .partner-logo { opacity: 1; filter: none; }
 .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; width: calc(100% - var(--page-gutter) * 2); max-width: 1380px; margin-inline: auto; padding-block: 1.5rem; border-top: 1px solid var(--panel-border); color: var(--metallic-silver); font-family: var(--font-tech); font-size: 0.55rem; letter-spacing: 0.06em; text-align: left; }
 .footer-bottom a {
@@ -540,8 +565,6 @@
 .footer-cedar-logo { margin: 0; opacity: 1; }
 .footer-cedar-logo:hover { transform: none; filter: none; }
 .main-footer .footer-partners-label { margin-bottom: 0; }
-.footer-partners .partner-link:nth-child(n) .partner-logo { height: 55px; }
-.footer-partners .partner-link:nth-child(n) .partner-logo.enlarged { height: 65px; }
 .footer-partners .partner-link:hover .partner-logo { transform: none; }
 
 /* Reuse the original redesign's numbered FAQ and square plus controls. */
@@ -651,8 +674,28 @@
   .org-quote { font-size: 0.85rem; }
   .footer-cta { font-size: clamp(3rem, 8vw, 4.5rem); }
   .footer-scinnova-logo { width: 175px; }
-  .footer-partners { gap: 1.5rem; }
+  .footer-partners { gap: 0.75rem; max-width: 660px; }
+  .footer-partners .partner-link { height: 60px; }
+  .footer-partners .partner-link:nth-child(1) .partner-logo { height: 68px; top: 3px; }
+  .footer-partners .partner-link:nth-child(2) .partner-logo { height: 88px; left: -2px; }
+  .footer-partners .partner-link:nth-child(3) .partner-logo { height: 46px; }
+  .footer-partners .partner-link:nth-child(4) .partner-logo { height: 90px; left: -1px; }
+  .footer-partners .partner-link:nth-child(5) .partner-logo { height: 48px; }
   .footer-bottom { font-size: 0.5rem; }
+}
+@media (max-width: 600px) {
+  .footer-partners {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 340px;
+    gap: 0.75rem 1.25rem;
+  }
+  .footer-partners .partner-link { height: 64px; }
+  .footer-partners .partner-link:nth-child(3) { grid-column: 1 / -1; }
+  .footer-partners .partner-link:nth-child(1) .partner-logo { height: 70px; top: 3px; }
+  .footer-partners .partner-link:nth-child(2) .partner-logo { height: 94px; left: -2px; }
+  .footer-partners .partner-link:nth-child(3) .partner-logo { height: 48px; }
+  .footer-partners .partner-link:nth-child(4) .partner-logo { height: 96px; left: -1px; }
+  .footer-partners .partner-link:nth-child(5) .partner-logo { height: 50px; }
 }
 @media (max-width: 520px) {
   .faq-section .section-title { font-size: 2.8rem; }
@@ -694,10 +737,12 @@
   .testimonial-portrait { width: 48px; height: 56px; }
   .testimonial-name { font-size: 0.8rem; }
   .contact-facts .contact-email { font-size: clamp(0.85rem, 4.3vw, 1.2rem); }
-  .footer-partners { gap: 1.25rem; }
-  .footer-partners .partner-link:nth-child(n) .partner-logo { height: 42px; max-width: 70px; }
-  .footer-partners .partner-link:nth-child(n) .partner-logo.enlarged { height: 52px; max-width: 80px; }
   .footer-bottom { flex-direction: column; align-items: start; gap: 0.5rem; padding-block: 1.5rem; }
+}
+@media (max-width: 360px) {
+  .footer-partners { gap: 0.65rem 0.75rem; }
+  .footer-partners .partner-link:nth-child(2) .partner-logo { height: 84px; }
+  .footer-partners .partner-link:nth-child(4) .partner-logo { height: 86px; }
 }
 
 /* Module illustration motion: active and decorative by default. */
