@@ -13,13 +13,13 @@
   color: var(--pale-white);
   font-size: 1rem;
 }
-:is(.module-overview, .testimonials-section, .contact-section) .feature-container,
+:is(.summary-strip, .module-overview, .testimonials-section, .contact-section) .feature-container,
 .organizers-section .container {
   width: calc(100% - var(--page-gutter) * 2);
   max-width: 1380px;
   padding-inline: 0;
 }
-:is(.module-overview, .testimonials-section, .contact-section, .organizers-section, .faq-section) .feature-eyebrow,
+:is(.summary-strip, .module-overview, .testimonials-section, .contact-section, .organizers-section, .faq-section) .feature-eyebrow,
 .main-footer .micro-label {
   display: block;
   margin-bottom: 1.4rem;
@@ -31,7 +31,7 @@
   text-transform: uppercase;
   line-height: 1.6;
 }
-:is(.testimonials-section, .contact-section) .feature-title {
+:is(.summary-strip, .testimonials-section, .contact-section) .feature-title {
   margin-top: 0;
   font-size: var(--text-section);
   letter-spacing: -0.015em;
@@ -150,98 +150,29 @@
   }
 }
 
-/* === SUMMARY DATA STRIP === */
-.summary-strip {
-  position: relative;
-  border-block: 1px solid var(--panel-border);
-  background: var(--panel-surface);
-  background-image: linear-gradient(180deg, rgba(187, 239, 121, 0.03) 0%, transparent 100%);
-}
-.summary-strip-inner {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1px;
-  width: calc(100% - var(--page-gutter, clamp(1.25rem, 4.5vw, 5rem)) * 2);
-  max-width: 1380px;
-  margin-inline: auto;
-  background: var(--panel-border);
-  border-inline: 1px solid var(--panel-border);
-  counter-reset: strip-item;
-}
-.summary-strip-cell {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 0.7rem;
-  padding: clamp(1.25rem, 2vw, 1.55rem) clamp(1.1rem, 2vw, 1.75rem);
-  background: var(--panel-surface);
-  counter-increment: strip-item;
-  transition: background-color var(--motion-fast) var(--motion-ease);
-}
-.summary-strip-cell::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto;
-  height: 2px;
-  background: var(--text-accent);
-  opacity: 0;
-  transition: opacity var(--motion-fast) var(--motion-ease);
-}
-.summary-strip-cell:hover {
-  background: #131c15;
-}
-.summary-strip-cell:hover::before {
-  opacity: 0.85;
-}
-.strip-label {
-  display: block;
-  font-family: var(--font-tech);
-  font-size: 0.62rem;
-  letter-spacing: 0.12em;
-  line-height: 1.5;
-  color: var(--metallic-silver);
-  text-transform: uppercase;
-}
-.strip-label::before {
-  content: counter(strip-item, decimal-leading-zero) " // ";
-  color: var(--text-accent);
-  font-weight: 600;
-}
-.strip-value {
-  font-family: var(--font-body);
-  font-size: clamp(1.05rem, 1.35vw, 1.25rem);
-  font-weight: 600;
+/* === MISSION PARAMETERS (SUMMARY STRIP) === */
+.summary-strip .contact-facts dd {
+  font-size: clamp(0.95rem, 1.45vw, 1.25rem);
+  font-weight: 500;
+  line-height: 1.55;
   color: var(--pale-white);
-  letter-spacing: 0.01em;
-  line-height: 1.3;
   font-variant-numeric: tabular-nums;
 }
 .strip-value--stacked {
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
-  font-size: clamp(0.94rem, 1.15vw, 1.05rem);
-  line-height: 1.4;
+  gap: 0.25rem;
 }
 .strip-line {
   display: block;
-  white-space: nowrap;
 }
 .strip-note {
-  display: block;
-  margin-top: 0.22rem;
-  margin-left: 0;
   font-family: var(--font-tech);
-  font-size: 0.66rem;
+  font-size: 0.7rem;
   font-weight: 500;
   color: var(--text-accent);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-.strip-divider {
-  color: var(--panel-border);
-  margin-inline: 0.35rem;
+  letter-spacing: 0.04em;
+  margin-left: 0.35rem;
 }
 .strip-highlight {
   color: var(--text-accent);
@@ -249,7 +180,7 @@
 }
 
 /* The programme is a set of specimen tiles. Logos keep their natural proportions. */
-.module-overview, .testimonials-section, .contact-section { position: relative; padding-block: var(--space-lg); }
+.summary-strip, .module-overview, .testimonials-section, .contact-section { position: relative; padding-block: var(--space-lg); }
 .home-modules-heading { display: flex; justify-content: space-between; align-items: end; gap: 2rem; margin-bottom: 3.2rem; }
 .home-modules-heading h2 { font-size: var(--text-section); letter-spacing: -0.015em; }
 .home-modules-heading h2 > span { color: var(--text-accent); }
@@ -316,8 +247,13 @@
 .testimonial-role { margin-top: 0.3rem; font-size: 0.65rem; line-height: 1.7; color: var(--metallic-silver); max-width: 45ch; }
 
 
-/* Contact: a large invitation, beside a clean directory of real channels. */
-.contact-section { border-top: 1px solid var(--panel-border); background-image: radial-gradient(ellipse at 5% 100%, rgba(49, 92, 69, 0.13), transparent 60%); }
+/* Parameters and contact share the same editorial invitation and ruled facts directory. */
+.summary-strip,
+.contact-section {
+  border-top: 1px solid var(--panel-border);
+  background-color: var(--obsidian-black);
+  background-image: radial-gradient(ellipse at 5% 100%, rgba(49, 92, 69, 0.13), transparent 60%);
+}
 
 /* === HERO COUNTDOWN CLOCK === */
 .doomsday-title {
@@ -660,10 +596,6 @@
   .home-module-link { padding-inline: 1.3rem; }
   .testimonials-editorial { column-gap: 3rem; }
 }
-@media (max-width: 1024px) {
-  .summary-strip-inner { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .summary-strip-cell { padding: 1.35rem 1.35rem; }
-}
 @media (max-width: 768px) {
   .hero-register-btn.mobile-only { display: inline-flex; }
   .home-modules-heading { align-items: start; margin-bottom: 2.5rem; }
@@ -694,7 +626,7 @@
   .home-modules-programme > li:last-child .home-module-emblem img { max-width: 175px; }
   .module-card-meta { inset: 1rem 1rem auto; font-size: 0.5rem; }
   .home-module-discipline { font-size: 0.78rem; }
-  :is(.testimonials-section, .contact-section) .feature-title { font-size: clamp(3.5rem, 10vw, 5rem); }
+  :is(.summary-strip, .testimonials-section, .contact-section) .feature-title { font-size: clamp(3.5rem, 10vw, 5rem); }
   .testimonials-editorial { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.5rem; }
   .testimonial-quote { font-size: 0.9rem; }
   .testimonial-person { align-items: start; gap: 0.75rem; }
@@ -740,11 +672,7 @@
   .faq-section .section-title { font-size: 2.8rem; }
   .faq-question { gap: 0.75rem; }
   .faq-answer p { padding-left: 1.75rem; padding-right: 0; font-size: 0.85rem; }
-  .summary-strip-inner { grid-template-columns: 1fr; }
-  .summary-strip-cell { padding: 1.15rem 1.1rem; gap: 0.5rem; }
-  .strip-value { font-size: 1rem; }
-  .strip-value--stacked { font-size: 0.94rem; }
-  .contact-section .feature-title { font-size: clamp(3rem, 11vw, 4.75rem); }
+  .summary-strip .feature-title { font-size: clamp(3rem, 11vw, 4.75rem); }
   .home-modules-heading { flex-direction: column; gap: 1rem; }
   .home-modules-heading h2 { font-size: 3.75rem; }
   .section-heading-aside { max-width: none; width: 100%; display: flex; align-items: end; justify-content: space-between; gap: 1rem; }
@@ -771,7 +699,7 @@
   }
   .home-module-discipline { font-size: 0.72rem; }
   .module-card-meta { font-size: 0.45rem; }
-  :is(.module-overview, .testimonials-section, .contact-section, .organizers-section, .faq-section) .feature-eyebrow { font-size: 0.58rem; }
+  :is(.summary-strip, .module-overview, .testimonials-section, .contact-section, .organizers-section, .faq-section) .feature-eyebrow { font-size: 0.58rem; }
   .testimonials-editorial { grid-template-columns: 1fr; gap: 2.5rem; }
   .testimonial-person { align-items: center; }
   .testimonial-portrait { width: 48px; height: 56px; }

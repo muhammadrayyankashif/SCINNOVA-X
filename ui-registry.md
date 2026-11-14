@@ -115,7 +115,7 @@ Files: all HTML pages (`index.html`, `about.html`, `core-team.html`, `modules.ht
 | Facts | Open rows with panel-rule dividers |
 | Labels | Small uppercase muted monospace |
 | Links | Pale Inter, green diagonal arrow; green on hover |
-| Specifications Strip | Panel-surface 4-column architectural grid strip (`.summary-strip`) positioned beneath the homepage hero with numbered lime indices (`01 //`–`04 //`), `1px` panel rules, and top accent hover bar, displaying Delegation Limit (4–7 Members), Module Allowance (4–6 Modules, Arcanum Compulsory), Early Bird Deadline (29 Nov 2026), and stacked Early Bird Fee Structure (Delegate: 4,000 PKR / Delegation: Free) |
+| Specifications Strip | Contact-style 2-column section (`.summary-strip`) positioned beneath the homepage hero with `MISSION PARAMETERS.` condensed heading on the left and a ruled `<dl class="contact-facts">` directory on the right displaying Delegation Limit (4–7 Members), Module Allowance (4–6 Modules, Arcanum Compulsory), Early Bird Deadline (29 Nov 2026), and stacked Early Bird Fee Structure (Delegate: 4,000 PKR / Delegation: Free) |
 | Radius / shadow | None |
 
 Keep native email, phone, Instagram, and map links. Contact destinations remain focusable via URL fragments. Preserve `reg.scinnova@cedar.edu.pk`, `+92 300 2526200`, `@scinnova_`, and the Cedar College DHA venue details.
