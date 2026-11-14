@@ -115,7 +115,7 @@ Files: all HTML pages (`index.html`, `about.html`, `core-team.html`, `modules.ht
 | Facts | Open rows with panel-rule dividers |
 | Labels | Small uppercase muted monospace |
 | Links | Pale Inter, green diagonal arrow; green on hover |
-| Specifications Strip | Clean, minimalist 4-column data strip (`.summary-strip`) positioned beneath the homepage hero, displaying Team Limit (4–7 Members), Module Allowance (4–6 Modules, Arcanum Compulsory), Early Bird Deadline (29 Nov 2026), and stacked Early Bird Fee Structure (Delegate: 4,000 PKR / Team: Free) |
+| Specifications Strip | Panel-surface 4-column architectural grid strip (`.summary-strip`) positioned beneath the homepage hero with numbered lime indices (`01 //`–`04 //`), `1px` panel rules, and top accent hover bar, displaying Delegation Limit (4–7 Members), Module Allowance (4–6 Modules, Arcanum Compulsory), Early Bird Deadline (29 Nov 2026), and stacked Early Bird Fee Structure (Delegate: 4,000 PKR / Delegation: Free) |
 | Radius / shadow | None |
 
 Keep native email, phone, Instagram, and map links. Contact destinations remain focusable via URL fragments. Preserve `reg.scinnova@cedar.edu.pk`, `+92 300 2526200`, `@scinnova_`, and the Cedar College DHA venue details.
@@ -136,9 +136,8 @@ Files: all HTML pages, `css/refinements.css`, `js/main.js`.
 
 | Property | Pattern |
 | --- | --- |
-| Default (top) | Transparent navbar with central floating pill for nav links |
-| Scrolled (`.is-scrolled`) | Combines smoothly into a unified dark blurred header bar (`rgba(8, 11, 9, 0.92)`, blur 16px, bottom border `1px solid var(--panel-border)`) |
-| Nav links on scroll | Sheds pill background/border to blend seamlessly into the combined bar |
+| Default (top) | Full unified dark blurred header bar (`rgba(8, 11, 9, 0.92)`, blur 16px, bottom border `1px solid var(--panel-border)`) with nav links blended seamlessly inside |
+| Scrolled (`.is-scrolled`) | Transparent navbar shedding the full bar background/border/blur while restoring the central dark glassmorphic floating pill for nav links |
 | Motion | Smooth transitions; disabled under `prefers-reduced-motion: reduce` |
 
 ### Closing invitation and footer
