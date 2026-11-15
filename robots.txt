@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://muhammadrayyankashif.github.io/SCINNOVA-X/sitemap.xml

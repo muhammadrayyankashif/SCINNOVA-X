@@ -1,3 +1,19 @@
 .env
 Draft
 *original_backup*
+
+# Reference PDFs & Study Guides kept locally only (not pushed / deployed)
+*.pdf
+
+# Raw pre-optimization source images & unreferenced legacy folders
+originals/
+public/Ambassadors/
+public/Audio/
+public/Logos/Sponsors/
+public/Pictures/project-sky.webp
+
+# Local build tooling, OS files & verification artifacts
+node_modules/
+.DS_Store
+Thumbs.db
+playwright-report/

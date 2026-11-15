@@ -1,6 +1,6 @@
 # SCINNOVA X component patterns
 
-Updated 10 November 2026 after user review. The retained page layouts live in `css/style.css`; approved component refinements live in `css/refinements.css`, loaded after it. The lime accent is global again. Preserve existing event facts, links, logos, and complete editorial content. Keep the retained hero, navigation, gallery, and Modules detail layouts. The redesigned FAQ has been restored by explicit user request.
+Updated 15 November 2026 for production static delivery. Source page layouts live in `css/style.css` and component refinements in `css/refinements.css`, bundled via `css/app.entry.css` into `css/app.min.css`; `js/main.js` builds `js/main.min.js`. The lime accent is global again. Preserve existing event facts, links, logos, and complete editorial content. Keep the retained hero, navigation, gallery, and Modules detail layouts. The redesigned FAQ has been restored by explicit user request.
 
 ## Approved component visual language
 
@@ -188,3 +188,9 @@ Last updated: 10 November 2026.
 - `IntersectionObserver` pauses offscreen cards; fall back to interaction-only activation when unavailable. Keep touch navigation immediate, without a first tap to start animation.
 - Reduced motion and data saving disable the animation gate and restore static drawings. Content and links remain usable without JavaScript or optional motion libraries.
 - Do not add perpetual JavaScript animation loops, change module logos, or animate the surrounding section / page layout.
+
+### Production build, optimized media & static hosting
+
+- **Source & committed bundles:** Author changes in `css/style.css`, `css/refinements.css`, and `js/main.js`, then run `npm run build` (`esbuild`) and `npm run verify` to regenerate committed `css/app.min.css` and `js/main.min.js`. All five main HTML pages (`index.html`, `about.html`, `modules.html`, `faqs.html`, `core-team.html`) load `css/app.min.css?v=1` and `js/main.min.js?v=1` using strictly relative paths.
+- **Optimized `.webp` & icon assets:** Active production media lives in `public/` (`doomsday-hero.webp`, `dr-sabieh.webp`, `dr-sajjad.webp`, `dr-athar.webp`, `ruhab.webp`, `cedar-college-logo.webp`, `cords-official-logo.webp`, `cords-logo-white.webp`, `juno-circle.webp`, `automaton-logo-light.webp`, downscaled gallery/editorial/module WebPs, `og-share.jpg`, and SCINNOVA X favicons `Icon.ico`, `favicon-32x32.png`, `icon-192.png`, `apple-touch-icon.png`). Pre-optimization originals stay gitignored on disk in `originals/`.
+- **Hosting & FileZilla checklist:** `.nojekyll`, `.htaccess`, standalone `404.html`, `robots.txt`, and `sitemap.xml` support both GitHub Pages (`/SCINNOVA-X/`) and Apache/cPanel static hosting. Before uploading to a custom domain via FileZilla, run `npm run set-domain -- https://your-domain.com` locally to update canonical, OpenGraph, Twitter, JSON-LD, `robots.txt`, and `sitemap.xml` URLs, then upload `*.html`, `.htaccess`, `robots.txt`, `sitemap.xml`, `css/app.min.css`, `js/main.min.js`, `js/vendor/`, and the active `public/` assets (`public/Pictures/`, `public/Logos/` excluding `Sponsors/`, `public/audio/`, and root icon files).

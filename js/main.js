@@ -10,7 +10,6 @@ const galleryMotionOverride = readGalleryMotionPreference();
 // Essential interactions work even when optional animation scripts are unavailable.
 initCountdown();
 initFAQ();
-initModulesPresentation();
 initMobileMenu();
 initMagneticButtons();
 initModuleHighlights();
@@ -145,7 +144,6 @@ function initModuleHighlights() {
 
   cards.forEach((card) => {
     let pointerFrame = 0;
-    let pointerInside = false;
     let inView = !observer;
 
     const clearPointer = () => {
@@ -163,10 +161,7 @@ function initModuleHighlights() {
     updateCards.set(card, update);
     observer?.observe(card);
 
-    card.addEventListener("pointerenter", (event) => {
-      pointerInside = event.pointerType === "mouse";
-      update();
-    }, { passive: true });
+    card.addEventListener("pointerenter", () => update(), { passive: true });
     card.addEventListener("pointermove", (event) => {
       if (event.pointerType !== "mouse" || !canMove() || document.hidden || !inView) return;
       window.cancelAnimationFrame(pointerFrame);
@@ -178,7 +173,6 @@ function initModuleHighlights() {
       });
     }, { passive: true });
     card.addEventListener("pointerleave", () => {
-      pointerInside = false;
       clearPointer();
       update();
     });
@@ -216,9 +210,9 @@ function initSmoothScrolling() {
     infinite: false,
     syncTouch: false,
   });
+  const navbar = document.querySelector(".magick-nav");
   window.lenis.on("scroll", (e) => {
     ScrollTrigger.update();
-    const navbar = document.querySelector(".magick-nav");
     if (navbar) {
       const scrollY = e?.scroll ?? (window.scrollY || document.documentElement.scrollTop || 0);
       syncNavbarScrollState(navbar, scrollY);
@@ -318,12 +312,16 @@ function initMagneticButtons() {
 function initFAQ() {
   const items = document.querySelectorAll(".faq-item");
   function setExpanded(item, expanded) {
+    const question = item.querySelector(".faq-question");
+    const answer = item.querySelector(".faq-answer");
+    if (!question || !answer) return;
     item.classList.toggle("active", expanded);
-    item.querySelector(".faq-question").setAttribute("aria-expanded", String(expanded));
-    item.querySelector(".faq-answer").hidden = !expanded;
+    question.setAttribute("aria-expanded", String(expanded));
+    answer.hidden = !expanded;
   }
   items.forEach((item) => {
     const question = item.querySelector(".faq-question");
+    if (!question) return;
     setExpanded(item, false);
     question.addEventListener("click", () => {
       const isActive = item.classList.contains("active");
@@ -520,131 +518,6 @@ function initGallery() {
       scrub: 1.5,
     },
   });
-}
-
-/* === MODULES PRESENTATION CAROUSEL === */
-function initModulesPresentation() {
-  const track = document.getElementById("modules-track");
-  const prevBtn = document.getElementById("module-prev-btn");
-  const nextBtn = document.getElementById("module-next-btn");
-  const dotsContainer = document.getElementById("modules-dots");
-  const currentEl = document.getElementById("current-slide");
-  const totalEl = document.getElementById("total-slides");
-
-  if (!track || !prevBtn || !nextBtn) return;
-
-  const cards = Array.from(track.querySelectorAll(".presentation-card"));
-  if (cards.length === 0) return;
-
-  let currentSlide = 0;
-
-  function getCardsPerView() {
-    return window.innerWidth >= 820 ? 2 : 1;
-  }
-
-  function getTotalSlides() {
-    const cpv = getCardsPerView();
-    return cpv === 2 ? Math.ceil(cards.length / 2) : cards.length;
-  }
-
-  function updateDots() {
-    if (!dotsContainer) return;
-    const total = getTotalSlides();
-    dotsContainer.innerHTML = "";
-    for (let i = 0; i < total; i++) {
-      const dot = document.createElement("button");
-      dot.className = `slider-dot ${i === currentSlide ? "active" : ""}`;
-      dot.setAttribute("aria-label", `Slide ${i + 1}`);
-      dot.addEventListener("click", () => goToSlide(i));
-      dotsContainer.appendChild(dot);
-    }
-  }
-
-  function updateUI() {
-    const total = getTotalSlides();
-    if (currentSlide >= total) currentSlide = total - 1;
-    if (currentSlide < 0) currentSlide = 0;
-
-    const cpv = getCardsPerView();
-    const viewport = track.parentElement;
-    const viewportWidth = viewport ? viewport.getBoundingClientRect().width : 1200;
-    const gap = window.innerWidth >= 820 ? 24 : 16;
-
-    let offset = 0;
-    if (cpv === 2) {
-      const cardWidth = (viewportWidth - gap) / 2;
-      const step = (cardWidth + gap) * 2;
-      offset = currentSlide * step;
-      const maxScroll = track.scrollWidth - viewportWidth;
-      if (maxScroll > 0 && offset > maxScroll) offset = maxScroll;
-    } else {
-      const cardWidth = viewportWidth;
-      offset = currentSlide * (cardWidth + gap);
-    }
-
-    track.style.transform = `translateX(-${offset}px)`;
-
-    if (currentEl) currentEl.textContent = String(currentSlide + 1).padStart(2, "0");
-    if (totalEl) totalEl.textContent = String(total).padStart(2, "0");
-
-    prevBtn.disabled = currentSlide === 0;
-    nextBtn.disabled = currentSlide === total - 1;
-
-    const dots = dotsContainer ? dotsContainer.querySelectorAll(".slider-dot") : [];
-    dots.forEach((dot, idx) => {
-      dot.classList.toggle("active", idx === currentSlide);
-    });
-  }
-
-  function goToSlide(index) {
-    currentSlide = index;
-    updateUI();
-  }
-
-  function nextSlide() {
-    const total = getTotalSlides();
-    if (currentSlide < total - 1) {
-      currentSlide++;
-      updateUI();
-    }
-  }
-
-  function prevSlide() {
-    if (currentSlide > 0) {
-      currentSlide--;
-      updateUI();
-    }
-  }
-
-  prevBtn.addEventListener("click", prevSlide);
-  nextBtn.addEventListener("click", nextSlide);
-
-  // Touch Swipe Support
-  let startX = 0;
-  let endX = 0;
-  track.addEventListener("touchstart", (e) => {
-    startX = e.touches[0].clientX;
-  }, { passive: true });
-  track.addEventListener("touchend", (e) => {
-    endX = e.changedTouches[0].clientX;
-    const diff = startX - endX;
-    if (Math.abs(diff) > 50) {
-      if (diff > 0) nextSlide();
-      else prevSlide();
-    }
-  }, { passive: true });
-
-  let resizeTimer;
-  window.addEventListener("resize", () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => {
-      updateDots();
-      updateUI();
-    }, 100);
-  });
-
-  updateDots();
-  updateUI();
 }
 
 /* === MOBILE MENU === */

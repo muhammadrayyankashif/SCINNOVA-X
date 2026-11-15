@@ -1,0 +1,17 @@
+{
+  "name": "scinnova-x",
+  "version": "1.0.0",
+  "private": true,
+  "homepage": "https://muhammadrayyankashif.github.io/SCINNOVA-X/",
+  "description": "SCINNOVA X static website at Cedar College",
+  "scripts": {
+    "build:css": "esbuild css/app.entry.css --bundle --minify --outfile=css/app.min.css",
+    "build:js": "esbuild js/main.js --minify --outfile=js/main.min.js",
+    "build": "npm run build:css && npm run build:js",
+    "set-domain": "node scripts/set-domain.mjs",
+    "verify": "node --check js/main.js && node --check js/main.min.js && node --check scripts/set-domain.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0"
+  }
+}

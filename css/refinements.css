@@ -163,6 +163,10 @@ html, body {
 }
 
 .magick-nav .logo > a {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
   flex-shrink: 0;
   width: max-content;
 }
@@ -384,26 +388,6 @@ html, body {
   line-height: 1.55;
   color: var(--pale-white);
   font-variant-numeric: tabular-nums;
-}
-.strip-value--stacked {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-.strip-line {
-  display: block;
-}
-.strip-note {
-  font-family: var(--font-tech);
-  font-size: 0.7rem;
-  font-weight: 500;
-  color: var(--text-accent);
-  letter-spacing: 0.04em;
-  margin-left: 0.35rem;
-}
-.strip-highlight {
-  color: var(--text-accent);
-  font-weight: 700;
 }
 
 /* The programme is a set of specimen tiles. Logos keep their natural proportions. */
@@ -699,7 +683,7 @@ html, body {
 
 /* The final invitation uses the same typography and flat signal-green action. */
 .main-footer { position: relative; overflow: hidden; padding-top: var(--space-lg); text-align: center; border-top: 1px solid var(--panel-border); background: radial-gradient(ellipse at 50% 25%, #1d301c 0%, var(--obsidian-black) 65%); }
-.footer-content, .footer-container { display: flex; flex-direction: column; align-items: center; max-width: 1100px; width: calc(100% - var(--page-gutter) * 2); margin-inline: auto; }
+.footer-content { display: flex; flex-direction: column; align-items: center; max-width: 1100px; width: calc(100% - var(--page-gutter) * 2); margin-inline: auto; }
 .footer-scinnova-logo { display: block; width: 200px; height: auto; margin-bottom: 2.5rem; }
 .footer-cta { max-width: 1000px; font-size: clamp(3.25rem, 6.5vw, 6.5rem); line-height: 1.05; letter-spacing: -0.015em; margin-bottom: 2.2rem; text-wrap: balance; }
 .cta-btn { padding-inline: 1.7rem; }
@@ -876,7 +860,7 @@ html, body {
 
 .main-footer { display: block; padding-bottom: 0; }
 .main-footer::before { content: none; }
-.footer-content, .footer-container { padding-inline: 0; }
+.footer-content { padding-inline: 0; }
 .footer-scinnova-logo { height: auto; filter: none; }
 .footer-scinnova-logo:hover { transform: none; filter: none; }
 .footer-cta { text-shadow: none; }

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#080b09" />
+    <title>404 — Page Not Found | SCINNOVA X</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Inter:wght@400;600;700&amp;display=swap" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Inter:wght@400;600;700&amp;display=swap"
+      media="print"
+      onload="this.media='all'" />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Inter:wght@400;600;700&amp;display=swap" />
+    </noscript>
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      :root {
+        --obsidian: #080b09;
+        --panel: #101711;
+        --border: #2b392e;
+        --pale: #edf1e8;
+        --silver: #a4afa7;
+        --accent: #bbef79;
+      }
+      body {
+        min-height: 100svh;
+        display: grid;
+        place-items: center;
+        padding: 2rem 1.25rem;
+        background: radial-gradient(ellipse at 50% 25%, #1d301c 0%, var(--obsidian) 65%);
+        color: var(--pale);
+        font-family: "Inter", system-ui, sans-serif;
+      }
+      main {
+        width: 100%;
+        max-width: 640px;
+        padding: clamp(2rem, 5vw, 3.5rem);
+        background: var(--panel);
+        border: 1px solid var(--border);
+        text-align: center;
+      }
+      .eyebrow {
+        color: var(--accent);
+        font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+        font-size: 0.8rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        margin-bottom: 1rem;
+      }
+      h1 {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: clamp(4.5rem, 14vw, 8rem);
+        font-weight: 400;
+        line-height: 0.9;
+        letter-spacing: 0.02em;
+        margin-bottom: 1rem;
+      }
+      h1 span {
+        color: var(--accent);
+      }
+      p {
+        color: var(--silver);
+        font-size: 1rem;
+        line-height: 1.7;
+        max-width: 44ch;
+        margin: 0 auto 2rem;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.9rem;
+      }
+      .btn-primary,
+      .btn-secondary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 46px;
+        padding: 0.75rem 1.4rem;
+        font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        text-decoration: none;
+        transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+      }
+      .btn-primary {
+        background: var(--accent);
+        color: var(--obsidian);
+        border: 1px solid var(--accent);
+      }
+      .btn-primary:hover {
+        background: var(--pale);
+        border-color: var(--pale);
+      }
+      .btn-secondary {
+        background: transparent;
+        color: var(--pale);
+        border: 1px solid var(--border);
+      }
+      .btn-secondary:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+      .meta {
+        margin-top: 2rem;
+        padding-top: 1.25rem;
+        border-top: 1px solid var(--border);
+        color: var(--silver);
+        font-family: ui-monospace, "SFMono-Regular", Consolas, monospace;
+        font-size: 0.75rem;
+        letter-spacing: 0.12em;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <p class="eyebrow">SIGNAL LOST // 404</p>
+      <h1>PAGE NOT <span>FOUND.</span></h1>
+      <p>The page you requested could not be located on SCINNOVA X. Return to the main site or jump straight to the competition modules.</p>
+      <div class="actions">
+        <a class="btn-primary" data-base-href="index.html" href="index.html">RETURN HOME</a>
+        <a class="btn-secondary" data-base-href="modules.html" href="modules.html">EXPLORE MODULES</a>
+        <a class="btn-secondary" data-base-href="faqs.html" href="faqs.html">VIEW FAQS</a>
+      </div>
+      <p class="meta">SCINNOVA X · 8 9 10 JANUARY 2027 · CEDAR COLLEGE</p>
+    </main>
+    <script>
+      (function () {
+        var prefix = window.location.pathname.indexOf("/SCINNOVA-X/") === 0 ? "/SCINNOVA-X/" : "/";
+        document.querySelectorAll("[data-base-href]").forEach(function (link) {
+          link.setAttribute("href", prefix + link.getAttribute("data-base-href"));
+        });
+      })();
+    </script>
+  </body>
+</html>
