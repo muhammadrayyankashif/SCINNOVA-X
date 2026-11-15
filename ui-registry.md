@@ -135,7 +135,7 @@ Files: all HTML pages, `css/refinements.css`, `js/main.js`.
 | Property | Pattern |
 | --- | --- |
 | Default (top) | Full-width dark blurred header bar (`rgba(8, 11, 9, 0.8)`, blur 16px, hairline emerald bottom border) with an enlarged Cedar College logo (`nav-logo--cedar`), centered arrow-free `REGISTER` button, and viewport-centered nav links |
-| Scrolled (`.is-scrolled`) | Choreographed `520ms cubic-bezier(0.22, 1, 0.36, 1)` transition into a unified centered floating bar (`width: calc(0% + 860px)`, `max-width: calc(100% - 2rem)`, `top: clamp(0.65rem, 1.35vh, 0.9rem)`, `border-radius: 14px`) where logos, GPU-translated nav links, and register button glide inward in lockstep without font jitter or overlap |
+| Scrolled (`.is-scrolled`) | Choreographed `520ms cubic-bezier(0.22, 1, 0.36, 1)` transition into a unified centered floating bar (`width: calc(0% + 860px)`, `max-width: calc(100% - 2rem)`, `top: clamp(0.65rem, 1.35vh, 0.9rem)`, `border-radius: 14px`) where logos, GPU-translated nav links (`border-radius: 8px`), and register button (`border-radius: 8px`) glide inward in lockstep without font jitter or overlap |
 | Motion | Smooth transitions; disabled under `prefers-reduced-motion: reduce` |
 
 ### Closing invitation and footer
