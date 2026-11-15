@@ -86,7 +86,7 @@ Files: `about.html`, `core-team.html`, `css/refinements.css`.
 
 | Property | Pattern |
 | --- | --- |
-| Editorial opening & structure | `about.html` sequences `#about-cedar` (Cedar College intro covering DHA Phase VIII & PECHS campuses, Liberal Arts Core, Peer Tutoring/TA programs, CEP 21+ societies, and clean `cedar-campus.webp` photography), `#about` (Scinnova narrative, `EST. 2017 / KARACHI, PK` parallax photo, and hairline Previous Sponsors ledger), and `#societies` (5 dark brutalist 3-column society dossier rows: CREW, CoRDS, Juno Circle, Cedar CODES, MindSports—with unboxed dark emblems, inline links to verified modules on `modules.html`, and unlabelled real event photography) above Contact and Footer |
+| Editorial opening & structure | `about.html` sequences `#about-cedar` (Cedar College intro covering DHA Phase VIII & PECHS campuses, Liberal Arts Core, Peer Tutoring/TA programs, CEP 21+ societies, and clean `cedar-campus.webp` photography), `#about` (Scinnova narrative and `EST. 2017 / KARACHI, PK` parallax photo), and `#societies` (5 dark brutalist 3-column society dossier rows: CREW, CoRDS, Juno Circle, Cedar CODES, MindSports—with unboxed dark emblems, inline links to verified modules on `modules.html`, and unlabelled real event photography) above Contact and Footer |
 | Caption | Solid green rectangle, dark monospace metadata |
 | Directorate surface | Dedicated `core-team.html` page (currently hidden from navigation via `noindex` and omitted nav links); shared panel surface; section rules |
 | Portraits | Large square crops, permanently colored (`filter: none`), square corners and a 1:1 aspect ratio on every viewport, no shadow, green bottom rule |
