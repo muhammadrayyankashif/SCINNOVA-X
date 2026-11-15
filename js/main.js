@@ -1,4 +1,5 @@
 const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
+const coarsePointerQuery = window.matchMedia("(pointer: coarse)");
 let motionContext;
 let motionMedia;
 let lenisTicker;
@@ -17,6 +18,7 @@ initBackToTop();
 initNavbarScroll();
 initDnaRotation();
 motionPreference.addEventListener("change", refreshPageMotion);
+coarsePointerQuery.addEventListener("change", refreshPageMotion);
 navigator.connection?.addEventListener("change", refreshPageMotion);
 window.addEventListener("online", initPageMotion);
 
@@ -72,8 +74,8 @@ async function initPageMotion() {
 
   if (await motionLibraries) {
     if (!motionContext) configureMotion();
-    // Parallax uses native scrolling immediately; smooth scrolling is optional.
-    if (!motionPreference.matches && !window.Lenis) {
+    // Parallax uses native scrolling immediately; smooth scrolling is desktop/fine-pointer only.
+    if (!motionPreference.matches && !coarsePointerQuery.matches && !window.Lenis) {
       smoothScrollLibrary ??= loadMotionScript("js/vendor/lenis-1.0.29.min.js")
         .then(initSmoothScrolling)
         .catch(() => { smoothScrollLibrary = null; });
@@ -200,8 +202,8 @@ function readGalleryMotionPreference() {
 }
 
 function initSmoothScrolling() {
-  if (motionPreference.matches || navigator.connection?.saveData || window.lenis ||
-      !window.gsap || !window.ScrollTrigger || !window.Lenis) return;
+  if (motionPreference.matches || navigator.connection?.saveData || coarsePointerQuery.matches ||
+      window.lenis || !window.gsap || !window.ScrollTrigger || !window.Lenis) return;
   window.lenis = new Lenis({
     duration: 1.2,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -210,16 +212,16 @@ function initSmoothScrolling() {
     smooth: true,
     mouseMultiplier: 1,
     smoothTouch: false,
-    touchMultiplier: 2,
+    touchMultiplier: 1,
     infinite: false,
-    syncTouch: true,
+    syncTouch: false,
   });
   window.lenis.on("scroll", (e) => {
     ScrollTrigger.update();
     const navbar = document.querySelector(".magick-nav");
     if (navbar) {
       const scrollY = e?.scroll ?? (window.scrollY || document.documentElement.scrollTop || 0);
-      navbar.classList.toggle("is-scrolled", scrollY > 20);
+      syncNavbarScrollState(navbar, scrollY);
     }
   });
   lenisTicker = (time) => window.lenis?.raf(time * 1000);
@@ -384,12 +386,13 @@ function initCountdown() {
   };
 
   const handleGesture = () => {
-    if (heroInView) {
+    if (heroInView && !isPlaying) {
       startClockAudio();
     }
   };
 
-  const gestureEvents = ["click", "pointerdown", "keydown", "touchstart", "scroll"];
+  // Avoid scroll/touchstart listeners so mobile touch swiping stays completely unblocked.
+  const gestureEvents = ["click", "pointerdown", "keydown", "touchend"];
   gestureEvents.forEach((ev) => window.addEventListener(ev, handleGesture, { capture: true, passive: true }));
 
   // Hero visibility observer: only play when hero is visible in the viewport
@@ -717,6 +720,16 @@ function initBackToTop() {
 }
 
 /* === NAVBAR SCROLL STATE === */
+function syncNavbarScrollState(navbar, scrollY) {
+  if (!navbar) return;
+  const isScrolled = navbar.classList.contains("is-scrolled");
+  if (!isScrolled && scrollY > 36) {
+    navbar.classList.add("is-scrolled");
+  } else if (isScrolled && scrollY < 16) {
+    navbar.classList.remove("is-scrolled");
+  }
+}
+
 function initNavbarScroll() {
   const navbar = document.querySelector(".magick-nav");
   if (!navbar) return;
@@ -725,7 +738,7 @@ function initNavbarScroll() {
 
   const updateNavbar = () => {
     const scrollY = window.scrollY || document.documentElement.scrollTop || 0;
-    navbar.classList.toggle("is-scrolled", scrollY > 20);
+    syncNavbarScrollState(navbar, scrollY);
     ticking = false;
   };
 

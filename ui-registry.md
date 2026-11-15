@@ -30,9 +30,9 @@ Files: all three HTML pages, `css/refinements.css`.
 | --- | --- |
 | Primary actions | `.nav-register-btn`, `.hero-register-btn`, `.cta-btn`: solid `#bbef79`, dark text, `1px` accent border |
 | Radius / shadow | None; clear legacy sheen, glow, and backdrop effects |
-| Text | System monospace, `0.78rem`–`0.84rem`, weight 600, `0.04em` tracking |
-| Spacing | Main action `0.9rem 1.4rem`; diagonal arrow on navigation and footer actions |
-| Hover / keyboard focus | Dark surface, lime text and border, subtle lime glow, `translateY(-2px)`; the arrow moves diagonally |
+| Text | System monospace; nav register `0.96rem` weight 700 centered (`0.94rem` hero register, `0.88rem` CTA) |
+| Spacing | Main action `0.9rem 1.4rem`, nav register `0.62rem 1.5rem`; diagonal arrow on CTA / footer actions only (omitted on navbar button) |
+| Hover / keyboard focus | Dark surface, lime text and border, subtle lime glow, `translateY(-2px)`; CTA arrow moves diagonally |
 
 Preserve the original navigation layout and mobile dialog. The hero registration button retains its original mobile-only placement with the approved button styling. Use `https://forms.gle/w2H4QhemSyPvcqB7A` for every registration destination (navbar, mobile menu, hero, and footer). Specify foreground and background together for hover, focus, and active states so legacy white text cannot reappear. Active press keeps dark background / lime text and returns to baseline.
 
@@ -73,10 +73,10 @@ Files: `index.html`, `css/refinements.css`.
 | --- | --- |
 | Section | Panel surface and thin top / bottom rules |
 | Card surface | 2x2 grid of split obsidian panels (`.testimonial`), `1px` `--panel-border`, `2px` green top accent illuminating to lime on hover |
-| Portrait half | `.testimonial-media` (`clamp(195px, 38%, 250px)` width and `clamp(235px, 19vw, 280px)` min-height on desktop; `4:3` `max-height: 240px` full-width crop on mobile); permanently full-color (`filter: none`), `object-position: 50% 12%`, subtle bottom vignette and green bottom edge accent |
-| Quote half | `.testimonial-body` with oversized lime opening quotation mark (`::before`), quiet monospace plate index (`01`–`04` via CSS counter `::after`), pale Inter `0.88rem`–`0.98rem` quote copy |
-| Attribution | Hairline divider above pale Inter 600 name (`0.9rem`) and muted institutional role (`0.7rem`) |
-| Responsive | Single-column `clamp(180px, 35%, 245px) / 1fr` horizontal split under `1100px`; vertical portrait-top / quote-bottom stack under `600px` |
+| Portrait half | `.testimonial-media` (`clamp(148px, 31%, 186px)` width and `clamp(180px, 14.5vw, 212px)` min-height on desktop; `1:1` uncropped square with `max-height: none` on mobile); permanently full-color (`filter: none`), `object-position: 50% 12%` (plus `.testimonial-portrait--sajjad` `padding-top: 16%` over `#fefdfb` to lower head position) |
+| Quote half | `.testimonial-body` with oversized lime opening quotation mark (`::before`), quiet monospace plate index (`01`–`04` via CSS counter `::after`), pale Inter `0.8rem`–`0.88rem` quote copy |
+| Attribution | Hairline divider above pale Inter 600 name (`0.84rem`) and muted institutional role (`0.68rem`), including `Former Dean at LUMS` and `Head of Quality Assurance, NUST` |
+| Responsive | Single-column `clamp(150px, 30%, 200px) / 1fr` horizontal split under `1100px`; vertical `1:1` portrait-top / quote-bottom stack under `600px` |
 
 Preserve every complete quotation, name, role, and portrait. Use `figure`, `blockquote`, and `figcaption`; retain the existing reading order. Keep portrait framing unobstructed so full faces and Dr. Sajjad Haider Zaidi's desk flag remain clear.
 
@@ -86,14 +86,14 @@ Files: `about.html`, `core-team.html`, `css/refinements.css`.
 
 | Property | Pattern |
 | --- | --- |
-| Editorial opening | Original About title, copy, layout, and image treatment |
+| Editorial opening & structure | `about.html` sequences `#about-cedar` (Cedar College intro covering DHA Phase VIII & PECHS campuses, Liberal Arts Core, Peer Tutoring/TA programs, CEP 21+ societies, and clean `cedar-campus.webp` photography), `#about` (Scinnova narrative, `EST. 2017 / KARACHI, PK` parallax photo, and hairline Previous Sponsors ledger), and `#societies` (5 dark brutalist 3-column society dossier rows: CREW, CoRDS, Juno Circle, Cedar CODES, MindSports—with unboxed dark emblems, inline links to verified modules on `modules.html`, and unlabelled real event photography) above Contact and Footer |
 | Caption | Solid green rectangle, dark monospace metadata |
-| Directorate surface | Dedicated `core-team.html` page; shared panel surface; section rules |
+| Directorate surface | Dedicated `core-team.html` page (currently hidden from navigation via `noindex` and omitted nav links); shared panel surface; section rules |
 | Portraits | Large square crops, permanently colored (`filter: none`), square corners and a 1:1 aspect ratio on every viewport, no shadow, green bottom rule |
 | Hover | Brighten the bottom rule; portraits stay colored without scaling |
-| Attribution | Inter 600, normal casing; green monospace role; muted quotation |
+| Attribution | Inter 600, normal casing; green monospace role (quotations removed) |
 
-Keep all director names, roles, and quotations. Hosted on `core-team.html`. Desktop order: Dr Husham Arshad, Director Roque Martin D.Mello, Nabeel Nasir Sheikh. At 768px and below, stack the Director first, followed by the two Co-Directors; the Director remains first in DOM order. Keep the green `EST. 2017` / `KARACHI, PK` image caption visible on mobile as well. The Get in touch link uses the restored monospace treatment, lime text and underline, and an arrow that moves slightly on hover or focus. Its native `#contact` destination remains intact.
+Keep all directorate names and roles (`Roque Martin D.Mello` — Director, `Dr Husham Arshad` — Co-Director, `Nabeel Nasir Sheikh` — Co-Director, `Muhammad Rayyan Dawood` — Patron). Hosted on `core-team.html`. Desktop order: Director Roque Martin D.Mello centered on top (row 1, column 2), above Dr Husham Arshad, Nabeel Nasir Sheikh, and Patron Muhammad Rayyan Dawood across row 2. At 768px and below, stack the Director first, followed by the remaining three members in DOM order. Keep the green `EST. 2017` / `KARACHI, PK` image caption visible on mobile as well. The Get in touch link uses the restored monospace treatment, lime text and underline, and an arrow that moves slightly on hover or focus. Its native `#contact` destination remains intact.
 
 ### Archive gallery
 
@@ -113,7 +113,7 @@ Files: all HTML pages (`index.html`, `about.html`, `core-team.html`, `modules.ht
 | Facts | Open rows with panel-rule dividers |
 | Labels | Small uppercase muted monospace |
 | Links | Pale Inter, green diagonal arrow; green on hover |
-| Specifications Strip | Contact-style 2-column section (`.summary-strip`) positioned beneath the homepage hero with `MISSION PARAMETERS.` condensed heading on the left and a ruled `<dl class="contact-facts">` directory on the right displaying Delegation Limit (4–7 Members), Module Allowance (4–6 Modules, Arcanum Compulsory), Early Bird Deadline (29 Nov 2026), and stacked Early Bird Fee Structure (Delegate: 4,000 PKR / Delegation: Free) |
+| Specifications Strip | Contact-style 2-column section (`.summary-strip`) positioned beneath the homepage hero with enlarged `COMPETITION BRIEF / SCINNOVA X` eyebrow, `MISSION PARAMETERS.` condensed heading on the left, and an enlarged ruled `<dl class="contact-facts">` directory on the right displaying Delegation Limit (`4–7 Members`), Module Allowance (`4–6 Modules`), and Early Bird Deadline (`29 Nov 2026`) |
 | Radius / shadow | None |
 
 Keep native email, phone, Instagram, and map links. Contact destinations remain focusable via URL fragments. Preserve `reg.scinnova@cedar.edu.pk`, `+92 300 2526200`, `@scinnova_`, and the Cedar College DHA venue details.
@@ -134,19 +134,19 @@ Files: all HTML pages, `css/refinements.css`, `js/main.js`.
 
 | Property | Pattern |
 | --- | --- |
-| Default (top) | Full unified dark blurred header bar (`rgba(8, 11, 9, 0.92)`, blur 16px, bottom border `1px solid var(--panel-border)`) with nav links blended seamlessly inside |
-| Scrolled (`.is-scrolled`) | Transparent navbar shedding the full bar background/border/blur while restoring the central dark glassmorphic floating pill for nav links |
+| Default (top) | Full-width dark blurred header bar (`rgba(8, 11, 9, 0.8)`, blur 16px, hairline emerald bottom border) with an enlarged Cedar College logo (`nav-logo--cedar`), centered arrow-free `REGISTER` button, and viewport-centered nav links |
+| Scrolled (`.is-scrolled`) | Choreographed `520ms cubic-bezier(0.22, 1, 0.36, 1)` transition into a unified centered floating bar (`width: calc(0% + 860px)`, `max-width: calc(100% - 2rem)`, `top: clamp(0.65rem, 1.35vh, 0.9rem)`, `border-radius: 14px`) where logos, GPU-translated nav links, and register button glide inward in lockstep without font jitter or overlap |
 | Motion | Smooth transitions; disabled under `prefers-reduced-motion: reduce` |
 
 ### Closing invitation and footer
 
-Files: all three HTML pages, `css/refinements.css`.
+Files: all HTML pages, `css/refinements.css`.
 
-Use an oversized balanced condensed CTA, the shared solid green registration action, original host and society logos, and a fine ruled monospace sign-off. Society logos stay fully colored and opaque at rest and on hover. All five society logos link directly to their Instagram profiles (`cedarmindsports`, `crew.cedar`, `cords.cedar`, `juno.cedar`, `cedar.codes`), with accessible link names identifying Instagram; the Cedar College host logo keeps the college website destination. Footer registration uses the same URL as the navbar. New-tab links use `noopener noreferrer`. The back-to-top link targets each page’s focusable main landmark. Footer sign-off text is exactly `SCINNOVA X` and `8–10 JANUARY 2027`; do not include `THE TENTH EDITION` or `/ KARACHI, PK` in the footer. The About image caption retains its location text.
+Use an oversized balanced condensed CTA, the shared solid green registration action, original host and society logos, and a fine ruled monospace sign-off. Society logos stay fully colored and opaque at rest and on hover. All five society logos link directly to their Instagram profiles (`cedarmindsports`, `crew.cedar`, `cords.cedar`, `juno.cedar`, `cedar.codes`), with accessible link names identifying Instagram; the Cedar College host logo keeps the college website destination. Footer registration uses the same URL as the navbar. New-tab links use `noopener noreferrer`. The back-to-top link targets each page’s focusable main landmark. Footer sign-off text is exactly `SCINNOVA X` and `8 9 10 JANUARY 2027`; do not include `THE TENTH EDITION` or `/ KARACHI, PK` in the footer. The About image caption retains its location text.
 
 ### Numbered FAQ
 
-Files: `about.html`, `css/refinements.css`, `js/main.js`.
+Files: `faqs.html` (moved from `about.html`), `css/refinements.css`, `js/main.js`. Navigation includes `FAQS` (`faqs.html`) across all pages.
 Last updated: 10 November 2026.
 
 | Property | Pattern |

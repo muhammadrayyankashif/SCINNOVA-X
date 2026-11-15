@@ -31,14 +31,14 @@
           <img
             src="public/Logos/Cedar Logos/College Logo (Two-Tone Yellow).png"
             alt="Cedar College"
-            class="nav-logo" width="4001" height="1547" loading="eager" decoding="async" />
+            class="nav-logo nav-logo--cedar" width="4001" height="1547" loading="eager" decoding="async" />
         </a>
       </div>
       <div class="nav-links desktop-only">
         <a href="index.html" class="nav-link">HOME</a>
         <a href="about.html" class="nav-link active" aria-current="page">ABOUT</a>
-        <a href="core-team.html" class="nav-link">CORE TEAM</a>
         <a href="modules.html" class="nav-link">MODULES</a>
+        <a href="faqs.html" class="nav-link">FAQS</a>
       </div>
       <div class="nav-controls">
         <a
@@ -64,8 +64,8 @@
       <nav class="mobile-nav-links" aria-label="Mobile">
         <a href="index.html" class="mobile-nav-link">HOME</a>
         <a href="about.html" class="mobile-nav-link active" aria-current="page">ABOUT</a>
-        <a href="core-team.html" class="mobile-nav-link">CORE TEAM</a>
         <a href="modules.html" class="mobile-nav-link">MODULES</a>
+        <a href="faqs.html" class="mobile-nav-link">FAQS</a>
         <a
           href="https://forms.gle/w2H4QhemSyPvcqB7A"
           target="_blank" rel="noopener noreferrer"
@@ -78,28 +78,90 @@
     <div id="smooth-wrapper">
       <div id="smooth-content">
         <main id="main-content" tabindex="-1">
-        <!-- ABOUT / EDITORIAL SECTION -->
-        <section class="section-padding editorial-section about-first-section" id="about">
-          <div class="container">
-            <div class="editorial-grid">
-              <div class="editorial-text">
-                <h1 class="section-title reveal-text">
-                  A DECADE OF<br /><span class="gold-text">INNOVATION.</span>
-                </h1>
-                <p class="body-text reveal-text">
-                  SCINNOVA is Cedar College’s flagship national science olympiad—engineered to push beyond conventional classroom theory. Now entering its landmark tenth edition, SCINNOVA X brings together the sharpest young scientific minds from across Karachi and Pakistan for three days of intense competition.
+        <!-- 01 / ABOUT CEDAR COLLEGE -->
+        <section class="about-cedar-section about-first-section" id="about-cedar" aria-labelledby="about-cedar-title">
+          <div class="feature-container">
+            <div class="about-cedar-grid">
+              <div class="about-cedar-copy">
+                <div class="about-cedar-brand">
+                  <img
+                    src="public/Logos/Cedar Logos/College Logo (Two-Tone Yellow).png"
+                    alt="Cedar College"
+                    class="about-cedar-logo"
+                    width="4001"
+                    height="1547"
+                    loading="eager"
+                    decoding="async" />
+                </div>
+                <h1 class="feature-title" id="about-cedar-title">ABOUT<br /><span>CEDAR.</span></h1>
+                <p class="body-text">
+                  Cedar College is a Cambridge International A-Level institution in Karachi, operating across two purpose-built campuses in DHA Phase VIII and PECHS for over a decade.
                 </p>
-                <p class="body-text reveal-text">
-                  Featuring nine rigorous modules spanning theoretical physics, algorithmic computing, applied engineering, and forensic science, SCINNOVA X challenges delegates to solve high-stakes problems with precision, speed, and critical intellect. Doomsday is coming—only the prepared will prevail.
+                <p class="body-text">
+                  Alongside rigorous A-Level academics supported by its Liberal Arts Core, Peer Tutoring, and Teaching Assistant programs, campus life revolves around the Cedar Enrichment Programme (CEP)—more than 21 student-led societies spanning Cedar National Model United Nations (1,100+ delegates), the Cedar College Debating Championship, Cedar Evening Bazaar (3,000+ visitors), Cedar Care community outreach, the arts, and STEM.
                 </p>
-                <a class="feature-text-link about-contact-link" href="#contact">Get in touch <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" /></svg></a>
+                <dl class="contact-facts about-cedar-facts">
+                  <div>
+                    <dt>DHA Campus</dt>
+                    <dd>211, Khayaban-e-Shaheen, DHA Phase VIII, Karachi</dd>
+                  </div>
+                  <div>
+                    <dt>PECHS Campus</dt>
+                    <dd>15/D &amp; 15/E, Al-Riaz Society, Off Shaheed-e-Millat Road, Karachi</dd>
+                  </div>
+                </dl>
+                <a class="about-contact-link" href="https://cedar.edu.pk/" target="_blank" rel="noopener noreferrer">
+                  Visit Cedar College
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12" /></svg>
+                </a>
+              </div>
+
+              <div class="about-cedar-visual">
+                <div class="about-cedar-photo">
+                  <img
+                    src="public/Pictures/cedar-campus.webp"
+                    alt="Cedar College students gathered inside the tiered campus auditorium during an inter-school conference"
+                    width="1400"
+                    height="933"
+                    loading="eager"
+                    decoding="async" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 02 / ABOUT SCINNOVA -->
+        <section class="editorial-section about-scinnova-section" id="about" aria-labelledby="about-scinnova-title">
+          <div class="feature-container">
+            <div class="editorial-grid about-scinnova-grid">
+              <div class="editorial-text reveal-text">
+                <h2 class="feature-title" id="about-scinnova-title">
+                  ABOUT<br /><span>SCINNOVA.</span>
+                </h2>
+                <p class="body-text">
+                  Founded in 2017, SCINNOVA is Cedar College’s flagship three-day national STEM olympiad, returning on 8 9 10 January 2027 for its landmark tenth edition. Across 100+ participating schools and colleges and a wider community reach of 4,500+, delegations gather in Karachi for applied scientific problem-solving under timed competition pressure.
+                </p>
+                <p class="body-text">
+                  Delegations of 4 to 7 members aged 14–18 compete across nine interdisciplinary modules spanning mechanical engineering, laboratory sciences, mathematics, astronomy, computer science, psychology, and forensics. Each module runs two competitive rounds over three hours of active execution.
+                </p>
+                <div class="about-action-row">
+                  <a class="about-contact-link" href="modules.html">
+                    Explore All 9 Modules
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" /></svg>
+                  </a>
+                  <a class="about-contact-link" href="#contact">
+                    Get in touch
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" /></svg>
+                  </a>
+                </div>
               </div>
               <div class="editorial-image parallax-img-wrapper">
                 <div class="image-frame">
                   <img
                     src="public/Pictures/1.webp"
-                    alt="SCINNOVA Atmosphere"
-                    class="parallax-img" width="1651" height="1080" loading="eager" decoding="async" />
+                    alt="SCINNOVA opening ceremony atmosphere with delegates on campus"
+                    class="parallax-img" width="1651" height="1080" loading="lazy" decoding="async" />
                 </div>
                 <div class="floating-caption">
                   <span>EST. 2017</span>
@@ -107,77 +169,214 @@
                 </div>
               </div>
             </div>
+
+            <div class="about-sponsors-ledger">
+              <div class="about-sponsors-meta">
+                <p class="feature-eyebrow">PREVIOUS SPONSORS</p>
+              </div>
+              <ul class="about-sponsors-list" aria-label="Previous SCINNOVA sponsors">
+                <li>Toyota</li>
+                <li>Meezan Bank</li>
+                <li>Dalda</li>
+                <li>Jubilee Insurance</li>
+                <li>USEFP</li>
+                <li>Corona Paints</li>
+                <li>Shaffer</li>
+                <li>A.S. Overseas</li>
+                <li>Lyallpur Galleria</li>
+              </ul>
+            </div>
           </div>
         </section>
 
-        <!-- FAQ SECTION -->
-        <section class="section-padding faq-section" id="faq">
-          <div class="container">
-            <p class="feature-eyebrow center-text">BEFORE YOU TAKE THE LEAP</p>
-            <h2 class="section-title center-text">
-              FREQUENTLY ASKED <span class="gold-text">QUESTIONS</span>
-            </h2>
-            <div class="faq-wrapper">
-              <div class="faq-item">
-                <h3>
-                  <button class="faq-question" type="button" id="faq-question-1"
-                    aria-expanded="true" aria-controls="faq-answer-1">
-                    <span class="faq-question-text">Can we register as private candidates?</span>
-                    <span class="toggle" aria-hidden="true">+</span>
-                  </button>
-                </h3>
-                <div class="faq-answer" id="faq-answer-1" role="region" aria-labelledby="faq-question-1">
-                  <p>
-                    Yes, private delegations and independent student teams from any institution or city across Pakistan are fully eligible to register.
-                  </p>
-                </div>
-              </div>
+        <!-- 03 / THE FIVE SOCIETIES -->
+        <section class="about-societies-section" id="societies" aria-labelledby="societies-title">
+          <div class="feature-container">
+            <header class="about-societies-header reveal-text">
+              <h2 class="feature-title" id="societies-title">FIVE SOCIETIES.<br /><span>ONE MISSION.</span></h2>
+            </header>
 
-              <div class="faq-item">
-                <h3>
-                  <button class="faq-question" type="button" id="faq-question-3"
-                    aria-expanded="true" aria-controls="faq-answer-3">
-                    <span class="faq-question-text">Do early bird registrants get specific benefits?</span>
-                    <span class="toggle" aria-hidden="true">+</span>
-                  </button>
-                </h3>
-                <div class="faq-answer" id="faq-answer-3" role="region" aria-labelledby="faq-question-3">
-                  <p>
-                    Teams applying in the Early Bird Round receive priority slot confirmation and preference in module selections before capacity limits are reached.
-                  </p>
+            <ol class="societies-dossier">
+              <!-- CREW -->
+              <li class="society-dossier">
+                <div class="society-identity">
+                  <div class="society-emblem-stage">
+                    <img
+                      src="public/Logos/Society Logos/Crew Logo black and white.webp"
+                      alt="CREW"
+                      class="society-logo society-logo--crew"
+                      width="900"
+                      height="600"
+                      loading="lazy"
+                      decoding="async" />
+                  </div>
+                  <a class="society-social-link" href="https://www.instagram.com/crew.cedar/" target="_blank" rel="noopener noreferrer" aria-label="CREW on Instagram">
+                    @crew.cedar <span aria-hidden="true">↗</span>
+                  </a>
                 </div>
-              </div>
 
-              <div class="faq-item">
-                <h3>
-                  <button class="faq-question" type="button" id="faq-question-4"
-                    aria-expanded="true" aria-controls="faq-answer-4">
-                    <span class="faq-question-text">Is it possible to pay the fees in cash?</span>
-                    <span class="toggle" aria-hidden="true">+</span>
-                  </button>
-                </h3>
-                <div class="faq-answer" id="faq-answer-4" role="region" aria-labelledby="faq-question-4">
-                  <p>
-                    Teams must submit payments via online bank transfer or direct deposit to the official Cedar College designated account (Faysal Bank) and attach their proof of payment in the registration form.
+                <div class="society-dossier-body">
+                  <h3 class="society-name">CREW</h3>
+                  <p class="society-desc">
+                    Winners of the 2025 International 4×4 Robotics Competition in Abu Dhabi, UAE. Outside SCINNOVA, CREW organizes Circuit Wars (featuring <em>Sail the Circuit</em> telemetry watercraft), builds campus installations like Mechanical Muses and Laser Maze, and engineered the 3D-printed electronics behind Project Polaris. Leads <a class="society-inline-link" href="modules.html#module-4-title">Planck’s Paradox</a> and <a class="society-inline-link" href="modules.html#module-7-title">Automaton</a>.
                   </p>
                 </div>
-              </div>
 
-              <div class="faq-item">
-                <h3>
-                  <button class="faq-question" type="button" id="faq-question-5"
-                    aria-expanded="true" aria-controls="faq-answer-5">
-                    <span class="faq-question-text">What is the refund policy?</span>
-                    <span class="toggle" aria-hidden="true">+</span>
-                  </button>
-                </h3>
-                <div class="faq-answer" id="faq-answer-5" role="region" aria-labelledby="faq-question-5">
-                  <p>
-                    Registration fees are non-refundable and non-transferable once payment processing and team credentials have been verified.
+                <div class="society-photo-frame">
+                  <img
+                    src="public/Pictures/crew-abudhabi.webp"
+                    alt="Cedar CREW robotics delegates holding trophy at the 2025 International 4x4 Robotics Competition in Abu Dhabi"
+                    width="560"
+                    height="420"
+                    loading="lazy"
+                    decoding="async" />
+                </div>
+              </li>
+
+              <!-- CoRDS -->
+              <li class="society-dossier">
+                <div class="society-identity">
+                  <div class="society-emblem-stage">
+                    <img
+                      src="public/Logos/Society Logos/CoRDS Logo White .webp"
+                      alt="CoRDS"
+                      class="society-logo society-logo--cords"
+                      width="1707"
+                      height="1080"
+                      loading="lazy"
+                      decoding="async" />
+                  </div>
+                  <a class="society-social-link" href="https://www.instagram.com/cords.cedar/" target="_blank" rel="noopener noreferrer" aria-label="CoRDS on Instagram">
+                    @cords.cedar <span aria-hidden="true">↗</span>
+                  </a>
+                </div>
+
+                <div class="society-dossier-body">
+                  <h3 class="society-name">CoRDS</h3>
+                  <p class="society-desc">
+                    Cedar’s student research and life-sciences society, backed by a published student research paper. CoRDS stages Evidentia (Karachi’s 150+ participant forensics competition), leads FRIP First Aid training for 50+ students across both campuses, coordinates university laboratory visits, and leads <a class="society-inline-link" href="modules.html#module-5-title">Asclepius</a>, <a class="society-inline-link" href="modules.html#module-2-title">Illuminatio</a>, and <a class="society-inline-link" href="modules.html#module-8-title">Freud’s Foresight</a>.
                   </p>
                 </div>
-              </div>
-            </div>
+
+                <div class="society-photo-frame">
+                  <img
+                    src="public/Pictures/4.webp"
+                    alt="Student carrying out volumetric titration inside the CoRDS laboratory round"
+                    width="1620"
+                    height="1080"
+                    loading="lazy"
+                    decoding="async" />
+                </div>
+              </li>
+
+              <!-- Juno Circle -->
+              <li class="society-dossier">
+                <div class="society-identity">
+                  <div class="society-emblem-stage">
+                    <img
+                      src="public/Logos/Society Logos/The Juno Circle Logo Color.webp"
+                      alt="Juno Circle"
+                      class="society-logo society-logo--juno"
+                      width="1620"
+                      height="1080"
+                      loading="lazy"
+                      decoding="async" />
+                  </div>
+                  <a class="society-social-link" href="https://www.instagram.com/juno.cedar/" target="_blank" rel="noopener noreferrer" aria-label="Juno Circle on Instagram">
+                    @juno.cedar <span aria-hidden="true">↗</span>
+                  </a>
+                </div>
+
+                <div class="society-dossier-body">
+                  <h3 class="society-name">Juno Circle</h3>
+                  <p class="society-desc">
+                    Creators of Project Sky (65,786 ft stratosphere launch) and six-month co-builders of Project Polaris—a custom star tracker accurate to 15 arcseconds of periodic error used to image the Andromeda Galaxy and Rosette Nebula from Gorakh Hill. Also hosts Equinox, Cedar’s intraschool math and astrophysics olympiad, and leads <a class="society-inline-link" href="modules.html#module-3-title">Ptolemy’s Puzzles</a> and <a class="society-inline-link" href="modules.html#module-6-title">Redshift</a>.
+                  </p>
+                </div>
+
+                <div class="society-photo-frame">
+                  <img
+                    src="public/Pictures/polaris-andromeda.webp"
+                    alt="Astrophotography image of the Andromeda Galaxy captured by Project Polaris at Gorakh Hill"
+                    width="1364"
+                    height="746"
+                    loading="lazy"
+                    decoding="async" />
+                </div>
+              </li>
+
+              <!-- Cedar CODES -->
+              <li class="society-dossier">
+                <div class="society-identity">
+                  <div class="society-emblem-stage">
+                    <img
+                      src="public/Logos/Society Logos/Codes Logo.webp"
+                      alt="Cedar CODES"
+                      class="society-logo society-logo--codes"
+                      width="500"
+                      height="500"
+                      loading="lazy"
+                      decoding="async" />
+                  </div>
+                  <a class="society-social-link" href="https://www.instagram.com/cedar.codes/" target="_blank" rel="noopener noreferrer" aria-label="Cedar CODES on Instagram">
+                    @cedar.codes <span aria-hidden="true">↗</span>
+                  </a>
+                </div>
+
+                <div class="society-dossier-body">
+                  <h3 class="society-name">Cedar CODES</h3>
+                  <p class="society-desc">
+                    Organizers and hosts of DayDream Karachi in partnership with Hack Club, bringing together 400+ student developers alongside sprint events such as Hackpocalypse. Builds SCINNOVA’s algorithmic, cryptography, and software challenges and leads <a class="society-inline-link" href="modules.html#module-9-title">Qwerty</a> across both campuses.
+                  </p>
+                </div>
+
+                <div class="society-photo-frame">
+                  <img
+                    src="public/Pictures/codes-lab.webp"
+                    alt="Student programmers collaborating on laptops during a Cedar CODES DayDream hackathon session"
+                    width="1400"
+                    height="933"
+                    loading="lazy"
+                    decoding="async" />
+                </div>
+              </li>
+
+              <!-- MindSports -->
+              <li class="society-dossier">
+                <div class="society-identity">
+                  <div class="society-emblem-stage">
+                    <img
+                      src="public/Logos/Society Logos/mindsports.webp"
+                      alt="MindSports"
+                      class="society-logo society-logo--mindsports"
+                      width="1080"
+                      height="1080"
+                      loading="lazy"
+                      decoding="async" />
+                  </div>
+                  <a class="society-social-link" href="https://www.instagram.com/cedarmindsports/" target="_blank" rel="noopener noreferrer" aria-label="Cedar MindSports on Instagram">
+                    @cedarmindsports <span aria-hidden="true">↗</span>
+                  </a>
+                </div>
+
+                <div class="society-dossier-body">
+                  <h3 class="society-name">MindSports</h3>
+                  <p class="society-desc">
+                    Organizers of Cognivia—Pakistan’s only college-level FIDE-rated rapid chess tournament featuring 80+ players from 15+ institutes across U-16 and U-20 divisions—plus Logikon (two days of chess, Scrabble, and speedcubing) and the 2025 National Science Bowl Pakistan Karachi Regional Runners-Up squad.
+                  </p>
+                </div>
+
+                <div class="society-photo-frame">
+                  <img
+                    src="public/Pictures/cognivia-chess.webp"
+                    alt="Player advancing a white chess pawn over a green competition board at Cognivia"
+                    width="1400"
+                    height="933"
+                    loading="lazy"
+                    decoding="async" />
+                </div>
+              </li>
+            </ol>
           </div>
         </section>
 
@@ -302,7 +501,7 @@
               </a>
             </div>
           </div>
-          <div class="footer-bottom"><span>SCINNOVA X</span><span>8–10 JANUARY 2027</span><a href="#main-content">BACK TO TOP <span class="back-to-top-arrow" aria-hidden="true">↑</span></a></div>
+          <div class="footer-bottom"><span>SCINNOVA X</span><span>8 9 10 JANUARY 2027</span><a href="#main-content">BACK TO TOP <span class="back-to-top-arrow" aria-hidden="true">↑</span></a></div>
         </footer>
       </div>
     </div>
