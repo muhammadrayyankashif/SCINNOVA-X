@@ -1096,10 +1096,12 @@ html, body {
   object-fit: contain;
 }
 .society-logo--crew {
-  max-height: 94px;
+  max-width: 98%;
+  max-height: 112px;
 }
 .society-logo--juno {
-  max-height: 102px;
+  max-width: 96%;
+  max-height: 120px;
 }
 .society-logo--mindsports {
   max-height: 94px;
