@@ -954,14 +954,8 @@ html, body {
   gap: clamp(2.5rem, 5.5vw, 5.5rem);
   align-items: center;
 }
-.about-cedar-brand {
-  margin-bottom: 1.4rem;
-}
-.about-cedar-logo {
-  display: block;
-  width: auto;
-  height: 34px;
-  object-fit: contain;
+#about-cedar-title {
+  white-space: nowrap;
 }
 .about-cedar-copy .body-text {
   margin-top: 1.5rem;
