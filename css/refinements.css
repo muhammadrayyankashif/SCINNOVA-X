@@ -983,19 +983,23 @@ html, body {
 }
 .about-cedar-visual {
   position: relative;
+  width: 100%;
 }
 .about-cedar-photo {
+  height: clamp(340px, 56vh, 540px);
+  width: 100%;
   border: 1px solid var(--panel-border);
   border-bottom: 2px solid var(--doom-green);
   background: var(--obsidian-black);
   overflow: hidden;
+  position: relative;
 }
 .about-cedar-photo img {
   display: block;
   width: 100%;
-  aspect-ratio: 3 / 2;
+  height: 100%;
   object-fit: cover;
-  object-position: 50% 42%;
+  object-position: 50% 50%;
 }
 
 .about-scinnova-section {
@@ -1082,18 +1086,28 @@ html, body {
   max-width: 88%;
   max-height: 84px;
   object-fit: contain;
+  filter: drop-shadow(0 0 8px rgba(187, 239, 121, 0.22));
+  transition: filter var(--motion-fast) var(--motion-ease);
+}
+.society-dossier:hover .society-logo {
+  filter: drop-shadow(0 0 14px rgba(187, 239, 121, 0.42));
 }
 .society-logo--crew {
   max-width: 98%;
   max-height: 112px;
 }
+.society-logo--cords {
+  max-height: 84px;
+}
 .society-logo--juno {
   max-width: 96%;
   max-height: 120px;
 }
+.society-logo--codes {
+  max-height: 84px;
+}
 .society-logo--mindsports {
   max-height: 94px;
-  filter: drop-shadow(0 0 1px rgba(237, 241, 232, 0.72)) drop-shadow(0 2px 10px rgba(237, 241, 232, 0.16));
 }
 .society-social-link {
   display: inline-flex;
@@ -1252,7 +1266,7 @@ html, body {
   .testimonial-person { margin-top: 0.9rem; padding-top: 0.7rem; }
   .testimonial-name { font-size: 0.84rem; }
   .testimonial-role { font-size: 0.68rem; }
-  .about-scinnova-section .editorial-image { height: 44vh; min-height: 280px; }
+  :is(.about-scinnova-section .editorial-image, .about-cedar-photo) { height: 44vh; min-height: 280px; }
   .society-dossier { grid-template-columns: 1fr; }
   .society-identity { border-right: 0; border-bottom: 1px solid var(--panel-border); }
   .society-emblem-stage { min-height: 82px; }
