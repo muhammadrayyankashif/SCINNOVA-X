@@ -34,7 +34,7 @@ Files: all three HTML pages, `css/refinements.css`.
 | Spacing | Main action `0.9rem 1.4rem`, nav register `0.62rem 1.5rem`; diagonal arrow on CTA / footer actions only (omitted on navbar button) |
 | Hover / keyboard focus | Dark surface, lime text and border, subtle lime glow, `translateY(-2px)`; CTA arrow moves diagonally |
 
-Preserve the original navigation layout and mobile dialog. The hero registration button retains its original mobile-only placement with the approved button styling. Use `https://forms.gle/w2H4QhemSyPvcqB7A` for every registration destination (navbar, mobile menu, hero, and footer). Specify foreground and background together for hover, focus, and active states so legacy white text cannot reappear. Active press keeps dark background / lime text and returns to baseline.
+Preserve the original navigation layout and mobile dialog. The hero registration button retains its original mobile-only placement with the approved button styling. Use `https://ticketly.pk/scinnova-x-qple` for every registration destination (navbar, mobile menu, hero, and footer). Specify foreground and background together for hover, focus, and active states so legacy white text cannot reappear. Active press keeps dark background / lime text and returns to baseline.
 
 ### Restored global compositions & Marvel Doomsday Clock Countdown
 
