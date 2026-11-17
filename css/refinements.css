@@ -249,7 +249,7 @@ html, body {
 .magick-nav.is-scrolled {
   pointer-events: auto;
   top: clamp(0.65rem, 1.35vh, 0.9rem);
-  width: calc(0% + 980px);
+  width: calc(0% + 860px);
   max-width: calc(100% - 2rem);
   gap: clamp(0.75rem, 1.6vw, 1.25rem);
   padding: 0.48rem 0.55rem 0.48rem 1.25rem;
